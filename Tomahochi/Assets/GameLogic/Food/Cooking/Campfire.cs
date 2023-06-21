@@ -5,19 +5,16 @@ using UnityEngine;
 public class Campfire : MonoBehaviour
 {
 	[SerializeField] private CookMiniGame _cookMiniGame;
-	private Recipe _cookingRecipe;
-	private void OnEnable()
-	{
-		_cookMiniGame.GameEnded.AddListener(OnMiniGameEnd);
-	}
+	[SerializeField] private Recipe _cookingRecipe;
 
-	private void OnDisable()
-	{
-		_cookMiniGame.GameEnded.RemoveListener(OnMiniGameEnd);
-	}
+	public bool IsCooking => _cookingRecipe != null;
 
 	public bool CanCook(Recipe recipe)
 	{
+		if (IsCooking)
+		{
+			return false;
+		}
 		foreach (Recipe.IngridiendData data in recipe.Igredients)
 		{
 			if (PlayerDataContainer.GetIngridientCount(data.Ingredient) < data.Count)
@@ -41,27 +38,31 @@ public class Campfire : MonoBehaviour
 			PlayerDataContainer.RemoveIngridient(data.Ingredient, data.Count);
 		}
 
-		if (PlayerDataContainer.FoodCookCount.Keys.Contains(recipe.Result.name) && PlayerDataContainer.FoodCookCount[recipe.Result.name] >= recipe.CookCountToSkipMiniGame)
+		if (PlayerDataContainer.GetFoodCount(recipe.Result) >= recipe.CookCountToSkipMiniGame)
 		{
 			PlayerDataContainer.AddCookedFood(_cookingRecipe.Result);
+			_cookingRecipe = null;
 			return;
 		}
 
+		_cookMiniGame.GameEnded += OnMiniGameEnd;
 		_cookMiniGame.SetUpSettings(_cookingRecipe.CookTime, _cookingRecipe.AcceptebleTime);
 		_cookMiniGame.StartGame();
 	}
 
 	private void OnMiniGameEnd(CookMiniGame.Result result)
 	{
-		if (result != CookMiniGame.Result.Success)
+		if (result == CookMiniGame.Result.Success)
 		{
-			return;
+			PlayerDataContainer.AddCookedFood(_cookingRecipe.Result);
 		}
-		PlayerDataContainer.AddCookedFood(_cookingRecipe.Result);
+		
 		_cookingRecipe = null;
+		_cookMiniGame.GameEnded -= OnMiniGameEnd;
 	}
 
 #if UNITY_EDITOR
+	[Header("Editor only")]
 	[SerializeField] private Recipe _cookRecipeForButton;
 
 	[CustomEditor(typeof(Campfire))]

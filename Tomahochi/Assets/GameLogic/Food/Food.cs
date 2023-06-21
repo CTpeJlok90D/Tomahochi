@@ -1,17 +1,26 @@
+using Pets;
+using Saving;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Food", menuName = "Cooking/Food")]
-public class Food : ScriptableObject
+public class Food : Consumeble
 {
-	[SerializeField] private string _viewName = "<view name>";
-	[SerializeField] private string _viewDescription = "<view description>";
-	[SerializeField] private Sprite _viewSprite;
-	[SerializeField] private float _nutritional = 30;
-	[SerializeField] private int _xpGain = 100;
+	public override void AddOnStorage(int count)
+	{
+		PlayerDataContainer.AddFood(this, count);
+	}
 
-	public string ViewName => _viewName;
-	public string ViewDescription => _viewDescription;
-	public Sprite ViewSprite => _viewSprite;
-	public float Nutritional => _nutritional;
-	public int XpCount => _xpGain;
+	public override void RemoveFromStorage(int count)
+	{
+		PlayerDataContainer.RemoveFood(this, count);
+	}
+	public override int GetStorageCount()
+	{
+		return PlayerDataContainer.GetFoodCount(this);
+	}
+
+	public override void Consume(PetSaveInfo pet)
+	{
+		pet.Feed(this);
+	}
 }

@@ -8,12 +8,13 @@ namespace Pets
 	{
 		[Header("Basics")]
 		[SerializeField] string _viewName = "<view name>";
-		[SerializeField] string _viewDescription = "<view description>"; 
-		[SerializeField] Sprite _viewSprite;
+		[SerializeField] Sprite _headSprite;
 		[SerializeField] int _starCount = 3;
-		public string ViewDescription => _viewDescription;
+		[SerializeField] private GameObject _viewPrefab;
 		public int StarCount => _starCount;
 		public string ViewName => _viewName;
+		public Sprite HeadSprite => _headSprite;
+		public GameObject ViewPrefab => _viewPrefab;
 
 
 		[Header("Level")][SerializeField] int _maxElevateCount = 5;
@@ -98,6 +99,7 @@ namespace Pets
 		public const float MIN_THIRST_TO_DRINK = 98;
 		public const float MIN_JOY_TO_PLAY = 98;
 		public const float MIN_POLLUTION_TO_WASH = 98;
+		public const float MIN_ENERGY_TO_SLEEP = 98;
 
 		[Header("Duplicats")]
 		[SerializeField] private int _maxDuplicatCount = 6;

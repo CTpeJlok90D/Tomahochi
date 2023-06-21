@@ -1,19 +1,34 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CookMiniGame : MonoBehaviour
 {
 	[SerializeField] private float _timeInterval = 5f;
 	[SerializeField] private Vector2 _acceptebleTimeInterval = new(1,2);
 	[SerializeField] private float _currentTime = 0;
-	[SerializeField] private UnityEvent<Result> _gameEnded;
+
+	public delegate void GameEndedHandler(Result result);
+	private event GameEndedHandler _gameEnded;
+	public delegate void GameStartedHandler();
+	private event GameStartedHandler _gameStarted;
 
 	private Coroutine _timerCoroutine;
 
-	public UnityEvent<Result> GameEnded => _gameEnded;
+	public event GameEndedHandler GameEnded
+	{
+		add => _gameEnded += value;
+		remove => _gameEnded -= value;
+	}
+	public event GameStartedHandler GameStarted
+	{
+		add => _gameStarted += value;
+		remove => _gameStarted -= value;
+	}
 	public bool IsLaunched => _timerCoroutine != null;
+	public Vector2 AcceptebleInterval => _acceptebleTimeInterval;
+	public float TimeInterval => _timeInterval;
+	public float CurrentTime => _currentTime;
 
 	public void SetUpSettings(float timeInterval, Vector2 acceptebleTimeInterval)
 	{
@@ -24,6 +39,7 @@ public class CookMiniGame : MonoBehaviour
 	public void StartGame()
 	{
 		_timerCoroutine = StartCoroutine(TimerCoroutine());
+		_gameStarted();
 	}
 
 	private IEnumerator TimerCoroutine()
@@ -47,15 +63,15 @@ public class CookMiniGame : MonoBehaviour
 		StopCoroutine(_timerCoroutine);
 		if (_currentTime > _acceptebleTimeInterval[0] && _currentTime < _acceptebleTimeInterval[1])
 		{
-			_gameEnded.Invoke(Result.Success);
+			_gameEnded(Result.Success);
 			return;
 		}
-		_gameEnded.Invoke(Result.Miss);
+		_gameEnded(Result.Miss);
 	}
 
 	public void OnTimeEnd()
 	{
-		_gameEnded.Invoke(Result.Timeout);
+		_gameEnded(Result.Timeout);
 	}
 
 	public enum Result
@@ -77,6 +93,10 @@ public class CookMiniGame : MonoBehaviour
 			if (GUILayout.Button("COOK!"))
 			{
 				target.OnPlayerClick();
+			}
+			if (GUILayout.Button("Luanch mini-game"))
+			{
+				target.StartGame();
 			}
 		}
 	}

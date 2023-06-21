@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Geovishap
   m_EditorClassIdentifier: 
   _viewName: Geovishap
-  _viewDescription: <view description>
-  _viewSprite: {fileID: 21300000, guid: 7ccc55ec863679441834fcb9978c47b9, type: 3}
+  _headSprite: {fileID: 981615501, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
   _starCount: 3
+  _viewPrefab: {fileID: 3032150570510147557, guid: fef694a4d378ff94aa92664903391b67,
+    type: 3}
   _maxElevateCount: 4
   _elevateEveryLevel: 10
   _xPToLevelUp: 1000

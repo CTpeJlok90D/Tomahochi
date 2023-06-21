@@ -1,5 +1,6 @@
 using Saving;
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Pets
@@ -13,8 +14,8 @@ namespace Pets
 		public float Food = 50;
 		public float Water = 50;
 		public float Joy = 50;
-		public float Sleep = 50;
-		public bool IsSleeping = false;
+		public float Energy = 50;
+		public string SleepingBedID;
 		[Header("Level")]
 		public int ElevateCount = 0;
 		public bool NeedEvelate = false;
@@ -30,6 +31,7 @@ namespace Pets
 	public static class PetLogic
 	{
 		public static Pet Pet(this PetSaveInfo info) => Resources.Load<Pet>(info.SystemName);
+		public static bool IsSleeping(this PetSaveInfo info) => string.IsNullOrEmpty(info.SleepingBedID) == false;
 		public static int MoraStorage(this PetSaveInfo info)
 		{
 			Pet pet = info.Pet();
@@ -56,7 +58,7 @@ namespace Pets
 
 		public static bool CanFeed(this PetSaveInfo info, Food food) 
 		{
-			return info.Food < Pets.Pet.MIN_HUNGER_TO_FEED && PlayerDataContainer.FoodInStorage[food.name] > 0;
+			return info.Food < Pets.Pet.MIN_HUNGER_TO_FEED && PlayerDataContainer.GetFoodCount(food) > 0 && info.IsSleeping() == false;
 		}
 
 		public static void Feed(this PetSaveInfo info, Food food)
@@ -72,7 +74,7 @@ namespace Pets
 
 		public static bool CanDrink(this PetSaveInfo info, Water water)
 		{
-			return info.Water < Pets.Pet.MIN_THIRST_TO_DRINK && PlayerDataContainer.WaterInStorage[water.name] > 0;
+			return info.Water < Pets.Pet.MIN_THIRST_TO_DRINK && PlayerDataContainer.GetWaterCount(water) > 0 && info.IsSleeping() == false;
 		}
 
 		public static void Drink(this PetSaveInfo info, Water water)
@@ -88,7 +90,7 @@ namespace Pets
 
 		public static bool CanPlay(this PetSaveInfo info)
 		{
-			return info.Joy < Pets.Pet.MIN_JOY_TO_PLAY;
+			return info.Joy < Pets.Pet.MIN_JOY_TO_PLAY && info.IsSleeping() == false;
 		}
 
 		public static void Stroke(this PetSaveInfo info)
@@ -146,11 +148,25 @@ namespace Pets
 			}
 		}
 
+		public static bool CanSleep(this PetSaveInfo info)
+		{
+			return info.Energy < Pets.Pet.MIN_ENERGY_TO_SLEEP && info.IsSleeping() == false;
+		}
+
+		public static void LaySleep(this PetSaveInfo info, Furniture sleepSpot)
+		{
+			if (info.CanSleep() == false)
+			{
+				return;
+			}
+			info.SleepingBedID = sleepSpot.ID.ToString();
+		}
+
 		public static void EmitLive(this PetSaveInfo info, float seconds)
 		{
 			Pet pet = info.Pet();
 
-			if (info.Sleep != 0 && info.Water != 0 && info.Joy != 0 && info.Food != 0)
+			if (info.Energy != 0 && info.Water != 0 && info.Joy != 0 && info.Food != 0)
 			{
 				info.MoraCount = Mathf.Clamp(info.MoraCount + info.MoraPerSecond() * seconds, 0, info.MoraStorage());
 				info.GemsCount = Mathf.Clamp(info.GemsCount + info.GemsPerSecond() * seconds, 0, info.GemsStorage());
@@ -158,22 +174,30 @@ namespace Pets
 
 			if (info.CurrentLevel == info.Pet().MaxLevel)
 			{
+				info.Joy = 100;
+				info.Food = 100;
+				info.Water = 100;
+				info.Energy = 100;
 				return;
 			}
 
 			info.Joy = Mathf.Clamp(info.Joy - pet.JoyFallRate*seconds, 0, 100);
 			info.Food = Mathf.Clamp(info.Food - pet.HungerFallRate*seconds, 0, 100);
 			info.Water = Mathf.Clamp(info.Water - pet.ThiestFallRate*seconds, 0, 100);
-			if (info.IsSleeping == false)
+			if (info.IsSleeping() == false)
 			{
-				info.Sleep = Mathf.Clamp(info.Sleep - pet.FatigueFallRate*seconds, 0, 100);
+				info.Energy = Mathf.Clamp(info.Energy - pet.FatigueFallRate*seconds, 0, 100);
 			}
 			else
 			{
-				float oldFatigue = info.Sleep;
-				info.Sleep = Mathf.Clamp(info.Sleep + pet.FatigueUpRate*seconds, 0, 100);
-				float sleepTime = (info.Sleep - oldFatigue) / pet.FatigueUpRate;
+				float oldFatigue = info.Energy;
+				info.Energy = Mathf.Clamp(info.Energy + pet.FatigueUpRate*seconds, 0, 100);
+				float sleepTime = (info.Energy - oldFatigue) / pet.FatigueUpRate;
 				info.GainXP(sleepTime * pet.XpWhileSleepRate);
+				if (info.Energy == 100 || info.Joy == 0 || info.Water == 0 || info.Food == 0)
+				{
+					info.SleepingBedID = string.Empty;
+				}
 			}
 		}
 	}

@@ -8,6 +8,7 @@ namespace AICore
     public class Memory
     {
         [SerializeField] private List<Impact> _impact;
+        [SerializeField] private bool _infinity; 
         [SerializeField] private float _dituration;
 
         private float _currentDituration;
@@ -32,7 +33,7 @@ namespace AICore
 			_currentDituration = _dituration;
 		}
 
-        public void OnMemoryAdd(FactorInfo info)
+        public void OnMemoryAdd(Factor info)
         {
             UpdateDituration();
 			foreach (Impact impact in _impact)
@@ -42,7 +43,7 @@ namespace AICore
             }
         }
 
-        public void UpdateInfo(FactorInfo info)
+        public void UpdateInfo(Factor info)
         {
 			foreach (Impact impact in _impact)
 			{
@@ -52,7 +53,12 @@ namespace AICore
 
         public void OnUpdate()
         {
-            _currentDituration -= Time.deltaTime;
+			if (_infinity)
+            {
+                return;
+            }
+
+			_currentDituration -= Time.deltaTime;
 		}
 
         public void OnMemoryRemove()

@@ -4,8 +4,8 @@ namespace AICore
 {
 	public class FactorContainer : MonoBehaviour
 	{
-		[SerializeField] private FactorInfo _info;
+		[SerializeField] private Factor _info;
 
-		public FactorInfo Info => _info;
+		public Factor Info => _info;
 	}
 }

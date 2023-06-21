@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using PlasticGui;
+using System;
 using UnityEngine;
 
-public class Furniture : MonoBehaviour
+[Serializable]
+public class Furniture
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private string _id;
+	public Vector2 Position;
+	public string SystemName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public string ID => _id;
+
+	public Furniture()
+	{
+		_id = Guid.NewGuid().ToString();
+	}
+
+	public Furniture(string id)
+	{
+		_id = id;
+	}
 }

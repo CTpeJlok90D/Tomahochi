@@ -5,21 +5,26 @@ namespace AICore
 {
     public class Brain : MonoBehaviour
     {
-        [SerializeField] private UnityDictionarity<Factor, Memory> _factorMemotyDictionary = new();
+        [SerializeField] private UnityDictionarity<string, Memory> _factorMemotyDictionary = new();
         [SerializeField] private List<Memory> _activeMemorys = new();
 
-		public void AddFactor(FactorInfo info)
+		public void AddFactor(Factor factor)
         {
-			if (_factorMemotyDictionary.Keys.Contains(info.Factor) == false)
+			if (_factorMemotyDictionary.Keys.Contains(factor) == false)
 			{
 				return;
 			}
 
-            Memory memory = _factorMemotyDictionary[info.Factor];
-            AddMemory(memory, info);
+            Memory memory = _factorMemotyDictionary[factor];
+            AddMemory(memory, factor);
 		}
 
-		private void AddMemory(Memory memory, FactorInfo info)
+		public void RemoveFactor(Factor factor)
+		{
+			RemoveMemory(_factorMemotyDictionary[factor]);
+		}
+
+		private void AddMemory(Memory memory, Factor info)
 		{
 			if (_activeMemorys.Contains(memory) == false)
 			{

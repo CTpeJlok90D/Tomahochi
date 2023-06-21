@@ -15,10 +15,10 @@ namespace AICore
         [SerializeField] private UnityEvent _begined;
         [SerializeField] private UnityEvent _ended;
 
-		private FactorInfo _info;
+		private Factor _info;
 
 		public NavMeshAgent Agent => _agent;
-		public FactorInfo Info => _info;
+		public Factor Info => _info;
         public UnityEvent Begined => _begined;
         public UnityEvent Ended => _ended;
 
@@ -34,7 +34,7 @@ namespace AICore
         {
             _ended.Invoke();
 		}
-        public virtual void OnTakeNewInfo(FactorInfo info) 
+        public virtual void OnTakeNewInfo(Factor info) 
         {
             _info = info;
         }

@@ -7,4 +7,9 @@ public class ZOffsetChanger : MonoBehaviour
 	{
 		transform.position = new(transform.position.x, transform.position.y, _target.position.y);
 	}
+
+	private void OnValidate()
+	{
+		_target ??= transform;
+	}
 }

@@ -13,17 +13,30 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 	private Coroutine _moveCoroutine;
 	public bool ThisCameraIsActive => (_brain.ActiveVirtualCamera as CinemachineVirtualCamera) == _camera;
 
+	private static MoveCameraPanel _instance;
+	public static MoveCameraPanel Singletone => _instance;
+
+	private void Awake()
+	{
+		if (_instance != null && _instance != this)
+		{
+			Destroy(this.gameObject);
+			Debug.LogWarning($"{this.name} is singletone! Other objects was destroyed", this);
+			return;
+		}
+		_instance = this;
+	}
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
 		Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		RaycastHit2D hit = Physics2D.Raycast(worldMousePosition, worldMousePosition);
 
-		if (hit.collider.TryGetComponent(out SelectPetCollision collision))
+		if (hit.collider.TryGetComponent(out Selecteble collision))
 		{
 			return;
 		}
-		SelectPetCollision.SelectedPet?.Deselect();
+		Selecteble.SelectedObject?.Deselect();
 		if (eventData.button != PointerEventData.InputButton.Left || ThisCameraIsActive == false)
 		{
 			return;

@@ -10,7 +10,9 @@ namespace Saving
 		public string FoodInStorage;
 		public string IngridientsInStorage;
 		public string FoodCookCount;
-		public string WaterStorage;
+		public string WaterInStorage;
+		public string FurnitureList;
+		public string FurnitureInStorage;
 		public int GemsCount = 0;
 		public int MoraCount = 0;
 		public int FateCount = 0;
