@@ -1,13 +1,29 @@
+using Saving;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Ingridient", menuName = "Cooking/Ingridient")]
-public class Ingredient : ScriptableObject
+public class Ingredient : Storageble
 {
-	[SerializeField] private string _viewName = "<View name>";
-	[SerializeField] private string _viewDescription = "<view description>";
-	[SerializeField] private Sprite _viewSprite;
+	public override void AddOnStorage(int count)
+	{
+		PlayerDataContainer.AddIngridient(this, count);
+	}
 
-	public string ViewName => _viewName;
-	public string ViewDescription => _viewDescription;
-	public Sprite ViewSprite => _viewSprite;
+	public override int GetStorageCount()
+	{
+		return PlayerDataContainer.GetIngridientCount(this);
+	}
+
+	public override UnityEvent<Storageble, int> OnStorageCountChanged => PlayerDataContainer.IngridiendCountChanged;
+
+	public override void RemoveFromStorage(int count)
+	{
+		PlayerDataContainer.RemoveIngridient(this, count);
+	}
+
+	public override void ApplyLoot()
+	{
+		AddOnStorage(10);
+	}
 }

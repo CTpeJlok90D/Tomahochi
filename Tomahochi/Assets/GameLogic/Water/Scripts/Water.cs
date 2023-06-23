@@ -1,6 +1,7 @@
 using Pets;
 using Saving;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Water", menuName = "Cooking/Water")]
 public class Water : Consumeble
@@ -15,13 +16,20 @@ public class Water : Consumeble
 		PlayerDataContainer.RemoveWater(this, count);
 	}
 
+	public override void Consume(PetSaveInfo pet)
+	{
+		pet.Drink(this);
+	}
+
 	public override int GetStorageCount()
 	{
 		return PlayerDataContainer.GetWaterCount(this);
 	}
 
-	public override void Consume(PetSaveInfo pet)
+	public override void ApplyLoot()
 	{
-		pet.Drink(this);
+		AddOnStorage(3);
 	}
+
+	public override UnityEvent<Storageble, int> OnStorageCountChanged => PlayerDataContainer.WaterCountChanged;
 }

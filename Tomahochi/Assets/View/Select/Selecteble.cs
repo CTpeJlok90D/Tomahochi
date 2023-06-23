@@ -25,9 +25,9 @@ public class Selecteble : MonoBehaviour
 		remove => _deselected -= value;
 	}
 
-	private static bool _canSelectOther = true;
 
 	private static Selecteble _selectedObject;
+	public static bool CanSelect = true;
 	public static Selecteble SelectedObject => _selectedObject;
 	private static event SelectedObjectChangedHandler _selectedObjectChanged;
 	public static event SelectedObjectChangedHandler SelectObjectChange
@@ -66,7 +66,7 @@ public class Selecteble : MonoBehaviour
 		{
 			return;
 		}
-		if (_canSelectOther == false)
+		if (CanSelect == false)
 		{
 			if (IsSelected)
 			{
@@ -79,14 +79,14 @@ public class Selecteble : MonoBehaviour
 
 	public void Select()
 	{
-		if (IsSelected)
+		if (IsSelected || CanSelect == false)
 		{
 			return;
 		}
 
 		_selectedObject?.Deselect();
 		_selectedObject = this;
-		_canSelectOther = _canSelectOtherWhileSelected;
+		CanSelect = _canSelectOtherWhileSelected;
 		_camera.Priority += _cameraPryorityChange;
 		MoveCameraPanel.Singletone.enabled = false || !_disableCameraMovement;
 		_selectedObjectChanged.Invoke(_selectedObject);
@@ -99,8 +99,9 @@ public class Selecteble : MonoBehaviour
 		{
 			return;
 		}
+
 		_selectedObject = null;
-		_canSelectOther = true;
+		CanSelect = true;
 		_camera.Priority -= _cameraPryorityChange;
 		MoveCameraPanel.Singletone.enabled = true;
 		_selectedObjectChanged.Invoke(_selectedObject);

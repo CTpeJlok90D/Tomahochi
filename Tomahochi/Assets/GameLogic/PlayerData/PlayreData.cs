@@ -16,8 +16,7 @@ namespace Saving
 		public int GemsCount = 0;
 		public int MoraCount = 0;
 		public int FateCount = 0;
-		public int RareRollCount = 0;
-		public int LegendaryRollCount = 0;
+		public int RollCount = 0;
 		public List<PetSaveInfo> UnlockedPets = new();
 
 		public string LastLaunchTime;

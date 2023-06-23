@@ -6,6 +6,9 @@ public class SleepSpotView : MonoBehaviour
 	[SerializeField] private FurnitureView _furnitureView;
 	[SerializeField] private Selecteble _select;
 	[SerializeField] private string _sleepingPet;
+	[SerializeField] private Transform _sleepTransform;
+
+	public Transform SleepTransform => _sleepTransform;
 
 	private void OnEnable()
 	{

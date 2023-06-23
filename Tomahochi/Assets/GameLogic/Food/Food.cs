@@ -1,6 +1,7 @@
 using Pets;
 using Saving;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Food", menuName = "Cooking/Food")]
 public class Food : Consumeble
@@ -23,4 +24,11 @@ public class Food : Consumeble
 	{
 		pet.Feed(this);
 	}
+
+	public override void ApplyLoot()
+	{
+		AddOnStorage(3);
+	}
+
+	public override UnityEvent<Storageble, int> OnStorageCountChanged => PlayerDataContainer.FoodCountChanged;
 }

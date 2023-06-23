@@ -1,13 +1,12 @@
-using JetBrains.Annotations;
-using Pets;
+using Saving;
 using System.Collections;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StoragebleListElement : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
-
 {
 	[SerializeField] private TMP_Text _countCaption;
 	[SerializeField] private TMP_Text _nameCaption;
@@ -38,14 +37,30 @@ public class StoragebleListElement : MonoBehaviour, IPointerDownHandler, IPointe
 		_nameCaptionFormat = _nameCaption.text;
 	}
 
-	public StoragebleListElement Init(Consumeble storageble, int count)
+	public StoragebleListElement Init(Consumeble consumeble, int count)
 	{
-		_nameCaption.text = string.Format(_nameCaptionFormat, storageble.ViewName);
-		_image.sprite = storageble.ViewSprite;
-		_consumeble = storageble;
+		_nameCaption.text = string.Format(_nameCaptionFormat, consumeble.ViewName);
+		_image.sprite = consumeble.ViewSprite;
+		_consumeble = consumeble;
 		Count = count;
-
+		_consumeble.OnStorageCountChanged.AddListener(UpdateCount);
 		return this;
+	}
+
+	private void OnDestroy()
+	{
+		if (PlayerDataContainer.HaveInstance)
+		{
+			_consumeble?.OnStorageCountChanged?.RemoveListener(UpdateCount);
+		}
+	}
+
+	public void UpdateCount(Storageble item, int count)
+	{
+		if (item == _consumeble)
+		{
+			Count = count;
+		}
 	}
 
 	private IEnumerator DragCoroutine()

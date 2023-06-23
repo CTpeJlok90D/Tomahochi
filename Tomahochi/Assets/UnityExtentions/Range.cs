@@ -25,7 +25,7 @@ namespace UnityExtentions
             return RandomValue().ToString();
 		}
 
-		private float RandomValue()
+		public float RandomValue()
 		{
             return UnityEngine.Random.Range(Min, Max);
 		}

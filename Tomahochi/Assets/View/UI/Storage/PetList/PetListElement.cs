@@ -39,7 +39,7 @@ public class PetListElement : MonoBehaviour, IPointerClickHandler
 
 		_info = info;
 		_nameCaption.text = string.Format(nameFormat, pet.name);
-		_headPlace.sprite = pet.HeadSprite;
+		_headPlace.sprite = pet.ViewSprite;
 		return this;
 	}
 

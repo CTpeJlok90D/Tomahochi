@@ -204,7 +204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 597672322, guid: 534141faee40b4f45aec341603aef3b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -227,8 +227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recipe: {fileID: 0}
+  _campfire: {fileID: 0}
   _image: {fileID: 8860900566476052831}
   _nameCaption: {fileID: 2649817901420793598}
+  _cantCookAlpha: 0.6
 --- !u!1 &8399383982928162562
 GameObject:
   m_ObjectHideFlags: 0

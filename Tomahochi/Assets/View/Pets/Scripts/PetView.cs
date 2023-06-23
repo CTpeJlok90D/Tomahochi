@@ -49,7 +49,7 @@ public class PetView : MonoBehaviour
 		if (_petInfo.IsSleeping())
 		{
 			SleepSpotView spot = FurnitureView.ByID[_petInfo.SleepingBedID].GetComponent<SleepSpotView>();
-			_agent.Warp(spot.transform.position);
+			_agent.Warp(spot.SleepTransform.position);
 			LaySleep(spot);
 		}
 	}
@@ -57,6 +57,7 @@ public class PetView : MonoBehaviour
 	private void LateUpdate()
 	{
 		_animator.SetBool(WALK_PARAMETR_NAME, InMoving);
+		_animator.SetBool(SLEEPING_PARAMERT_NAME, InMoving == false && _petInfo.IsSleeping());
 
 		if (InMoving)
 		{

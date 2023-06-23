@@ -67,7 +67,7 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 		{
 			lastMousePosition = Input.mousePosition;
 			yield return null;
-			_camera.transform.position += (lastMousePosition - Input.mousePosition) * _moveSensivity;
+			_camera.transform.position += (lastMousePosition - Input.mousePosition) * _moveSensivity * _camera.m_Lens.OrthographicSize;
 		}
 	}
 

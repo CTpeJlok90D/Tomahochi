@@ -55,9 +55,9 @@ MonoBehaviour:
   _ended:
     m_PersistentCalls:
       m_Calls: []
-  _animator: {fileID: 5621750241381333287}
   _petView: {fileID: 2574148756044278657}
   _brain: {fileID: 1532446309018048211}
+  _sleepPlace: {fileID: 0}
 --- !u!1 &61774748480107868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,7 +2569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3829520467884618871}
-  Priority: 0
+  Priority: 1
   _maxSpeed: 4
   _acceleration: 8
   _soppingDistance: 0

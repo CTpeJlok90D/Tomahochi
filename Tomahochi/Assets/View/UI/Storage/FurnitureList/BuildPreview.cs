@@ -8,14 +8,14 @@ public class BuildPreview : MonoBehaviour
 	[SerializeField] private Color _cantBuildColor;
 	[SerializeField] private LayerMask _layers;
 	private InstallResult _result = InstallResult.InProgress;
-	private Vector2 _size;
+	private Vector2[] _buildCheckPoints;
 
 	public InstallResult Result => _result;
 
-	public BuildPreview Init(Sprite viewSprite, Vector2 size)
+	public BuildPreview Init(Sprite viewSprite, Vector2[] buildCheckPoints)
 	{
 		_spriteRenderer.sprite = viewSprite;
-		_size = size;
+		_buildCheckPoints = buildCheckPoints;
 		return this;
 	}
 
@@ -36,21 +36,11 @@ public class BuildPreview : MonoBehaviour
 	private bool CanBuild()
 	{
 		List<RaycastHit2D> hits = new();
-		Vector2 invertedSize = new Vector2(_size.x, -_size.y);
 
-		RaycastHit2D Raycast(Vector2 size) => Physics2D.Raycast((Vector2)transform.position + size, Vector2.zero, Mathf.Infinity, _layers);
-		hits.Add(Raycast(_size/2));
-		hits.Add(Raycast(-_size/2));
-		hits.Add(Raycast(-invertedSize/2));
-		hits.Add(Raycast(invertedSize/2));
-
-		points = new Vector2[]
+		foreach (Vector2 point in _buildCheckPoints)
 		{
-			_size/2,
-			-_size/2,
-			-invertedSize/2,
-			invertedSize/2
-		};
+			hits.Add(Physics2D.Raycast((Vector2)transform.position + point, Vector2.zero, Mathf.Infinity, _layers));
+		}
 
 		foreach (RaycastHit2D hit in hits)
 		{
@@ -79,7 +69,7 @@ public class BuildPreview : MonoBehaviour
 		InProgress
 	}
 
-	private Vector2[] points;
+	private Vector2[] points = new Vector2[0];
 	private void OnDrawGizmos()
 	{
 		foreach (Vector2 point in points)

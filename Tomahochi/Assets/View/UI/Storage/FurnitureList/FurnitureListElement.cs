@@ -1,5 +1,4 @@
 using Saving;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -25,19 +24,19 @@ public class FurnitureListElement : MonoBehaviour, IPointerDownHandler
 		_info = info;
 		_nameCaption.text = string.Format(_nameFormat, info.name);
 		UpdateCount();
-		_imageView.sprite = _info.ViewIcon;
+		_imageView.sprite = _info.ViewSprite;
 
 		return this;
 	}
 
 	private void OnEnable()
 	{
-		PlayerDataContainer.FurnitureOnStarageCountChanged += OnFurnitureCountChange;
+		PlayerDataContainer.FurnitureOnStarageCountChanged.AddListener(OnFurnitureCountChange);
 	}
 
 	private void OnDisable()
 	{
-		PlayerDataContainer.FurnitureOnStarageCountChanged -= OnFurnitureCountChange;
+		PlayerDataContainer.FurnitureOnStarageCountChanged.AddListener(OnFurnitureCountChange);
 	}
 
 	public void UpdateCount()
@@ -45,13 +44,17 @@ public class FurnitureListElement : MonoBehaviour, IPointerDownHandler
 		_countCaption.text = string.Format(_countFrormat, PlayerDataContainer.GetFurnitureCountOnStorage(_info.name));
 	}
 
-	private void OnFurnitureCountChange(string name, int count)
+	private void OnFurnitureCountChange(Storageble info , int count)
 	{
-		if (name != _info.name)
+		if (info.name != _info.name)
 		{
 			return;
 		}
 		UpdateCount();
+		if (count == 0)
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
@@ -65,7 +68,7 @@ public class FurnitureListElement : MonoBehaviour, IPointerDownHandler
 		{
 			SystemName = _info.name
 		};
-		BuildPreview buildPreview = Instantiate(_buildPreviewPrefab).Init(_info.ViewIcon, _info.Size);
+		BuildPreview buildPreview = Instantiate(_buildPreviewPrefab).Init(_info.ViewSprite, _info.BuildCheckPoints);
 
 		while (buildPreview.Result == BuildPreview.InstallResult.InProgress)
 		{

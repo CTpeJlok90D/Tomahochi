@@ -8,7 +8,6 @@ public static class PlayerPrefsTweaks
 	private static void ClearPrefs()
 	{
 		PlayerPrefs.DeleteAll();
-		PlayerDataContainer.LoadStartSavedPrefs();
 		Debug.Log("Prefs cleared");
 	}
 
@@ -21,7 +20,7 @@ public static class PlayerPrefsTweaks
 	[MenuItem("PlayerPrefs/Save")]
 	private static void SaveCurrentPrefs()
 	{
-		PlayerDataContainer.SaveData();
+		PlayerDataContainer.SavePlayerData();
 		Debug.Log($"Saved new player prefs:");
 		ShowPlayerPrefs();
 	}

@@ -1,19 +1,20 @@
+using Saving;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pets
 {
 	[CreateAssetMenu]
-	public class Pet : ScriptableObject
+	public class Pet : ScriptableObject, ILootDrop
 	{
 		[Header("Basics")]
 		[SerializeField] string _viewName = "<view name>";
-		[SerializeField] Sprite _headSprite;
-		[SerializeField] int _starCount = 3;
+		[SerializeField] Sprite _viewSprite;
+		[SerializeField] int _starCount = 5;
 		[SerializeField] private GameObject _viewPrefab;
 		public int StarCount => _starCount;
 		public string ViewName => _viewName;
-		public Sprite HeadSprite => _headSprite;
+		public Sprite ViewSprite => _viewSprite;
 		public GameObject ViewPrefab => _viewPrefab;
 
 
@@ -125,6 +126,14 @@ namespace Pets
 			{
 				info.EmitLive(seconds);
 			}
+		}
+
+		public void ApplyLoot()
+		{
+			PlayerDataContainer.AddPet(new PetSaveInfo()
+			{
+				SystemName = this.name
+			});
 		}
 	}
 }

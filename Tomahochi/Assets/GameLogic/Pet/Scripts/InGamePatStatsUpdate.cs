@@ -1,15 +1,23 @@
 using UnityEditor;
 using UnityEngine;
 using Saving;
+using System;
 
 namespace Pets
 {
 	public class InGamePatStatsUpdate : MonoBehaviour
 	{
+		private DateTime _lastRegistredDateTime = DateTime.MinValue;
 		private void Update()
 		{
-			Pet.FallRatePetsByTime(PlayerDataContainer.UnlockedPets, Time.deltaTime);
+			if (_lastRegistredDateTime == DateTime.MinValue)
+			{
+				_lastRegistredDateTime = DateTime.UtcNow;
+			}
+			Pet.FallRatePetsByTime(PlayerDataContainer.UnlockedPets, (float)(DateTime.UtcNow - _lastRegistredDateTime).TotalSeconds);
+			_lastRegistredDateTime = DateTime.UtcNow;
 		}
+
 #if UNITY_EDITOR
 		[SerializeField] private float _seconds;
 		[CustomEditor(typeof(InGamePatStatsUpdate))]

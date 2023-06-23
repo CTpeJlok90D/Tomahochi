@@ -14,6 +14,10 @@ public class PetUI : MonoBehaviour
 	[SerializeField] private Image _foodImage;
 	[SerializeField] private Image _waterImage;
 	[SerializeField] private Image _sleepImage;
+	[SerializeField] private Slider _slider;
+	[SerializeField] private Button _elevateButton;
+	[SerializeField] private Image[] _starsImages;
+	[SerializeField] private Image[] _backGroundStars;
 
 	private string _gemsCaptionFormat;
 	private string _moraCaptionFormat;
@@ -34,11 +38,18 @@ public class PetUI : MonoBehaviour
 	private void OnEnable()
 	{
 		Selecteble.SelectObjectChange += OnSelectedObjectChange;
+		_elevateButton.onClick.AddListener(ElevatePet);
 	}
 
 	private void OnDisable()
 	{
 		Selecteble.SelectObjectChange -= OnSelectedObjectChange;
+		_elevateButton.onClick.RemoveListener(ElevatePet);
+	}
+
+	private void ElevatePet()
+	{
+		_petInfo.Elevate();
 	}
 
 	private void OnSelectedObjectChange(Selecteble selecteble)
@@ -75,5 +86,20 @@ public class PetUI : MonoBehaviour
 		_foodImage.fillAmount = _petInfo.Food / 100;
 		_waterImage.fillAmount = _petInfo.Water / 100;
 		_sleepImage.fillAmount = _petInfo.Energy / 100;
+
+		_slider.value = _petInfo.CurrentXP / _pet.XPToLevelUp;
+		_elevateButton.gameObject.SetActive(_petInfo.NeedEvelate);
+		int starNumber = 1;
+		foreach (Image image in _backGroundStars)
+		{
+			image.gameObject.SetActive(starNumber <= _pet.MaxElevateCount);
+			starNumber++;
+		}
+		starNumber = 1;
+		foreach (Image image in _starsImages)
+		{
+			image.enabled = starNumber <= _petInfo.ElevateCount;
+			starNumber++;
+		}
 	}
 }

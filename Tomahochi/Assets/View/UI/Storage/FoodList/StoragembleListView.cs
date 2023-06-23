@@ -7,7 +7,6 @@ public class StoragembleListView : MonoBehaviour
 	[SerializeField] private Transform _content;
 	[SerializeField] private StoragebleListElement _element;
 	[SerializeField] private UnityDictionarity<Consumeble, StoragebleListElement> _consumebleCount;
-	[SerializeField] private ElementShowType Type = ElementShowType.Food;
 
 	private void Start()
 	{
@@ -16,14 +15,9 @@ public class StoragembleListView : MonoBehaviour
 
 	private void OnEnable()
 	{
-		if (Type == ElementShowType.Food || Type == ElementShowType.All)
-		{
-			PlayerDataContainer.FoodCountChanged.AddListener(UpdateConsumebleList);
-		}
-		if (Type == ElementShowType.Water || Type == ElementShowType.All)
-		{
-			PlayerDataContainer.WaterCountChanged.AddListener(UpdateConsumebleList);
-		}
+		PlayerDataContainer.WaterCountChanged.AddListener(UpdateConsumebleList);
+		PlayerDataContainer.FoodCountChanged.AddListener(UpdateConsumebleList);
+		LoadFoodList();
 	}
 
 	private void OnDisable()
@@ -35,8 +29,9 @@ public class StoragembleListView : MonoBehaviour
 		}
 	}
 
-	private void UpdateConsumebleList(Consumeble consumeble, int count)
+	private void UpdateConsumebleList(Storageble storageble, int count)
 	{
+		Consumeble consumeble = storageble as Consumeble;
 		if (count == 0)
 		{
 			Destroy(_consumebleCount[consumeble].gameObject);
@@ -85,25 +80,9 @@ public class StoragembleListView : MonoBehaviour
 
 	private Consumeble[] GetStoragebleObject()
 	{
-		switch (Type)
-		{
-			case ElementShowType.Food: 
-				return Resources.LoadAll<Food>("");
-			case ElementShowType.Water: 
-				return Resources.LoadAll<Water>("");
-			case ElementShowType.All: 
-				List<Consumeble> result = new();
-				result.AddRange(Resources.LoadAll<Food>(""));
-				result.AddRange(Resources.LoadAll<Water>(""));
-				return result.ToArray();
-		}
-		return null;
-	}
-
-	private enum ElementShowType
-	{
-		Food,
-		Water,
-		All
+		List<Consumeble> result = new();
+		result.AddRange(Resources.LoadAll<Food>(""));
+		result.AddRange(Resources.LoadAll<Water>(""));
+		return result.ToArray();
 	}
 }

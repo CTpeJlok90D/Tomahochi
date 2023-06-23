@@ -22,13 +22,34 @@ public class RecipeListElement : MonoBehaviour, IPointerClickHandler
 		_initialized = true;
 		_recipe = recipe;
 		_campfire = campfire;
-
 		return this;
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		_campfire.Cook(_recipe);
+		OnStorageCountChange();
+	}
+
+	private void OnStorageCountChange()
+	{
+		bool value = true;
+		foreach (Recipe.IngridiendData data in _recipe.Igredients)
+		{
+			if (data.Ingredient.GetStorageCount() < data.Count)
+			{
+				value = false;
+				break;
+			}
+		}
+		if (value)
+		{
+			_image.color = Color.white;
+		}
+		else
+		{
+			_image.color = new(1, 1, 1, _cantCookAlpha);
+		}
 	}
 
 	public IEnumerator Start()
