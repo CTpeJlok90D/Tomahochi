@@ -12,7 +12,7 @@ public class PetView : MonoBehaviour
 	[SerializeField] private NavMeshAgent _agent;
 	[SerializeField] private Animator _animator;
 	[SerializeField] private Brain _brain;
-	[SerializeField] private string _linkedPetSystemName = "<System pet name>";
+	[SerializeField] private string _linkedPetSystemName = "<System pet name>"; // ÿ” –≈“ Õ≈ “–Œ√¿… ›“Œ œŒÀ≈! ≈√Œ Õ≈ Õ”∆ÕŒ ÀŒ ¿À»«»–Œ¬¿“‹!
 	[SerializeField] private Vector3 _rightLookScale = new Vector3(-1, 1, 1);
 	[SerializeField] private Vector3 _leftLookScale = new Vector3(1, 1, 1);
 

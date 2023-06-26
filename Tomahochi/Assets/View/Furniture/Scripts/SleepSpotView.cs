@@ -32,7 +32,7 @@ public class SleepSpotView : MonoBehaviour
 	private void OnDeselect()
 	{
 		UI.PetList.PetClicked -= OnPetChoose;
-		UI.PetList.Hide();
+		UI.PetList?.Hide();
 	}
 
 	private void OnPetChoose(PetSaveInfo info)

@@ -12,6 +12,11 @@ public class UI : MonoBehaviour
 
 	public delegate void ModeChangedHandler(UIMode mode);
 	private event ModeChangedHandler _modeChanged;
+	public static event ModeChangedHandler ModeChanged
+	{
+		add => _instance._modeChanged += value;
+		remove => _instance._modeChanged -= value;
+	}
 	public static UIMode Mode
 	{
 		get
@@ -29,7 +34,6 @@ public class UI : MonoBehaviour
 			_instance._tabPerMode[value].Tab.SetActive(true);
 			_instance._mode = value;
 			_instance._modeChanged?.Invoke(Mode);
-			Selecteble.CanSelect = info.CanSelectObjects;
 			MoveCameraPanel.Singletone.enabled = info.CanMoveCamera;
 		}
 	}
@@ -37,18 +41,7 @@ public class UI : MonoBehaviour
 	public static PetList PetList => _instance._petList;
 	public static PetUI PetUI => _instance._petUI;
 	public static RecipeList RecipeList => _instance._recipeList;
-	public static event ModeChangedHandler ModeChanged
-	{
-		add
-		{
-			_instance._modeChanged += value;
-		}
-		remove
-		{
-			_instance._modeChanged -= value;
-		}
-	}
-
+	public static bool HaveInstance => _instance != null;
 	private void Awake()
 	{
 #if UNITY_EDITOR
@@ -83,6 +76,5 @@ public class UI : MonoBehaviour
 	{
 		public GameObject Tab;
 		public bool CanMoveCamera;
-		public bool CanSelectObjects;
 	}
 }

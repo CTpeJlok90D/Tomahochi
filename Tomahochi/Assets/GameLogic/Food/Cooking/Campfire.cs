@@ -5,17 +5,35 @@ using UnityEngine;
 public class Campfire : MonoBehaviour
 {
 	[SerializeField] private CookMiniGame _cookMiniGame;
-	[SerializeField] private Recipe _cookingRecipe;
+	[SerializeField] private Recipe _selectedRecipe;
+	public delegate void RecipeSelectedDelegate(Recipe recipe);
+	private event RecipeSelectedDelegate _selectedRecipeChanged;
 
-	public bool IsCooking => _cookingRecipe != null;
+	private bool _isCooking = false;
 
-	public bool CanCook(Recipe recipe)
+	public bool IsCooking => _isCooking;
+	public Recipe SelectedRecipe => _selectedRecipe;
+	public event RecipeSelectedDelegate SelectedRecipeChanged
 	{
-		if (IsCooking)
+		add => _selectedRecipeChanged += value;
+		remove => _selectedRecipeChanged -= value;
+	}
+
+
+
+	public void SelectRecipe(Recipe recipe)
+	{
+		_selectedRecipe = recipe;
+		_selectedRecipeChanged?.Invoke(recipe);
+	}
+	public bool CanAutoCook() => PlayerDataContainer.GetCookedFoodCount(_selectedRecipe.Result) >= _selectedRecipe.CookCountToSkipMiniGame && CanCook();
+	public bool CanCook()
+	{
+		if (IsCooking || _selectedRecipe == null)
 		{
 			return false;
 		}
-		foreach (Recipe.IngridiendData data in recipe.Igredients)
+		foreach (Recipe.IngridiendData data in _selectedRecipe.Igredients)
 		{
 			if (PlayerDataContainer.GetIngridientCount(data.Ingredient) < data.Count)
 			{
@@ -24,71 +42,46 @@ public class Campfire : MonoBehaviour
 		}
 		return true;
 	}
-	public void Cook(Recipe recipe)
+
+	public void AutoCook()
 	{
-		if (CanCook(recipe) == false)
+		if (CanAutoCook() == false)
 		{
 			return;
 		}
 
-		_cookingRecipe = recipe;
+		foreach (Recipe.IngridiendData data in _selectedRecipe.Igredients)
+		{
+			PlayerDataContainer.RemoveIngridient(data.Ingredient, data.Count);
+		}
+		PlayerDataContainer.AddFood(_selectedRecipe.Result);
+	}
 
-		foreach (Recipe.IngridiendData data in _cookingRecipe.Igredients)
+	public void HandCook()
+	{
+		if (CanCook() == false)
+		{
+			return;
+		}
+		_isCooking = true;
+
+		foreach (Recipe.IngridiendData data in _selectedRecipe.Igredients)
 		{
 			PlayerDataContainer.RemoveIngridient(data.Ingredient, data.Count);
 		}
 
-		if (PlayerDataContainer.GetFoodCount(recipe.Result) >= recipe.CookCountToSkipMiniGame)
-		{
-			PlayerDataContainer.AddCookedFood(_cookingRecipe.Result);
-			_cookingRecipe = null;
-			return;
-		}
-
 		_cookMiniGame.GameEnded += OnMiniGameEnd;
-		_cookMiniGame.SetUpSettings(_cookingRecipe.CookTime, _cookingRecipe.AcceptebleTime);
+		_cookMiniGame.SetUpSettings(_selectedRecipe.CookTime, _selectedRecipe.AcceptebleTime);
 		_cookMiniGame.StartGame();
 	}
-
 	private void OnMiniGameEnd(CookMiniGame.Result result)
 	{
+		_isCooking = false;
 		if (result == CookMiniGame.Result.Success)
 		{
-			PlayerDataContainer.AddCookedFood(_cookingRecipe.Result);
+			PlayerDataContainer.AddCookedFood(_selectedRecipe.Result);
 		}
 		
-		_cookingRecipe = null;
 		_cookMiniGame.GameEnded -= OnMiniGameEnd;
 	}
-
-#if UNITY_EDITOR
-	[Header("Editor only")]
-	[SerializeField] private Recipe _cookRecipeForButton;
-
-	[CustomEditor(typeof(Campfire))]
-	public class CampfireEditor : Editor
-	{
-		public new Campfire target => base.target as Campfire;
-
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
-			if (Application.isPlaying == false)
-			{
-				return;
-			}
-			if (target._cookRecipeForButton != null)
-			{
-				foreach (Recipe.IngridiendData ingredient in target._cookRecipeForButton.Igredients)
-				{
-					GUILayout.Label($"Request a {ingredient.Count} {ingredient.Ingredient}. On storage: {PlayerDataContainer.GetIngridientCount(ingredient.Ingredient)}");
-				}
-			}
-			if (GUILayout.Button("Cook"))
-			{
-				target.Cook(target._cookRecipeForButton);
-			}
-		}
-	}
-#endif
 }

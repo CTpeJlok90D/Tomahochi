@@ -1,3 +1,4 @@
+using Saving;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class SimpleStoragebleItemCountView : MonoBehaviour
 
 	private void Start()
 	{
+		_storageble?.OnStorageCountChanged?.AddListener(OnCountChanged);
 		_countFormat = _countCapltion.text;
 		if (_storageble == null)
 		{
@@ -27,16 +29,19 @@ public class SimpleStoragebleItemCountView : MonoBehaviour
 
 	private void OnEnable()
 	{
-		_storageble?.OnStorageCountChanged.AddListener(OnCountChanged);
 		if (string.IsNullOrEmpty(_countFormat) == false)
 		{
 			UpdateCount();
 		}
 	}
 
-	private void OnDisable()
+	private void OnDestroy()
 	{
-		_storageble?.OnStorageCountChanged.RemoveListener(OnCountChanged);
+		if (PlayerDataContainer.HaveInstance == false)
+		{
+			return;
+		}
+		_storageble.OnStorageCountChanged?.RemoveListener(OnCountChanged);
 	}
 
 	private void OnCountChanged(Storageble item, int count)

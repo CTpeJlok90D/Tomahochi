@@ -1,4 +1,6 @@
+using AICore;
 using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -6,9 +8,13 @@ public class Selecteble : MonoBehaviour
 {
 	[SerializeField] private CinemachineVirtualCamera _camera;
 	[SerializeField] private int _cameraPryorityChange = 50;
-	[SerializeField] private bool _deleselectOnRepeatTab = false;
+	[SerializeField] private bool _deleselectOnRepeatClick = false;
 	[SerializeField] private bool _disableCameraMovement = false;
 	[SerializeField] private bool _canSelectOtherWhileSelected = true;
+	[SerializeField] private List<UIMode> _canBeSelectedInModes = new();
+
+	private CinemachineBrain _brain;
+
 	public delegate void SelectedObjectChangedHandler(Selecteble selecteble);
 	public delegate void DeSelectedObjectChangedHandler();
 	private event SelectedObjectChangedHandler _selected;
@@ -19,15 +25,16 @@ public class Selecteble : MonoBehaviour
 		add => _selected += value;
 		remove => _selected -= value;
 	}
+
 	public event DeSelectedObjectChangedHandler Deselected
 	{
 		add => _deselected += value;
 		remove => _deselected -= value;
 	}
 
+	public bool CurrentUIModeIsAccepteble => _canBeSelectedInModes.Contains(UI.Mode);
 
 	private static Selecteble _selectedObject;
-	public static bool CanSelect = true;
 	public static Selecteble SelectedObject => _selectedObject;
 	private static event SelectedObjectChangedHandler _selectedObjectChanged;
 	public static event SelectedObjectChangedHandler SelectObjectChange
@@ -62,16 +69,13 @@ public class Selecteble : MonoBehaviour
 
 	public void OnPlayerClick()
 	{
-		if (IsSelected && _deleselectOnRepeatTab == false)
+		if (IsSelected && _deleselectOnRepeatClick == false)
 		{
 			return;
 		}
-		if (CanSelect == false)
+		if (IsSelected)
 		{
-			if (IsSelected)
-			{
-				Deselect();
-			}
+			Deselect();
 			return;
 		}
 		IsSelected = IsSelected == false;
@@ -79,17 +83,14 @@ public class Selecteble : MonoBehaviour
 
 	public void Select()
 	{
-		if (IsSelected || CanSelect == false)
-		{
-			return;
-		}
+		if ((IsSelected || CurrentUIModeIsAccepteble == false) ||
+		 (SelectedObject != null && SelectedObject._canSelectOtherWhileSelected == false)) return;
 
 		_selectedObject?.Deselect();
 		_selectedObject = this;
-		CanSelect = _canSelectOtherWhileSelected;
 		_camera.Priority += _cameraPryorityChange;
 		MoveCameraPanel.Singletone.enabled = false || !_disableCameraMovement;
-		_selectedObjectChanged.Invoke(_selectedObject);
+		_selectedObjectChanged?.Invoke(_selectedObject);
 		_selected?.Invoke(_selectedObject);
 	}
 
@@ -101,10 +102,36 @@ public class Selecteble : MonoBehaviour
 		}
 
 		_selectedObject = null;
-		CanSelect = true;
 		_camera.Priority -= _cameraPryorityChange;
-		MoveCameraPanel.Singletone.enabled = true;
-		_selectedObjectChanged.Invoke(_selectedObject);
+		if (MoveCameraPanel.Singletone != null)
+		{
+			MoveCameraPanel.Singletone.enabled = true;
+		}
+		_selectedObjectChanged?.Invoke(_selectedObject);
 		_deselected?.Invoke();
+	}
+
+	private void OnEnable()
+	{
+		UI.ModeChanged += OnModeChangedUI;
+	}
+
+	private void OnDisable()
+	{
+		UI.ModeChanged -= OnModeChangedUI;
+		Deselect();
+	}
+
+	private void Awake()
+	{
+		_brain = Camera.main.GetComponent<CinemachineBrain>();
+	}
+
+	private void OnModeChangedUI(UIMode mode)
+	{
+		if (CurrentUIModeIsAccepteble == false)
+		{
+			Deselect();
+		}
 	}
 }

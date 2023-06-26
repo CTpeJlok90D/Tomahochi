@@ -15,7 +15,10 @@ public class ChangeModeButtonView : MonoBehaviour
 
 	private void OnDisable()
 	{
-		UI.ModeChanged -= OnModeChanged;
+		if (UI.HaveInstance)
+		{
+			UI.ModeChanged -= OnModeChanged;
+		}
 	}
 
 	private void OnModeChanged(UIMode mode)

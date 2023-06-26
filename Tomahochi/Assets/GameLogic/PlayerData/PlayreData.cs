@@ -13,6 +13,7 @@ namespace Saving
 		public string WaterInStorage;
 		public string FurnitureList;
 		public string FurnitureInStorage;
+		public string Home;
 		public int GemsCount = 0;
 		public int MoraCount = 0;
 		public int FateCount = 0;

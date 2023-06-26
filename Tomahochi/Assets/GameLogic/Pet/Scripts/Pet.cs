@@ -20,12 +20,16 @@ namespace Pets
 
 		[Header("Level")][SerializeField] int _maxElevateCount = 5;
 		[SerializeField] int _elevateEveryLevel = 10;
+		[SerializeField] int _elevateMoraCost = 200;
+		[SerializeField] int _elevateCostRise = 100;
 		[SerializeField] float _xPToLevelUp = 1000;
 		[SerializeField] float _xpPerStroke = 10;
 		public int MaxElevateCount => _maxElevateCount;
 		public float XpPerStroke => _xpPerStroke;
 		public float XPToLevelUp => _xPToLevelUp;
 		public int EvelateEveryLevel => _elevateEveryLevel;
+		public int ElevateMoraBaseCost => _elevateMoraCost;
+		public int ElevateCostRise => _elevateCostRise;
 
 
 		[Header("Joy")][SerializeField] float _joyPerStroke = 10;

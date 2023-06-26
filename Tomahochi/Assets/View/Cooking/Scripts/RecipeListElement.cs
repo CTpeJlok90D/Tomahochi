@@ -22,12 +22,18 @@ public class RecipeListElement : MonoBehaviour, IPointerClickHandler
 		_initialized = true;
 		_recipe = recipe;
 		_campfire = campfire;
+		_image.sprite = _recipe.Result.ViewSprite;
+		_nameCaption.text = _recipe.Result.ViewName;
+		if (_campfire.CanCook() == false)
+		{
+			_image.color = new(1, 1, 1, _cantCookAlpha);
+		}
 		return this;
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		_campfire.Cook(_recipe);
+		_campfire.SelectRecipe(_recipe);
 		OnStorageCountChange();
 	}
 
@@ -58,12 +64,6 @@ public class RecipeListElement : MonoBehaviour, IPointerClickHandler
 		if (_initialized == false)
 		{
 			throw new Exception("Object was not initialized!");
-		}
-		_image.sprite = _recipe.Result.ViewSprite;
-		_nameCaption.text = _recipe.Result.ViewName;
-		if (_campfire.CanCook(_recipe) == false)
-		{
-			_image.color = new(1,1,1, _cantCookAlpha);
 		}
 	}
 }

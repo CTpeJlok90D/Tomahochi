@@ -29,5 +29,10 @@ namespace UnityExtentions
 		{
             return UnityEngine.Random.Range(Min, Max);
 		}
+
+        public bool Contains(float value)
+        {
+            return value >= Min && value <= Max;
+        }
     }
 }

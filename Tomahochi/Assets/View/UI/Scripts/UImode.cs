@@ -3,5 +3,6 @@ public enum UIMode
 	Defualt,
 	EditRoomMode,
 	Shop,
-	Pray
+	Pray,
+	DevTools
 }

@@ -3,12 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using Pets;
 using System.Linq;
-using Codice.Client.Commands;
+using System.IO;
 
 namespace Saving
 {
@@ -23,6 +22,7 @@ namespace Saving
 		[SerializeField] private UnityDictionarity<string, int> _waterInStorage = new();
 		[SerializeField] private UnityDictionarity<string, Furniture> _furnitureById = new();
 		[SerializeField] private UnityDictionarity<string, int> _furnitureInStorage = new();
+		[SerializeField] private Home _home = new();
 
 
 		private ReactiveVariable<int> _gemsCount = new(0);
@@ -30,13 +30,13 @@ namespace Saving
 		private ReactiveVariable<int> _fateCount = new(0);
 		private ReactiveVariable<int> _rollCount = new(0);
 		private bool _isLoaded = false;
-		private UnityEvent<List<PetSaveInfo>> _unlockedPetsChanged = new();
+		private UnityEvent<PetSaveInfo> _unlockedNewPet = new();
 		private UnityEvent<Storageble, int> _foodCountChanged = new();
 		private UnityEvent<Storageble, int> _ingridiendCountChanged = new();
 		private UnityEvent<Storageble, int> _waterCountChanged = new();
 		private UnityEvent<Storageble, int> _furnitureOnStorageCountChanged = new();
 
-		public static UnityEvent<List<PetSaveInfo>> unlockedPetsChanged => instance._unlockedPetsChanged;
+		public static UnityEvent<PetSaveInfo> UnlockedNewPet => instance._unlockedNewPet;
 		public static UnityEvent<Storageble, int> FoodCountChanged => instance._foodCountChanged;
 		public static UnityEvent<Storageble, int> WaterCountChanged => instance._waterCountChanged;
 		public static UnityEvent<Storageble, int> IngridiendCountChanged => instance._ingridiendCountChanged;
@@ -62,7 +62,15 @@ namespace Saving
 
 		public static int SecondsPassed => instance._secondsPassed;
 		public static Pet PetBySystemName(string name) => PetInfoBySystemName(name).Pet();
-		public static PetSaveInfo PetInfoBySystemName(string name) => instance._playerData.UnlockedPets.Where((pet) => pet.SystemName == name).First();
+		public static PetSaveInfo PetInfoBySystemName(string name) 
+		{
+			PetSaveInfo[] info = instance._playerData.UnlockedPets.Where((pet) => pet.SystemName == name).ToArray();
+			if (info.Length == 0)
+			{
+				return null;
+			}
+			return info[0];
+		}
 
 		private void Awake()
 		{
@@ -168,7 +176,15 @@ namespace Saving
 				return;
 			}
 			instance._playerData.UnlockedPets.Add(info);
-			instance._unlockedPetsChanged.Invoke(instance._playerData.UnlockedPets);
+			instance._unlockedNewPet.Invoke(info);
+		}
+		public static int GetCookedFoodCount(Food food)
+		{
+			if (instance._foodCookCount.Keys.Contains(food.name) == false)
+			{
+				return 0;
+			}
+			return instance._foodCookCount[food.name];
 		}
 		public static int GetFoodCount(Food food)
 		{
@@ -293,6 +309,11 @@ namespace Saving
 			RemoveFurnitureFromStorage(furniture.SystemName, 1);
 			SavePlayerData();
 		}
+		public static void RemoveFurniture(Furniture furniture)
+		{
+			_instance._furnitureById.Remove(furniture.ID);
+			SavePlayerData();
+		}
 		public static void AddFurnitureInStorage(string systemName, int count)
 		{
 			if (_instance._furnitureInStorage.Keys.Contains(systemName) == false)
@@ -331,6 +352,21 @@ namespace Saving
 		{
 			return _instance._furnitureInStorage.Keys.ToArray();
 		}
+		public static bool AddRoom(Vector2Int room)
+		{
+			SavePlayerData();
+			return _instance._home.AddRoom(room);
+		}
+		public static Vector2Int[] GetRooms()
+		{
+			return _instance._home.Rooms.ToArray();
+		}
+		public static Vector2Int[] GetBuildPlaces()
+		{
+			return _instance._home.BuildPlaces().ToArray();
+		}
+		public static bool CanBuildHere(Vector2Int position) => _instance._home.CanBuildHere(position);
+		public static int BuildCost => _instance._home.BuildHomeCost;
 
 		private void SaveData(int value) => SavePlayerData();
 		private void SaveData(Storageble food, int value) => SavePlayerData();
@@ -353,6 +389,7 @@ namespace Saving
 			data.FoodCookCount = JsonUtility.ToJson(instance._foodCookCount);
 			data.FurnitureList = JsonUtility.ToJson(instance._furnitureById);
 			data.FurnitureInStorage = JsonUtility.ToJson(instance._furnitureInStorage);
+			data.Home = JsonUtility.ToJson(instance._home);
 
 			data.LastLaunchTime = DateTime.UtcNow.ToString(DATE_TIME_FORMAT);
 
@@ -360,7 +397,8 @@ namespace Saving
 #if DEBUG_SAVE_LOAD
 			Debug.Log("Save player data");
 #endif
-			PlayerPrefs.SetString(JSON_SAVE_KEY, JsonUtility.ToJson(instance._playerData, true));
+			string directory = Directory.GetCurrentDirectory() + "/save.txt";
+			File.WriteAllText(directory, JsonUtility.ToJson(instance._playerData, true));
 			// Менять выше
 		}
 		public static void LoadPlayerData()
@@ -369,10 +407,17 @@ namespace Saving
 #if DEBUG_SAVE_LOAD
 			Debug.Log("Load player data");
 #endif
-			string playerDataJson = PlayerPrefs.GetString(JSON_SAVE_KEY);
-			instance._playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
+			string directory = Directory.GetCurrentDirectory() + "/save.txt";
+			if (Directory.Exists(directory))
+			{
+				string playerDataJson = File.ReadAllText(directory);
+				instance._playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
+			}
+			else
+			{
+				instance._playerData = StartPlayerData;
+			}
 			// Менять выше
-			instance._playerData ??= StartPlayerData;
 
 			instance._foodInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FoodInStorage);
 			instance._waterInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.WaterInStorage);
@@ -380,6 +425,7 @@ namespace Saving
 			instance._foodCookCount = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FoodCookCount);
 			instance._furnitureById = JsonUtility.FromJson<UnityDictionarity<string, Furniture>>(instance._playerData.FurnitureList);
 			instance._furnitureInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FurnitureInStorage);
+			instance._home = JsonUtility.FromJson<Home>(instance._playerData.Home);
 
 			instance._foodInStorage ??= new();
 			instance._waterInStorage ??= new();
@@ -387,6 +433,7 @@ namespace Saving
 			instance._foodCookCount ??= new();
 			instance._furnitureById ??= new();
 			instance._furnitureInStorage ??= new();
+			instance._home ??= new();
 
 			instance._gemsCount.Value = instance._playerData.GemsCount;
 			instance._moraCount.Value = instance._playerData.MoraCount;
@@ -394,7 +441,7 @@ namespace Saving
 			instance._isLoaded = true;
 		}
 
-		private static PlayerData StartPlayerData
+		public static PlayerData StartPlayerData
 		{
 			get => new()
 			{
@@ -409,8 +456,8 @@ namespace Saving
 						Water = 50
 					}
 				},
-				MoraCount = 99999,
-				GemsCount = 99999
+				MoraCount = 0,
+				GemsCount = 0
 			};
 		}
 	}

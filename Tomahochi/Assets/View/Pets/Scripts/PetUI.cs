@@ -10,6 +10,7 @@ public class PetUI : MonoBehaviour
 	[SerializeField] private TMP_Text _moraCaption;
 	[SerializeField] private TMP_Text _nameCaption;
 	[SerializeField] private TMP_Text _levelCaption;
+	[SerializeField] private TMP_Text _elevateCostCaption;
 	[SerializeField] private Image _joyImage;
 	[SerializeField] private Image _foodImage;
 	[SerializeField] private Image _waterImage;
@@ -23,6 +24,7 @@ public class PetUI : MonoBehaviour
 	private string _moraCaptionFormat;
 	private string _nameCaptionFormat;
 	private string _levelCaptionFormat;
+	private string _elevateCostFormat;
 
 	private Pet _pet;
 	private PetSaveInfo _petInfo;
@@ -33,6 +35,7 @@ public class PetUI : MonoBehaviour
 		_moraCaptionFormat = _moraCaption.text;
 		_nameCaptionFormat = _nameCaption.text;
 		_levelCaptionFormat = _levelCaption.text;
+		_elevateCostFormat = _elevateCostCaption.text;
 	}
 
 	private void OnEnable()
@@ -45,6 +48,7 @@ public class PetUI : MonoBehaviour
 	{
 		Selecteble.SelectObjectChange -= OnSelectedObjectChange;
 		_elevateButton.onClick.RemoveListener(ElevatePet);
+		OnSelectedObjectChange(null);
 	}
 
 	private void ElevatePet()
@@ -81,11 +85,13 @@ public class PetUI : MonoBehaviour
 		_levelCaption.text = string.Format(_levelCaptionFormat, _petInfo.CurrentLevel % _pet.EvelateEveryLevel, _pet.EvelateEveryLevel);
 		_gemsCaption.text = string.Format(_gemsCaptionFormat, (int)_petInfo.GemsCount, _petInfo.GemsStorage());
 		_moraCaption.text = string.Format(_moraCaptionFormat, (int)_petInfo.MoraCount, _petInfo.MoraStorage());
+		_elevateCostCaption.text = string.Format(_elevateCostFormat, _petInfo.ElevateCost());
 
 		_joyImage.fillAmount = _petInfo.Joy / 100;
 		_foodImage.fillAmount = _petInfo.Food / 100;
 		_waterImage.fillAmount = _petInfo.Water / 100;
 		_sleepImage.fillAmount = _petInfo.Energy / 100;
+
 
 		_slider.value = _petInfo.CurrentXP / _pet.XPToLevelUp;
 		_elevateButton.gameObject.SetActive(_petInfo.NeedEvelate);

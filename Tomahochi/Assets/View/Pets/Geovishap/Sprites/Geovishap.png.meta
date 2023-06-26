@@ -20,7 +20,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -2555,7 +2555,7 @@ TextureImporter:
         boneIndex[2]: 0
         boneIndex[3]: 0
     - serializedVersion: 2
-      name: Geovishap_11
+      name: Geovishap_sleepHands
       rect:
         serializedVersion: 2
         x: 174
@@ -3873,8 +3873,8 @@ TextureImporter:
       name: Geovishap_leg
       rect:
         serializedVersion: 2
-        x: 648
-        y: 337
+        x: 649
+        y: 336
         width: 29
         height: 63
       alignment: 0
@@ -5405,7 +5405,7 @@ TextureImporter:
         width: 155
         height: 150
       alignment: 9
-      pivot: {x: 0.78436005, y: 0.3484895}
+      pivot: {x: 0.7843601, y: 0.3484895}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -7625,8 +7625,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Geovishap_Body: 1725631178
       Geovishap_35: -719231237
-      Geovishap_LegPart3: -1544384111
       Geovishap_30: -678840204
       Stars: -1223638210
       Geovishap_LegPart1: 2002820613
@@ -7643,27 +7643,27 @@ TextureImporter:
       Geovishap_16: -1668381534
       Geovishap_15: 1553987443
       Eye_opened: -753121801
+      Geovishap_sleepHands: 2052350143
       Geovishap_26: 33198
-      Geovishap_33: -1351932869
       Geovishap_legPart2: -229861214
+      Geovishap_33: -1351932869
       Geovishap_22: 1015454445
-      Geovishap_25: -1701646139
       Eye_Closed: -1457882653
+      Geovishap_25: -1701646139
       Geovishap_HeadSleep: -295032059
-      Geovishap_tail sleep: -425777669
       Geovishap_24: -1119816348
-      Geovishap_34: 2045086860
+      Geovishap_tail sleep: -425777669
       Geovishap_0: -1565027141
       Geovishap_28: -494458254
       Geovishap_32: 174907959
-      Geovishap_11: 2052350143
+      Geovishap_34: 2045086860
       Geovishap_4: -929868075
       Geovishap_29: 1088708024
       Geovishap_19: -2114580942
       Geovishap_Tail: -117233093
       Geovishap_LegPart2: -1848054866
       Geovishap_RightHand: -1033028474
-      Geovishap_Body: 1725631178
+      Geovishap_LegPart3: -1544384111
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

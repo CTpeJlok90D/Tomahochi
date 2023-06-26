@@ -439,6 +439,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -1083,7 +1084,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &4219194762692870921
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1100,7 +1101,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6804316044257431600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,8 +1129,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6804316044257431600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0275, y: -0.1739, z: 0}
-  m_LocalScale: {x: 1.937098, y: 0.5636955, z: 1}
+  m_LocalPosition: {x: -0.022, y: -0.0419, z: 10}
+  m_LocalScale: {x: 1.3957648, y: 0.46061864, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6879252896254735053}
@@ -1337,6 +1339,25 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1360,6 +1381,7 @@ PolygonCollider2D:
       - {x: 1.5056454, y: -0.22094509}
       - {x: 1.3847688, y: 0.38645828}
       - {x: 1.9961575, y: 1.9631338}
+  m_UseDelaunayMesh: 0
 --- !u!114 &579163297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,8 +1408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cookMiniGame: {fileID: 0}
-  _cookingRecipe: {fileID: 0}
-  _cookRecipeForButton: {fileID: 0}
+  _selectedRecipe: {fileID: 0}
 --- !u!114 &579163301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1402,9 +1423,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 7413182875635562775}
   _cameraPryorityChange: 50
-  _deleselectOnRepeatTab: 1
-  _disableCameraMovement: 1
+  _deleselectOnRepeatClick: 1
+  _disableCameraMovement: 0
   _canSelectOtherWhileSelected: 0
+  _canBeSelectedInModes: 00000000
 --- !u!1 &8721489055608513000
 GameObject:
   m_ObjectHideFlags: 0

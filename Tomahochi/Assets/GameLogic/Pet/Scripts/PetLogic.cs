@@ -1,6 +1,5 @@
 using Saving;
 using System;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 namespace Pets
@@ -30,10 +29,23 @@ namespace Pets
 
 	public static class PetLogic
 	{
-		public static Pet Pet(this PetSaveInfo info) => Resources.Load<Pet>(info.SystemName);
+		public static Pet Pet(this PetSaveInfo info)
+		{
+			return Resources.Load<Pet>(info.SystemName);
+		}
 		public static bool IsSleeping(this PetSaveInfo info) => string.IsNullOrEmpty(info.SleepingBedID) == false;
+		public static int ElevateCost(this PetSaveInfo info)
+		{
+			Pet pet = info.Pet();
+			return pet.ElevateMoraBaseCost + pet.ElevateCostRise * info.ElevateCount;
+		}
 		public static void Elevate(this PetSaveInfo info)
 		{
+			if (PlayerDataContainer.MoraCount < info.ElevateCost())
+			{
+				return;
+			}
+			PlayerDataContainer.MoraCount -= info.ElevateCost();
 			info.NeedEvelate = false;
 		}
 		public static int MoraStorage(this PetSaveInfo info)

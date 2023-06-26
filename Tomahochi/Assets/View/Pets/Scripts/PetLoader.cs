@@ -11,4 +11,22 @@ public class PetLoader : MonoBehaviour
 			Instantiate(petInfo.Pet().ViewPrefab, transform);
 		}
 	}
+
+	private void OnEnable()
+	{
+		PlayerDataContainer.UnlockedNewPet.AddListener(OnPetAdd);
+	}
+
+	private void OnDisable()
+	{
+		if (PlayerDataContainer.HaveInstance)
+		{
+			PlayerDataContainer.UnlockedNewPet.RemoveListener(OnPetAdd);
+		}
+	}
+
+	private void OnPetAdd(PetSaveInfo info)
+	{
+		Instantiate(info.Pet().ViewPrefab, transform);
+	}
 }

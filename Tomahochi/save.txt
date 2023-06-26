@@ -1,0 +1,31 @@
+{
+    "FoodInStorage": "{\"_values\":[]}",
+    "IngridientsInStorage": "{\"_values\":[]}",
+    "FoodCookCount": "{\"_values\":[]}",
+    "WaterInStorage": "{\"_values\":[]}",
+    "FurnitureList": "{\"_values\":[]}",
+    "FurnitureInStorage": "{\"_values\":[]}",
+    "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":6.0,\"Min\":0.0}}",
+    "GemsCount": 0,
+    "MoraCount": 0,
+    "FateCount": 0,
+    "RollCount": 0,
+    "UnlockedPets": [
+        {
+            "SystemName": "Geovishap",
+            "Food": 49.948944091796878,
+            "Water": 49.948944091796878,
+            "Joy": 49.948944091796878,
+            "Energy": 49.97623825073242,
+            "SleepingBedID": "",
+            "ElevateCount": 0,
+            "NeedEvelate": false,
+            "CurrentXP": 0.0,
+            "CurrentLevel": 1,
+            "MoraCount": 3.006849527359009,
+            "GemsCount": 0.5412328839302063,
+            "DuplicatCount": 0
+        }
+    ],
+    "LastLaunchTime": "2023-06-26 14:14:50,926"
+}

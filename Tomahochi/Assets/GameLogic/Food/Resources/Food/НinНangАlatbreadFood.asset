@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: "\u041Din\u041Dang\u0410latbreadFood"
   m_EditorClassIdentifier: 
   _viewName: "\u041Din hang alatbread"
-  _viewDescription: <view description>
-  _viewSprite: {fileID: 21300000, guid: be2ef728a4d5be841a1b788f19328363, type: 3}
+  _viewSprite: {fileID: 21300000, guid: a122194334e78c34194e3d4e9694ced2, type: 3}
   _nutritional: 30
   _xpGain: 100
