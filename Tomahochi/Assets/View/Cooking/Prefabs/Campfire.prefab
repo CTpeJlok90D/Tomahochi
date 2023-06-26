@@ -439,7 +439,6 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -1084,7 +1083,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &4219194762692870921
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1101,8 +1100,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6804316044257431600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,25 +1337,6 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1381,7 +1360,6 @@ PolygonCollider2D:
       - {x: 1.5056454, y: -0.22094509}
       - {x: 1.3847688, y: 0.38645828}
       - {x: 1.9961575, y: 1.9631338}
-  m_UseDelaunayMesh: 0
 --- !u!114 &579163297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1424,7 +1402,7 @@ MonoBehaviour:
   _camera: {fileID: 7413182875635562775}
   _cameraPryorityChange: 50
   _deleselectOnRepeatClick: 1
-  _disableCameraMovement: 0
+  _disableCameraMovement: 1
   _canSelectOtherWhileSelected: 0
   _canBeSelectedInModes: 00000000
 --- !u!1 &8721489055608513000

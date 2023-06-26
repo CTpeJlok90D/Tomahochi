@@ -15,7 +15,7 @@ MonoBehaviour:
   _viewName: Geovishap
   _viewSprite: {fileID: 981615501, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
   _starCount: 5
-  _viewPrefab: {fileID: 7640371632733492114, guid: 3098662d14e009b43a55eb398e2ac796,
+  _viewPrefab: {fileID: 3032150570510147557, guid: 65b408374915d2244b6dd3d64149c28d,
     type: 3}
   _maxElevateCount: 5
   _elevateEveryLevel: 10

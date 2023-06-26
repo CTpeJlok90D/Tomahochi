@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4873e028182757a45a6e4c502384dde6, type: 2}
   _5StarPets:
   - {fileID: 11400000, guid: 47d73b4bf22e64d4bbd0da02020631fd, type: 2}
-  - {fileID: 11400000, guid: e6321ab82e0e61a4f89546ae6723bd13, type: 2}
+  - {fileID: 11400000, guid: 713b3d5e70bfc5444a686b17d3f5dfbc, type: 2}
   _foodAndWater:
   - {fileID: 11400000, guid: efc5bd75a0063d6479767cf4803c07cc, type: 2}
   - {fileID: 11400000, guid: 77c3cfd8e4426ba4182335f30e1584b6, type: 2}

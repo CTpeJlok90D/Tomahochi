@@ -44,7 +44,9 @@ public class Prayer : MonoBehaviour
 		List<ILootDrop> drops = new();
 		for (int i = 0; i < count; i++)
 		{
-			drops.Add(_dropTable.Pray());
+			ILootDrop drop = _dropTable.Pray();
+			drops.Add(drop);
+			drop.ApplyLoot();
 		}
 		ShowLoot(drops);
 	}

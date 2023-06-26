@@ -1,4 +1,4 @@
-//#define DEBUG_SAVE_LOAD
+#define DEBUG_SAVE_LOAD
 
 using System;
 using System.Collections.Generic;
@@ -92,22 +92,6 @@ namespace Saving
 			}
 			Pet.FallRatePetsByTime(UnlockedPets, _secondsPassed);
 		}
-		private void OnEnable()
-		{
-			GemsCountChanged.AddListener(SaveData);
-			MoraCountChanged.AddListener(SaveData);
-			FadeCountChanged.AddListener(SaveData);
-			FoodCountChanged.AddListener(SaveData);
-			WaterCountChanged.AddListener(SaveData);
-		}
-		private void OnDisable()
-		{
-			GemsCountChanged.RemoveListener(SaveData);
-			MoraCountChanged.RemoveListener(SaveData);
-			FadeCountChanged.RemoveListener(SaveData);
-			FoodCountChanged.RemoveListener(SaveData);
-			WaterCountChanged.RemoveListener(SaveData);
-		}
 		private void OnDestroy()
 		{
 			SavePlayerData();
@@ -122,7 +106,6 @@ namespace Saving
 			{
 				instance._playerData.GemsCount = value;
 				instance._gemsCount.Value = value;
-				SavePlayerData();
 			}
 		}
 		public static int MoraCount
@@ -135,7 +118,6 @@ namespace Saving
 			{
 				instance._moraCount.Value = value;
 				instance._playerData.MoraCount = value;
-				SavePlayerData();
 			}
 		}
 		public static int FateCount
@@ -148,7 +130,6 @@ namespace Saving
 			{
 				instance._fateCount.Value = value;
 				instance._playerData.FateCount = value;
-				SavePlayerData();
 			}
 		}
 		public static int RollCount
@@ -161,7 +142,6 @@ namespace Saving
 			{
 				_instance._rollCount.Value = value;
 				_instance._playerData.RollCount = value;
-				SavePlayerData();
 			}
 		}
 		public static UnityEvent<int> GemsCountChanged => instance._gemsCount.Changed;
@@ -215,7 +195,6 @@ namespace Saving
 			}
 			instance._foodInStorage[food.name] += count;
 			instance._foodCountChanged.Invoke(food, instance._foodInStorage[food.name]);
-			SavePlayerData();
 		}
 		public static void RemoveFood(Food food, int count = 1)
 		{
@@ -228,7 +207,6 @@ namespace Saving
 			{
 				_instance._foodInStorage.Remove(food.name);
 			}
-			SavePlayerData();
 			instance._foodCountChanged?.Invoke(food, GetFoodCount(food));
 		}
 		public static int GetIngridientCount(Ingredient ingredient)
@@ -247,13 +225,11 @@ namespace Saving
 			}
 			instance._ingridiendsInStorage[ingredient.name] += count;
 			instance._ingridiendCountChanged.Invoke(ingredient, instance._ingridiendsInStorage[ingredient.name]);
-			SavePlayerData();
 		}
 		public static void RemoveIngridient(Ingredient ingridient, int count = 1)
 		{
 			instance._ingridiendsInStorage[ingridient.name] = (int)Mathf.Clamp(instance._ingridiendsInStorage[ingridient.name] - count, 0, Mathf.Infinity);
 			instance._ingridiendCountChanged.Invoke(ingridient, instance._ingridiendsInStorage[ingridient.name]);
-			SavePlayerData();
 		}
 		public static int GetWaterCount(Water water)
 		{
@@ -271,7 +247,6 @@ namespace Saving
 			}
 			instance._waterInStorage[water.name] += count;
 			instance._waterCountChanged.Invoke(water, instance._waterInStorage[water.name]);
-			SavePlayerData();
 		}
 		public static void RemoveWater(Water water, int count = 1)
 		{
@@ -285,7 +260,6 @@ namespace Saving
 				_instance._waterInStorage.Remove(water.name);
 			}
 			instance._waterCountChanged.Invoke(water, PlayerDataContainer.GetWaterCount(water));
-			SavePlayerData();
 		}
 		public static string[] GetAllFurnitureId()
 		{
@@ -307,12 +281,10 @@ namespace Saving
 			}
 			_instance._furnitureById.Add(furniture.ID, furniture);
 			RemoveFurnitureFromStorage(furniture.SystemName, 1);
-			SavePlayerData();
 		}
 		public static void RemoveFurniture(Furniture furniture)
 		{
 			_instance._furnitureById.Remove(furniture.ID);
-			SavePlayerData();
 		}
 		public static void AddFurnitureInStorage(string systemName, int count)
 		{
@@ -323,7 +295,6 @@ namespace Saving
 			_instance._furnitureInStorage[systemName] += count;
 			FurnitureInfo info = Resources.Load<FurnitureInfo>(systemName);
 			_instance._furnitureOnStorageCountChanged?.Invoke(info, GetFurnitureCountOnStorage(systemName));
-			SavePlayerData();
 		}
 		public static void RemoveFurnitureFromStorage(string systemName, int count)
 		{
@@ -338,7 +309,6 @@ namespace Saving
 			}
 			FurnitureInfo info = Resources.Load<FurnitureInfo>(systemName);
 			_instance._furnitureOnStorageCountChanged?.Invoke(info, GetFurnitureCountOnStorage(systemName));
-			SavePlayerData();
 		}
 		public static int GetFurnitureCountOnStorage(string systemName)
 		{
@@ -354,7 +324,6 @@ namespace Saving
 		}
 		public static bool AddRoom(Vector2Int room)
 		{
-			SavePlayerData();
 			return _instance._home.AddRoom(room);
 		}
 		public static Vector2Int[] GetRooms()
@@ -368,9 +337,7 @@ namespace Saving
 		public static bool CanBuildHere(Vector2Int position) => _instance._home.CanBuildHere(position);
 		public static int BuildCost => _instance._home.BuildHomeCost;
 
-		private void SaveData(int value) => SavePlayerData();
-		private void SaveData(Storageble food, int value) => SavePlayerData();
-		public static void SavePlayerData()
+		private static void SavePlayerData()
 		{
 			if (instance._isLoaded == false)
 			{
@@ -407,13 +374,12 @@ namespace Saving
 #if DEBUG_SAVE_LOAD
 			Debug.Log("Load player data");
 #endif
-			string directory = Directory.GetCurrentDirectory() + "/save.txt";
-			if (Directory.Exists(directory))
+			try
 			{
-				string playerDataJson = File.ReadAllText(directory);
+				string playerDataJson = File.ReadAllText(Directory.GetCurrentDirectory() + "/save.txt");
 				instance._playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
 			}
-			else
+			catch
 			{
 				instance._playerData = StartPlayerData;
 			}

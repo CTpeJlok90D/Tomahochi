@@ -32,7 +32,7 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 		Vector2 worldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		RaycastHit2D hit = Physics2D.Raycast(worldMousePosition, worldMousePosition);
 
-		if (hit.collider.TryGetComponent(out Selecteble collision))
+		if (hit && hit.collider.TryGetComponent(out Selecteble collision))
 		{
 			return;
 		}

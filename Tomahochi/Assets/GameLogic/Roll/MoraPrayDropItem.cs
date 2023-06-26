@@ -14,7 +14,7 @@ public class MoraPrayDropItem : ScriptableObject, ILootDrop
 
 	public void ApplyLoot()
 	{
-		_moraCount = Random.Range(_moraCountRange[0], _moraCountRange[0]+1);
+		_moraCount = Random.Range(_moraCountRange[0], _moraCountRange[1]+1);
 		PlayerDataContainer.MoraCount += _moraCount;
 	}
 }
