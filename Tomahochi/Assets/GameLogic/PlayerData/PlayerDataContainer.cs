@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Pets;
 using System.Linq;
 using UnityExtentions;
+using System.Data;
 
 namespace Saving
 {
@@ -22,6 +23,7 @@ namespace Saving
 		[SerializeField] private UnityDictionarity<string, int> _waterInStorage = new();
 		[SerializeField] private UnityDictionarity<string, Furniture> _furnitureById = new();
 		[SerializeField] private UnityDictionarity<string, int> _furnitureInStorage = new();
+		[SerializeField] private UnityDictionarity<int, float> _minigameRecords = new();
 		[SerializeField] private SerializedList<PetSaveInfo> _unlockedPets = new();
 		[SerializeField] private Home _home = new();
 
@@ -342,6 +344,24 @@ namespace Saving
 		}
 		public static bool CanBuildHere(Vector2Int position) => _instance._home.CanBuildHere(position);
 		public static int BuildCost => _instance._home.BuildHomeCost;
+		public static void WriteRecord(int miniGame, float record)
+		{
+			if (instance._minigameRecords.Keys.Contains(miniGame) == false)
+			{
+				instance._minigameRecords.Add(miniGame, record);
+				return;
+			}
+			instance._minigameRecords[miniGame] = record;
+		}
+		public static float GetRecord(int miniGame)
+		{
+			if (instance._minigameRecords.Keys.Contains(miniGame) == false)
+			{
+				return 0;
+			}
+			return instance._minigameRecords[miniGame];
+		}
+
 
 		private static void SavePlayerData()
 		{
@@ -364,6 +384,7 @@ namespace Saving
 			data.FurnitureInStorage = JsonUtility.ToJson(instance._furnitureInStorage);
 			data.Home = JsonUtility.ToJson(instance._home);
 			data.UnlockedPets = JsonUtility.ToJson(_instance._unlockedPets);
+			data.MiniGamesRecords = JsonUtility.ToJson(_instance._minigameRecords);
 			
 			data.LastLaunchTime = DateTime.UtcNow.ToString(DATE_TIME_FORMAT);
 
@@ -381,6 +402,7 @@ namespace Saving
 			instance._furnitureInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FurnitureInStorage);
 			instance._home = JsonUtility.FromJson<Home>(instance._playerData.Home);
 			instance._unlockedPets = JsonUtility.FromJson<SerializedList<PetSaveInfo>>(instance._playerData.UnlockedPets);
+			instance._minigameRecords = JsonUtility.FromJson<UnityDictionarity<int, float>>(_instance._playerData.MiniGamesRecords);
 
 			instance._foodInStorage ??= new();
 			instance._waterInStorage ??= new();
@@ -390,6 +412,7 @@ namespace Saving
 			instance._furnitureInStorage ??= new();
 			instance._home ??= new();
 			instance._unlockedPets ??= StartPetList;
+			instance._minigameRecords ??= new();
 
 			instance._gemsCount.Value = instance._playerData.GemsCount;
 			instance._moraCount.Value = instance._playerData.MoraCount;

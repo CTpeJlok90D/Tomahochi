@@ -8,7 +8,7 @@ public class NextRoomGenerateTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.TryGetComponent(out Player player))
+		if (collision.gameObject.TryGetComponent(out FlyAndGrapPlayer player))
 		{
 			GameObject instance = Instantiate(_nextRoomPrefab);
 			instance.transform.position = _owner.transform.position + _nextRoomPositionOffcet;

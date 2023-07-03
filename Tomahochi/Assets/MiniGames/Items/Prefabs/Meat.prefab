@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5944513596498267060}
   - component: {fileID: 5666106821870632434}
   - component: {fileID: 4631322503555444707}
-  - component: {fileID: 405632409290248529}
   m_Layer: 0
   m_Name: Meat
   m_TagString: Untagged
@@ -136,15 +135,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _storageble: {fileID: 11400000, guid: 9c318c4d0d24cb34990eae3c87cd4909, type: 2}
   _count: 1
---- !u!114 &405632409290248529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3007539407423494029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bad0ab8eb30b640970d6d1a508344e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

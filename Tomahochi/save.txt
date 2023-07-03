@@ -1,16 +1,17 @@
 {
     "FoodInStorage": "{\"_values\":[]}",
-    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Ham\",\"Value\":2},{\"Name\":\"\",\"Key\":\"Cabbage\",\"Value\":2},{\"Name\":\"\",\"Key\":\"Flour\",\"Value\":1}]}",
+    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Cabbage\",\"Value\":11},{\"Name\":\"\",\"Key\":\"Ham\",\"Value\":10},{\"Name\":\"\",\"Key\":\"Flour\",\"Value\":19},{\"Name\":\"\",\"Key\":\"Egg\",\"Value\":11},{\"Name\":\"\",\"Key\":\"Meat\",\"Value\":6}]}",
     "FoodCookCount": "{\"_values\":[]}",
     "WaterInStorage": "{\"_values\":[]}",
     "FurnitureList": "{\"_values\":[]}",
     "FurnitureInStorage": "{\"_values\":[]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":260.8333435058594,\"GemsCount\":46.95000076293945,\"Food\":45.652774810791019,\"Water\":45.652774810791019,\"Joy\":97.60648345947266,\"Energy\":47.82638931274414,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":4.953939914703369,\"CurrentLevel\":1,\"DuplicatCount\":0,\"_pet\":{\"instanceID\":26014}}]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":1000.0,\"GemsCount\":213.78326416015626,\"Food\":30.20233154296875,\"Water\":30.20233154296875,\"Joy\":138.3643341064453,\"Energy\":40.1027946472168,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":4.801706314086914,\"CurrentLevel\":1,\"DuplicatCount\":0,\"_pet\":{\"instanceID\":26034}}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
-    "GemsCount": 5,
-    "MoraCount": 10,
+    "MiniGamesRecords": "{\"_values\":[{\"Name\":\"\",\"Key\":1,\"Value\":23.600936889648439}]}",
+    "GemsCount": 50,
+    "MoraCount": 60,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-03 08:53:10,397"
+    "LastLaunchTime": "2023-07-03 10:52:20,559"
 }

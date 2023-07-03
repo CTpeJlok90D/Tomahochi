@@ -21,6 +21,12 @@ namespace UnityExtentions
             return range.RandomValue();
         }
 
+
+		public static implicit operator int(Range range)
+		{
+			return range.RandomIntValue();
+		}
+
 		public override string ToString()
 		{
             return RandomValue().ToString();

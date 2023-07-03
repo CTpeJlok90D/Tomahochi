@@ -37,7 +37,7 @@ public class ItemsGenerator : MonoBehaviour
 		{
 			ObjectInfo info = _randomList[Random.Range(0, _randomList.Count - 1)];
 
-			SmartMonoBehaivor instance =  SmartMonoBehaivor.Create(info.GameObject);
+			GameObject instance =  Instantiate(info.GameObject);
 			instance.transform.SetParent(_owner);
 
 			instance.transform.localPosition = new(_xSpawnPositionRange, _ySpawnPositionRange);
@@ -68,7 +68,7 @@ public class ItemsGenerator : MonoBehaviour
 	[Serializable]
 	private class ObjectInfo
 	{
-		public SmartMonoBehaivor GameObject;
+		public GameObject GameObject;
 		public float Weight = 1;
 		public float Chance;
 	}

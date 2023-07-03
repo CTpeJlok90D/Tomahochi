@@ -58,15 +58,23 @@ MonoBehaviour:
     Chance: 0.33333334
   - GameObject: {fileID: 1972259876116855414, guid: 2fd509ec6abd58246a9a1ca268a55598,
       type: 3}
-    Weight: 5
-    Chance: 0.5555556
+    Weight: 2
+    Chance: 0.22222222
+  - GameObject: {fileID: 2305976898282072173, guid: f2d885f3035227c45bccebb44bd54fe7,
+      type: 3}
+    Weight: 2
+    Chance: 0.22222222
   - GameObject: {fileID: 4718224281861048583, guid: 28a26f7875e83d248af1c85cab861b74,
+      type: 3}
+    Weight: 1
+    Chance: 0.11111111
+  - GameObject: {fileID: 1384071340383798269, guid: dcb7e41b1d6db4947b54b10eaad50eba,
       type: 3}
     Weight: 1
     Chance: 0.11111111
   _itemsCountRange:
     Max: 2
-    Min: 1
+    Min: 0
 --- !u!1 &2854458790026193980
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,15 +130,23 @@ MonoBehaviour:
   - GameObject: {fileID: 8852681869507913242, guid: 2fff644a0cc46e34e8e2e0b476649e51,
       type: 3}
     Weight: 3
-    Chance: 0.5
+    Chance: 0.33333334
   - GameObject: {fileID: 1972259876116855414, guid: 2fd509ec6abd58246a9a1ca268a55598,
       type: 3}
     Weight: 2
-    Chance: 0.33333334
+    Chance: 0.22222222
+  - GameObject: {fileID: 9141422241324950173, guid: e505833879bf7184b89c573390577008,
+      type: 3}
+    Weight: 2
+    Chance: 0.22222222
   - GameObject: {fileID: 4718224281861048583, guid: 28a26f7875e83d248af1c85cab861b74,
       type: 3}
     Weight: 1
-    Chance: 0.16666667
+    Chance: 0.11111111
+  - GameObject: {fileID: 4548454658227022450, guid: a07560422e1a183458a4bfeacc80edd7,
+      type: 3}
+    Weight: 1
+    Chance: 0.11111111
   _itemsCountRange:
     Max: 2
     Min: 0

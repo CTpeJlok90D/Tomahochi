@@ -42,6 +42,7 @@ public abstract class SmartMonoBehaivor : MonoBehaviour
 
 	public static void Remove(SmartMonoBehaivor obj)
 	{
+		obj.transform.SetParent(null);
 		obj.gameObject.SetActive(false);
 	}
 
