@@ -1,19 +1,19 @@
-#define DEBUG_SAVE_LOAD
-
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using Pets;
 using System.Linq;
-using System.IO;
+using UnityExtentions;
 
 namespace Saving
 {
-	public class PlayerDataContainer : MonoBehaviour
+	public class PlayerDataContainer : Init
 	{
-		[SerializeField] private PlayerData _playerData = new();
+		public static int PlayingPetIndex = 0;
+
+		[Space(50)]
+		[Header("PlayerDataContainer")]
 		[SerializeField] private int _secondsPassed = 0;
 		[SerializeField] private Pet _startPet;
 		[SerializeField] private UnityDictionarity<string, int> _foodInStorage = new();
@@ -22,6 +22,7 @@ namespace Saving
 		[SerializeField] private UnityDictionarity<string, int> _waterInStorage = new();
 		[SerializeField] private UnityDictionarity<string, Furniture> _furnitureById = new();
 		[SerializeField] private UnityDictionarity<string, int> _furnitureInStorage = new();
+		[SerializeField] private SerializedList<PetSaveInfo> _unlockedPets = new();
 		[SerializeField] private Home _home = new();
 
 
@@ -41,10 +42,9 @@ namespace Saving
 		public static UnityEvent<Storageble, int> WaterCountChanged => instance._waterCountChanged;
 		public static UnityEvent<Storageble, int> IngridiendCountChanged => instance._ingridiendCountChanged;
 		public static UnityEvent<Storageble, int> FurnitureOnStarageCountChanged => _instance._furnitureOnStorageCountChanged;
-		public static PetSaveInfo[] UnlockedPets => _instance._playerData.UnlockedPets.ToArray();
+		public static PetSaveInfo[] UnlockedPets => _instance._unlockedPets.List.ToArray();
 		public static bool HaveInstance => _instance != null;
 
-		private const string JSON_SAVE_KEY = "JSON_SAVE";
 		private const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss,fff";
 		private static PlayerDataContainer instance
 		{
@@ -61,10 +61,11 @@ namespace Saving
 		private static PlayerDataContainer _instance;
 
 		public static int SecondsPassed => instance._secondsPassed;
-		public static Pet PetBySystemName(string name) => PetInfoBySystemName(name).Pet();
+		public static Pet PetBySystemName(string name) => PetInfoBySystemName(name).Pet;
 		public static PetSaveInfo PetInfoBySystemName(string name) 
 		{
-			PetSaveInfo[] info = instance._playerData.UnlockedPets.Where((pet) => pet.SystemName == name).ToArray();
+			Pet lookingPet = Resources.Load<Pet>(name);
+			PetSaveInfo[] info = UnlockedPets.Where((pet) => pet.Pet == lookingPet).ToArray();
 			if (info.Length == 0)
 			{
 				return null;
@@ -72,9 +73,10 @@ namespace Saving
 			return info[0];
 		}
 
-		private void Awake()
+		protected new void Awake()
 		{
-			if (instance != null && instance != this)
+			base.Awake();
+			if (_instance != null && _instance != this)
 			{
 				Destroy(gameObject);
 			}
@@ -92,8 +94,12 @@ namespace Saving
 			}
 			Pet.FallRatePetsByTime(UnlockedPets, _secondsPassed);
 		}
-		private void OnDestroy()
+		private void OnDisable()
 		{
+			if (HaveInstance == false)
+			{
+				return;
+			}
 			SavePlayerData();
 		}
 		public static int GemsCount
@@ -149,13 +155,13 @@ namespace Saving
 		public static UnityEvent<int> FadeCountChanged => instance._gemsCount.Changed;
 		public static void AddPet(PetSaveInfo info)
 		{
-			PetSaveInfo[] petInfos = instance._playerData.UnlockedPets.Where(haveInfo => info.SystemName == haveInfo.SystemName).ToArray();
+			PetSaveInfo[] petInfos = UnlockedPets.Where(haveInfo => info.Pet == haveInfo.Pet).ToArray();
 			if (petInfos.Length > 0)
 			{
 				petInfos[0].DuplicatCount++;
 				return;
 			}
-			instance._playerData.UnlockedPets.Add(info);
+			_instance._unlockedPets.List.Add(info);
 			instance._unlockedNewPet.Invoke(info);
 		}
 		public static int GetCookedFoodCount(Food food)
@@ -259,7 +265,7 @@ namespace Saving
 			{
 				_instance._waterInStorage.Remove(water.name);
 			}
-			instance._waterCountChanged.Invoke(water, PlayerDataContainer.GetWaterCount(water));
+			instance._waterCountChanged.Invoke(water, GetWaterCount(water));
 		}
 		public static string[] GetAllFurnitureId()
 		{
@@ -357,33 +363,15 @@ namespace Saving
 			data.FurnitureList = JsonUtility.ToJson(instance._furnitureById);
 			data.FurnitureInStorage = JsonUtility.ToJson(instance._furnitureInStorage);
 			data.Home = JsonUtility.ToJson(instance._home);
-
+			data.UnlockedPets = JsonUtility.ToJson(_instance._unlockedPets);
+			
 			data.LastLaunchTime = DateTime.UtcNow.ToString(DATE_TIME_FORMAT);
 
-			// Менять ниже
-#if DEBUG_SAVE_LOAD
-			Debug.Log("Save player data");
-#endif
-			string directory = Directory.GetCurrentDirectory() + "/save.txt";
-			File.WriteAllText(directory, JsonUtility.ToJson(instance._playerData, true));
-			// Менять выше
+			_instance.Save();
 		}
 		public static void LoadPlayerData()
 		{
-			// Менять ниже
-#if DEBUG_SAVE_LOAD
-			Debug.Log("Load player data");
-#endif
-			try
-			{
-				string playerDataJson = File.ReadAllText(Directory.GetCurrentDirectory() + "/save.txt");
-				instance._playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
-			}
-			catch
-			{
-				instance._playerData = StartPlayerData;
-			}
-			// Менять выше
+			_instance.Load();
 
 			instance._foodInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FoodInStorage);
 			instance._waterInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.WaterInStorage);
@@ -392,6 +380,7 @@ namespace Saving
 			instance._furnitureById = JsonUtility.FromJson<UnityDictionarity<string, Furniture>>(instance._playerData.FurnitureList);
 			instance._furnitureInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FurnitureInStorage);
 			instance._home = JsonUtility.FromJson<Home>(instance._playerData.Home);
+			instance._unlockedPets = JsonUtility.FromJson<SerializedList<PetSaveInfo>>(instance._playerData.UnlockedPets);
 
 			instance._foodInStorage ??= new();
 			instance._waterInStorage ??= new();
@@ -400,6 +389,7 @@ namespace Saving
 			instance._furnitureById ??= new();
 			instance._furnitureInStorage ??= new();
 			instance._home ??= new();
+			instance._unlockedPets ??= StartPetList;
 
 			instance._gemsCount.Value = instance._playerData.GemsCount;
 			instance._moraCount.Value = instance._playerData.MoraCount;
@@ -407,24 +397,18 @@ namespace Saving
 			instance._isLoaded = true;
 		}
 
-		public static PlayerData StartPlayerData
+		private static SerializedList<PetSaveInfo> StartPetList
 		{
-			get => new()
+			get
 			{
-				UnlockedPets = new List<PetSaveInfo>()
+				return new SerializedList<PetSaveInfo>()
 				{
-					new PetSaveInfo()
+					List = new()
 					{
-						SystemName = instance._startPet.name,
-						Food = 50,
-						Energy = 50,
-						Joy = 50,
-						Water = 50
+						new PetSaveInfo(_instance._startPet)
 					}
-				},
-				MoraCount = 0,
-				GemsCount = 0
-			};
+				};
+			}
 		}
 	}
 }

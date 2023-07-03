@@ -8,7 +8,7 @@ public class PetLoader : MonoBehaviour
 	{
 		foreach (PetSaveInfo petInfo in PlayerDataContainer.UnlockedPets)
 		{
-			Instantiate(petInfo.Pet().ViewPrefab, transform);
+			Instantiate(petInfo.Pet.ViewPrefab, transform);
 		}
 	}
 
@@ -27,6 +27,6 @@ public class PetLoader : MonoBehaviour
 
 	private void OnPetAdd(PetSaveInfo info)
 	{
-		Instantiate(info.Pet().ViewPrefab, transform);
+		Instantiate(info.Pet.ViewPrefab, transform);
 	}
 }

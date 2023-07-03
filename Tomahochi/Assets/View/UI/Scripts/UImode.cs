@@ -4,5 +4,6 @@ public enum UIMode
 	EditRoomMode,
 	Shop,
 	Pray,
-	DevTools
+	DevTools,
+	PlayPetSelect
 }

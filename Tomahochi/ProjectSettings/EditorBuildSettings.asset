@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/FlyAndDragSubScene.unity
+    guid: 9e9e012ffe6b88d4da62f500e5c1dd6b
   m_configObjects: {}

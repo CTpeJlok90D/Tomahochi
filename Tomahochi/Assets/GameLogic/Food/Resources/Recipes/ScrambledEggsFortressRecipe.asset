@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f47bc9982d27b14e81c02cfa3f09513, type: 3}
+  m_Name: ScrambledEggsFortressRecipe
+  m_EditorClassIdentifier: 
+  _ingredients:
+  - Ingredient: {fileID: 11400000, guid: 9c318c4d0d24cb34990eae3c87cd4909, type: 2}
+    Count: 1
+  - Ingredient: {fileID: 11400000, guid: d3c539a97c8e01c4ea2b9a53dc4fdff2, type: 2}
+    Count: 1
+  - Ingredient: {fileID: 11400000, guid: 1fb5dd8cfb0ca4d4a990e424018f4d1d, type: 2}
+    Count: 1
+  _result: {fileID: 11400000, guid: cf33e2926bc67a04da0704c6f8e16f73, type: 2}
+  _cookTime: 2
+  _acceptebleTime: {x: 0.3, y: 1.7}
+  _cookCountToSkipMiniGame: 5

@@ -5,8 +5,11 @@ using UnityEngine;
 public class Furniture
 {
 	[SerializeField] private string _id;
+	
 	public Vector2 Position;
+	public string PlaceDate;
 	public string SystemName;
+
 
 	public string ID => _id;
 

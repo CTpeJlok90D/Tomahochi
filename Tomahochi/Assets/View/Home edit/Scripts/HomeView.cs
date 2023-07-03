@@ -91,6 +91,7 @@ public class HomeView : MonoBehaviour
 	{
 		AddRoomWitoutMeshUpdate(roomPosition);
 		_surface.BuildNavMesh();
+		PlaceBuildPlaces();
 	}
 
 	public void AddCameraCollider(Vector2 roomPostion)

@@ -1,4 +1,3 @@
-using AICore;
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +11,6 @@ public class Selecteble : MonoBehaviour
 	[SerializeField] private bool _disableCameraMovement = false;
 	[SerializeField] private bool _canSelectOtherWhileSelected = true;
 	[SerializeField] private List<UIMode> _canBeSelectedInModes = new();
-
-	private CinemachineBrain _brain;
 
 	public delegate void SelectedObjectChangedHandler(Selecteble selecteble);
 	public delegate void DeSelectedObjectChangedHandler();
@@ -88,7 +85,10 @@ public class Selecteble : MonoBehaviour
 
 		_selectedObject?.Deselect();
 		_selectedObject = this;
-		_camera.Priority += _cameraPryorityChange;
+		if (_camera != null)
+		{
+			_camera.Priority += _cameraPryorityChange;
+		}
 		MoveCameraPanel.Singletone.enabled = false || !_disableCameraMovement;
 		_selectedObjectChanged?.Invoke(_selectedObject);
 		_selected?.Invoke(_selectedObject);
@@ -102,7 +102,10 @@ public class Selecteble : MonoBehaviour
 		}
 
 		_selectedObject = null;
-		_camera.Priority -= _cameraPryorityChange;
+		if (_camera != null)
+		{
+			_camera.Priority -= _cameraPryorityChange;
+		}
 		if (MoveCameraPanel.Singletone != null)
 		{
 			MoveCameraPanel.Singletone.enabled = true;
@@ -120,11 +123,6 @@ public class Selecteble : MonoBehaviour
 	{
 		UI.ModeChanged -= OnModeChangedUI;
 		Deselect();
-	}
-
-	private void Awake()
-	{
-		_brain = Camera.main.GetComponent<CinemachineBrain>();
 	}
 
 	private void OnModeChangedUI(UIMode mode)

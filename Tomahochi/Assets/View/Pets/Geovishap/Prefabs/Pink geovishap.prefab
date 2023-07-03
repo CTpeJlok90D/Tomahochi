@@ -1340,7 +1340,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5621750241381333287
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1357,7 +1357,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &593533074597381932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,6 +2223,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -2308,6 +2310,25 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2332,6 +2353,7 @@ PolygonCollider2D:
       - {x: 0.53750193, y: -0.05070104}
       - {x: 0.3572429, y: 0.13499668}
       - {x: 0.11561185, y: 0.010438994}
+  m_UseDelaunayMesh: 0
 --- !u!114 &2239177986718909380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2367,7 +2389,7 @@ MonoBehaviour:
   _agent: {fileID: 3829520467884618871}
   _animator: {fileID: 5621750241381333287}
   _brain: {fileID: 1532446309018048211}
-  _linkedPetSystemName: Geovishap
+  _pet: {fileID: 11400000, guid: 713b3d5e70bfc5444a686b17d3f5dfbc, type: 2}
   _rightLookScale: {x: 1, y: 1, z: 1}
   _leftLookScale: {x: -1, y: 1, z: 1}
 --- !u!114 &783802157884257325

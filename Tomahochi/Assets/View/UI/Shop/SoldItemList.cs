@@ -16,6 +16,8 @@ public class SoldItemList : MonoBehaviour
 	[SerializeField] private string _nameFormat;
 	[SerializeField] private string _descriptionFormat;
 
+	private Dictionary<SoldItem, SoldItemView> _itemsViews = new();
+
 	private void Start()
 	{
 		_nameFormat = _nameCaption.text;
@@ -40,12 +42,18 @@ public class SoldItemList : MonoBehaviour
 		foreach (SoldItem item in _list)
 		{
 			SoldItemView view = Instantiate(_prefab, _content).Init(item, SelectItem);
+			_itemsViews.Add(item, view);
 		}
 		SelectItem(_list[0]);
 	}
 
 	private void SelectItem(SoldItem item)
 	{
+		if (_selectedItem != null)
+		{
+			_itemsViews[_selectedItem].Background.enabled = false;
+		}
+		_itemsViews[item].Background.enabled = true;
 		_selectedItem = item;
 		UpdateCaption();
 	}
@@ -64,6 +72,7 @@ public class SoldItemList : MonoBehaviour
 
 	private void Clear()
 	{
+		_itemsViews.Clear();
 		foreach (Transform childs in _content.transform)
 		{
 			Destroy(childs.gameObject);

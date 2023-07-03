@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FurnitureActionsPanel : MonoBehaviour
 {
 	[SerializeField] private GameObject _panel;
+	[SerializeField] private Vector2 _panelOffect;
 	[SerializeField] private Button _moveOnStorageButton;
 	[SerializeField] private Button _moveFurnitureButton;
 	[SerializeField] private BuildPreview _buildPreviewPrefab;
@@ -71,6 +72,7 @@ public class FurnitureActionsPanel : MonoBehaviour
 	{
 		if (selected != null && selected.TryGetComponent(out FurnitureView view))
 		{
+			_panel.transform.position = (Vector2)Input.mousePosition + _panelOffect;
 			_selectedFurnitureView = view;
 			_panel.SetActive(true);
 			return;

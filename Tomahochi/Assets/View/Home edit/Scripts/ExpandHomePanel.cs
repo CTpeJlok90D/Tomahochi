@@ -53,7 +53,7 @@ public class ExpandHomePanel : MonoBehaviour
 	private void OnYesClick()
 	{
 		_homeView.AddRoom(_selectedBuildPlace.PositionOnGrid);
-		Destroy(_selectedBuildPlace.gameObject);
+		//Destroy(_selectedBuildPlace.gameObject);
 	}
 
 	private void OnNoClick()

@@ -9,15 +9,20 @@ public class SoldItemView : MonoBehaviour, IPointerClickHandler
 	[SerializeField] private Image _image;
 	[SerializeField] private TMP_Text _moraPriceCaption;
 	[SerializeField] private TMP_Text _gemsPriceCaption;
+	[SerializeField] private Image _background;
+
 	private string _moraPriceFormat;
 	private string _gemsPriceFormat;
+	public delegate void SelectItem(SoldItem item);
 	private SelectItem _function;
+
+	public Image Background => _background;
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		_function.Invoke(_soldItem);
 	}
 
-	public delegate void SelectItem(SoldItem item);
 	public SoldItemView Init(SoldItem item, SelectItem function)
 	{
 		_function = function;
@@ -27,15 +32,10 @@ public class SoldItemView : MonoBehaviour, IPointerClickHandler
 		_image.sprite = _soldItem.Item.ViewSprite;
 
 		_moraPriceCaption.text = string.Format(_moraPriceFormat, _soldItem.MoraPrice);
-		if (_soldItem.MoraPrice == 0)
-		{
-			Destroy(_moraPriceCaption.gameObject);
-		}
+		_moraPriceCaption.gameObject.SetActive(_soldItem.MoraPrice != 0);
+
 		_gemsPriceCaption.text = string.Format(_gemsPriceFormat, _soldItem.GemsPrice);
-		if (_soldItem.GemsPrice == 0)
-		{
-			Destroy(_gemsPriceCaption.gameObject);
-		}
+		_gemsPriceCaption.gameObject.SetActive(_soldItem.GemsPrice != 0);
 		return this;
 	}
 }

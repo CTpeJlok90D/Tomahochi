@@ -13,7 +13,7 @@ public class Home
 	};
 
 	[SerializeField] private Range _xSize = new Range(0,0);
-	[SerializeField] private Range _ySize = new Range(0, 6);
+	[SerializeField] private Range _ySize = new Range(0, 7);
 	public const int BASE_BUILD_HOME_MORA_COST = 0;
 	public const int COST_PER_ROOM_COUNT_RISE = 5000;
 	public int BuildHomeCost => BASE_BUILD_HOME_MORA_COST + COST_PER_ROOM_COUNT_RISE * _rooms.Count;

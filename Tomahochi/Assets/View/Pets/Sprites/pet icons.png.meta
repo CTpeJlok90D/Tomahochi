@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -123,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -234,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GeovishapIcon
+      name: Geovishap Icon
       rect:
         serializedVersion: 2
         x: 78
@@ -318,7 +325,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pet icons_9
+      name: PinkGeovishap Icon
       rect:
         serializedVersion: 2
         x: 72
@@ -580,30 +587,29 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pet icons_10: -1657703183
-      pet icons_12: -1923282685
-      pet icons_7: 1408100297
-      pet icons_19: 368272949
-      pet icons_1: -1504601356
-      pet icons_20: -1425698070
-      pet icons_17: 1108248323
-      pet icons_11: -1450316561
-      pet icons_8: -30968572
-      pet icons_14: 32874508
-      pet icons_18: -469307568
-      pet icons_2: 1107810397
-      pet icons_4: -22793436
-      pet icons_13: 62686301
-      pet icons_15: -582243483
-      pet icons_6: -1571736073
-      pet icons_16: 1302588339
-      GeovishapIcon: 981615501
-      pet icons_9: 721022633
-      pet icons_3: -433036968
+      Geovishap Icon: 981615501
+      PinkGeovishap Icon: 721022633
       pet icons_0: -937733435
-  spritePackingTag: 
+      pet icons_1: -1504601356
+      pet icons_10: -1657703183
+      pet icons_11: -1450316561
+      pet icons_12: -1923282685
+      pet icons_13: 62686301
+      pet icons_14: 32874508
+      pet icons_15: -582243483
+      pet icons_16: 1302588339
+      pet icons_17: 1108248323
+      pet icons_18: -469307568
+      pet icons_19: 368272949
+      pet icons_2: 1107810397
+      pet icons_20: -1425698070
+      pet icons_3: -433036968
+      pet icons_4: -22793436
+      pet icons_6: -1571736073
+      pet icons_7: 1408100297
+      pet icons_8: -30968572
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

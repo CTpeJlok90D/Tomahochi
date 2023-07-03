@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PinkGeovishap
   m_EditorClassIdentifier: 
   _viewName: Geovishap
-  _viewSprite: {fileID: 981615501, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
+  _viewSprite: {fileID: 721022633, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
   _starCount: 5
   _viewPrefab: {fileID: 3032150570510147557, guid: 65b408374915d2244b6dd3d64149c28d,
     type: 3}

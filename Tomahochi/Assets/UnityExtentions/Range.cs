@@ -8,6 +8,7 @@ namespace UnityExtentions
         public float Max;
         public float Min;
 
+        public float Middle => (Max + Min) / 2;
         public Range(float min = -1, float max = 1)
         {
             Min = min;
@@ -24,7 +25,10 @@ namespace UnityExtentions
 		{
             return RandomValue().ToString();
 		}
-
+        public int RandomIntValue()
+        {
+            return UnityEngine.Random.Range((int)Min, (int)Max + 1);
+        }
 		public float RandomValue()
 		{
             return UnityEngine.Random.Range(Min, Max);

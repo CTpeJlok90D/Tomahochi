@@ -1,11 +1,12 @@
 using Saving;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SoldItem", menuName = "Shop/SoldItem")]
 public class SoldItem : ScriptableObject
 {
-	[SerializeField] private string _soldName;
-	[SerializeField] private string _soldDescription;
+	[SerializeField] private string _soldName = "{sold name}";
+	[SerializeField] private string _soldDescription = "{sold description}";
 	[SerializeField] private int _moraPrice;
 	[SerializeField] private int _gemsPrice;
 	[SerializeField] private int _count = 1;

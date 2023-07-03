@@ -83,8 +83,8 @@ public class PetUI : MonoBehaviour
 	public void UpdateStats()
 	{
 		_levelCaption.text = string.Format(_levelCaptionFormat, _petInfo.CurrentLevel % _pet.EvelateEveryLevel, _pet.EvelateEveryLevel);
-		_gemsCaption.text = string.Format(_gemsCaptionFormat, (int)_petInfo.GemsCount, _petInfo.GemsStorage());
-		_moraCaption.text = string.Format(_moraCaptionFormat, (int)_petInfo.MoraCount, _petInfo.MoraStorage());
+		_gemsCaption.text = string.Format(_gemsCaptionFormat, (int)_petInfo.GemsCount, _petInfo.GemsStorage);
+		_moraCaption.text = string.Format(_moraCaptionFormat, (int)_petInfo.MoraCount, _petInfo.MoraStorage);
 		_elevateCostCaption.text = string.Format(_elevateCostFormat, _petInfo.ElevateCost());
 
 		_joyImage.fillAmount = _petInfo.Joy / 100;

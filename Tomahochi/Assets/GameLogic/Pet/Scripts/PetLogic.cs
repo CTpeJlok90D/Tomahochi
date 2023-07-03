@@ -5,10 +5,8 @@ using UnityEngine;
 namespace Pets
 {
 	[Serializable]
-	public class PetSaveInfo
+	public class PetSaveInfo : CurrencyDrive
 	{
-		[Header("Basics")]
-		public string SystemName = "<system name>";
 		[Header("Indicators")]
 		public float Food = 50;
 		public float Water = 50;
@@ -20,199 +18,171 @@ namespace Pets
 		public bool NeedEvelate = false;
 		public float CurrentXP = 0;
 		public int CurrentLevel = 1;
-		[Header("Currency")]
-		public float MoraCount = 0;
-		public float GemsCount = 0;
 		[Header("Duplicats")]
 		public int DuplicatCount = 0;
-	}
 
-	public static class PetLogic
-	{
-		public static Pet Pet(this PetSaveInfo info)
+		[SerializeField] private Pet _pet;
+		public Pet Pet => _pet;
+
+		public PetSaveInfo(Pet pet)
 		{
-			return Resources.Load<Pet>(info.SystemName);
+			_pet = pet;
 		}
-		public static bool IsSleeping(this PetSaveInfo info) => string.IsNullOrEmpty(info.SleepingBedID) == false;
-		public static int ElevateCost(this PetSaveInfo info)
+
+		public bool IsSleeping() => string.IsNullOrEmpty(SleepingBedID) == false;
+		public int ElevateCost()
 		{
-			Pet pet = info.Pet();
-			return pet.ElevateMoraBaseCost + pet.ElevateCostRise * info.ElevateCount;
+			return _pet.ElevateMoraBaseCost + _pet.ElevateCostRise * ElevateCount;
 		}
-		public static void Elevate(this PetSaveInfo info)
+		public void Elevate()
 		{
-			if (PlayerDataContainer.MoraCount < info.ElevateCost())
+			if (PlayerDataContainer.MoraCount < ElevateCost())
 			{
 				return;
 			}
-			PlayerDataContainer.MoraCount -= info.ElevateCost();
-			info.NeedEvelate = false;
+			PlayerDataContainer.MoraCount -= ElevateCost();
+			NeedEvelate = false;
 		}
-		public static int MoraStorage(this PetSaveInfo info)
+		public override int MoraStorage => _pet.BaseMoraStorage + _pet.MoraStorageExpandCount * (CurrentLevel / _pet.LevelsToMoraStorageExpand) + _pet.MoraStoragePerDuplicatBonus * DuplicatCount;
+
+		public override int GemsStorage => _pet.BaseGemsStorage + _pet.GemsStorageExpandCount * (CurrentLevel / _pet.LevelsToGemsStorageExpand);
+
+		public override float MoraPerSecond => (_pet.MoraPerSecond + _pet.MoraPerSecondDuplicatBonus * DuplicatCount);
+
+		public override float GemsPerSecond => (_pet.GemsPerSecond + _pet.GemsPerSecondDuplicatBonus * DuplicatCount);
+
+		public bool CanFeed(Food food)
 		{
-			Pet pet = info.Pet();
-			return pet.BaseMoraStorage + pet.MoraStorageExpandCount * (info.CurrentLevel / pet.LevelsToMoraStorageExpand) + pet.MoraStoragePerDuplicatBonus * info.DuplicatCount;
+			return Food < Pet.MIN_HUNGER_TO_FEED && PlayerDataContainer.GetFoodCount(food) > 0 && IsSleeping() == false;
 		}
 
-		public static int GemsStorage(this PetSaveInfo info)
+		public void Feed(Food food)
 		{
-			Pet pet = info.Pet();
-			return pet.BaseGemsStorage + pet.GemsStorageExpandCount * (info.CurrentLevel / pet.LevelsToGemsStorageExpand);
-		}
-
-		public static float MoraPerSecond(this PetSaveInfo info)
-		{
-			Pet pet = info.Pet();
-			return (pet.MoraPerSecond + pet.MoraPerSecondDuplicatBonus * info.DuplicatCount);
-		}
-
-		public static float GemsPerSecond(this PetSaveInfo info)
-		{
-			Pet pet = info.Pet();
-			return (pet.GemsPerSecond + pet.GemsPerSecondDuplicatBonus * info.DuplicatCount);
-		}
-
-		public static bool CanFeed(this PetSaveInfo info, Food food) 
-		{
-			return info.Food < Pets.Pet.MIN_HUNGER_TO_FEED && PlayerDataContainer.GetFoodCount(food) > 0 && info.IsSleeping() == false;
-		}
-
-		public static void Feed(this PetSaveInfo info, Food food)
-		{
-			if (info.CanFeed(food) == false)
+			if (CanFeed(food) == false)
 			{
 				return;
 			}
 			PlayerDataContainer.RemoveFood(food, 1);
-			info.Food = Mathf.Clamp(info.Food + food.Nutritional, 0, 100);
-			info.GainXP(food.XpCount);
+			Food = Mathf.Clamp(Food + food.Nutritional, 0, 100);
+			GainXP(food.XpCount);
 		}
 
-		public static bool CanDrink(this PetSaveInfo info, Water water)
+		public bool CanDrink(Water water)
 		{
-			return info.Water < Pets.Pet.MIN_THIRST_TO_DRINK && PlayerDataContainer.GetWaterCount(water) > 0 && info.IsSleeping() == false;
+			return Water < Pet.MIN_THIRST_TO_DRINK && PlayerDataContainer.GetWaterCount(water) > 0 && IsSleeping() == false;
 		}
 
-		public static void Drink(this PetSaveInfo info, Water water)
+		public void Drink(Water water)
 		{
-			if (info.CanDrink(water) == false)
+			if (CanDrink(water) == false)
 			{
 				return;
 			}
 			PlayerDataContainer.RemoveWater(water, 1);
-			info.Water = Mathf.Clamp(info.Water + water.Nutritional, 0, 100);
-			info.GainXP(water.XpCount);
+			Water = Mathf.Clamp(Water + water.Nutritional, 0, 100);
+			GainXP(water.XpCount);
 		}
 
-		public static bool CanPlay(this PetSaveInfo info)
+		public bool CanPlay()
 		{
-			return info.Joy < Pets.Pet.MIN_JOY_TO_PLAY && info.IsSleeping() == false;
+			return Joy < Pet.MIN_JOY_TO_PLAY && IsSleeping() == false;
 		}
 
-		public static void Stroke(this PetSaveInfo info)
+		public void Stroke()
 		{
-			Pet pet = info.Pet();
+			ClaimCurrency();
 
-			info.ClaimCurrency();
-
-			if (info.CanPlay())
+			if (CanPlay())
 			{
-				info.GainXP(pet.XpPerStroke);
-				info.Joy = Mathf.Clamp(info.Joy + pet.JoyPerStroke, 0, 100);
+				GainXP(_pet.XpPerStroke);
+				Joy = Mathf.Clamp(Joy + _pet.JoyPerStroke, 0, 100);
 			}
 		}
 
-		public static void ClaimCurrency(this PetSaveInfo info)
+		public void ClaimCurrency()
 		{
-			PlayerDataContainer.MoraCount += (int)info.MoraCount;
-			info.MoraCount -= (int)info.MoraCount;
+			PlayerDataContainer.MoraCount += (int)MoraCount;
+			MoraCount -= (int)MoraCount;
 
-			PlayerDataContainer.GemsCount += (int)info.GemsCount;
-			info.GemsCount -= (int)info.GemsCount;
+			PlayerDataContainer.GemsCount += (int)GemsCount;
+			GemsCount -= (int)GemsCount;
 		}
 
-		public static void GainXP(this PetSaveInfo info, float count)
+		public void GainXP(float count)
 		{
-			Pet pet = info.Pet();
-			if (info.CurrentLevel == pet.MaxLevel || info.NeedEvelate)
+			if (CurrentLevel == _pet.MaxLevel || NeedEvelate)
 			{
 				return;
 			}
 
-			info.CurrentXP += count;
+			CurrentXP += count;
 
-			while (info.CurrentXP > pet.XPToLevelUp)
+			while (CurrentXP > _pet.XPToLevelUp)
 			{
-				info.LevelUp();
-				info.CurrentXP -= pet.XPToLevelUp;
+				LevelUp();
+				CurrentXP -= _pet.XPToLevelUp;
 			}
 		}
 
-		public static void LevelUp(this PetSaveInfo info)
+		public void LevelUp()
 		{
-			Pet pet = info.Pet();
-			if (info.CurrentLevel == pet.MaxLevel || info.NeedEvelate)
+			if (CurrentLevel == _pet.MaxLevel || NeedEvelate)
 			{
 				return;
 			}
 
-			info.CurrentLevel++;
-			info.GemsCount = Mathf.Clamp(info.GemsCount + pet.GemsPerLevel,0, info.GemsStorage());
-			if (info.CurrentLevel % pet.EvelateEveryLevel == 0)
+			CurrentLevel++;
+			GemsCount = Mathf.Clamp(GemsCount + _pet.GemsPerLevel, 0, GemsStorage);
+			if (CurrentLevel % _pet.EvelateEveryLevel == 0)
 			{
-				info.NeedEvelate = true;
+				NeedEvelate = true;
 			}
 		}
 
-		public static bool CanSleep(this PetSaveInfo info)
+		public bool CanSleep()
 		{
-			return info.Energy < Pets.Pet.MIN_ENERGY_TO_SLEEP && info.IsSleeping() == false;
+			return Energy < Pet.MIN_ENERGY_TO_SLEEP && IsSleeping() == false;
 		}
 
-		public static void LaySleep(this PetSaveInfo info, Furniture sleepSpot)
+		public void LaySleep(Furniture sleepSpot)
 		{
-			if (info.CanSleep() == false)
+			if (CanSleep() == false)
 			{
 				return;
 			}
-			info.SleepingBedID = sleepSpot.ID.ToString();
+			SleepingBedID = sleepSpot.ID.ToString();
 		}
 
-		public static void EmitLive(this PetSaveInfo info, float seconds)
+		public override bool DriveCondition => Energy != 0 && Water != 0 && Joy != 0 && Food != 0;
+		public override void EmitLive(float seconds)
 		{
-			Pet pet = info.Pet();
+			base.EmitLive(seconds);
 
-			if (info.Energy != 0 && info.Water != 0 && info.Joy != 0 && info.Food != 0)
+			if (CurrentLevel == _pet.MaxLevel)
 			{
-				info.MoraCount = Mathf.Clamp(info.MoraCount + info.MoraPerSecond() * seconds, 0, info.MoraStorage());
-				info.GemsCount = Mathf.Clamp(info.GemsCount + info.GemsPerSecond() * seconds, 0, info.GemsStorage());
-			}
-
-			if (info.CurrentLevel == info.Pet().MaxLevel)
-			{
-				info.Joy = 100;
-				info.Food = 100;
-				info.Water = 100;
-				info.Energy = 100;
+				Joy = 100;
+				Food = 100;
+				Water = 100;
+				Energy = 100;
 				return;
 			}
 
-			info.Joy = Mathf.Clamp(info.Joy - pet.JoyFallRate*seconds, 0, 100);
-			info.Food = Mathf.Clamp(info.Food - pet.HungerFallRate*seconds, 0, 100);
-			info.Water = Mathf.Clamp(info.Water - pet.ThiestFallRate*seconds, 0, 100);
-			if (info.IsSleeping() == false)
+			Joy = Mathf.Clamp(Joy - _pet.JoyFallRate * seconds, 0, 100);
+			Food = Mathf.Clamp(Food - _pet.HungerFallRate * seconds, 0, 100);
+			Water = Mathf.Clamp(Water - _pet.ThiestFallRate * seconds, 0, 100);
+			if (IsSleeping() == false)
 			{
-				info.Energy = Mathf.Clamp(info.Energy - pet.FatigueFallRate*seconds, 0, 100);
+				Energy = Mathf.Clamp(Energy - _pet.FatigueFallRate * seconds, 0, 100);
 			}
 			else
 			{
-				float oldFatigue = info.Energy;
-				info.Energy = Mathf.Clamp(info.Energy + pet.FatigueUpRate*seconds, 0, 100);
-				float sleepTime = (info.Energy - oldFatigue) / pet.FatigueUpRate;
-				info.GainXP(sleepTime * pet.XpWhileSleepRate);
-				if (info.Energy == 100 || info.Joy == 0 || info.Water == 0 || info.Food == 0)
+				float oldFatigue = Energy;
+				Energy = Mathf.Clamp(Energy + _pet.FatigueUpRate * seconds, 0, 100);
+				float sleepTime = (Energy - oldFatigue) / _pet.FatigueUpRate;
+				GainXP(sleepTime * _pet.XpWhileSleepRate);
+				if (Energy == 100 || Joy == 0 || Water == 0 || Food == 0)
 				{
-					info.SleepingBedID = string.Empty;
+					SleepingBedID = string.Empty;
 				}
 			}
 		}

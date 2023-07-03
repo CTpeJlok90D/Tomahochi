@@ -18,6 +18,6 @@ MonoBehaviour:
   - Ingredient: {fileID: 11400000, guid: 9c318c4d0d24cb34990eae3c87cd4909, type: 2}
     Count: 1
   _result: {fileID: 11400000, guid: 77c3cfd8e4426ba4182335f30e1584b6, type: 2}
-  _cookTime: 5
-  _acceptebleTime: {x: 1.5, y: 3.5}
+  _cookTime: 4
+  _acceptebleTime: {x: 1, y: 3}
   _cookCountToSkipMiniGame: 5

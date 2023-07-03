@@ -12,13 +12,12 @@ public class PetView : MonoBehaviour
 	[SerializeField] private NavMeshAgent _agent;
 	[SerializeField] private Animator _animator;
 	[SerializeField] private Brain _brain;
-	[SerializeField] private string _linkedPetSystemName = "<System pet name>"; // ÿ” –≈“ Õ≈ “–Œ√¿… ›“Œ œŒÀ≈! ≈√Œ Õ≈ Õ”∆ÕŒ ÀŒ ¿À»«»–Œ¬¿“‹!
+	[SerializeField] private Pet _pet;
 	[SerializeField] private Vector3 _rightLookScale = new Vector3(-1, 1, 1);
 	[SerializeField] private Vector3 _leftLookScale = new Vector3(1, 1, 1);
 
 	private static Dictionary<string, PetView> _petViewByName = new();
 
-	private Pet _pet;
 	private PetSaveInfo _petInfo;
 
 	public const string WALK_PARAMETR_NAME = "IsWalking";
@@ -31,7 +30,7 @@ public class PetView : MonoBehaviour
 
 	public static PetView GetPetViewByInfo(PetSaveInfo info)
 	{
-		return _petViewByName[info.SystemName];
+		return _petViewByName[info.Pet.name];
 	}
 
 	public void LaySleep(SleepSpotView sleepSpot)
@@ -42,9 +41,9 @@ public class PetView : MonoBehaviour
 
 	private void Start()
 	{
-		_petInfo = PlayerDataContainer.PetInfoBySystemName(_linkedPetSystemName);
-		_pet = PetInfo.Pet();
-		_petViewByName.Add(PetInfo.SystemName, this);
+		_petViewByName.Clear();
+		_petInfo = PlayerDataContainer.PetInfoBySystemName(_pet.name);
+		_petViewByName.Add(PetInfo.Pet.name, this);
 
 		if (_petInfo.IsSleeping())
 		{

@@ -35,7 +35,7 @@ public class PetListElement : MonoBehaviour, IPointerClickHandler
 
 	public PetListElement Init(PetSaveInfo info)
 	{
-		Pet pet = info.Pet();
+		Pet pet = info.Pet;
 
 		_info = info;
 		_nameCaption.text = string.Format(nameFormat, pet.name);

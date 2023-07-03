@@ -3,7 +3,7 @@
     "rootNamespace": "",
     "references": [
         "UnityExtentions",
-        "UnityInterface"
+        "GeekPlay_SDK"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

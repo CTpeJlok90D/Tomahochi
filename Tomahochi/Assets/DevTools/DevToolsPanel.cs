@@ -50,7 +50,7 @@ public class DevToolsPanel : MonoBehaviour
 		_petSaveInfos = PlayerDataContainer.UnlockedPets;
 		foreach (PetSaveInfo info in _petSaveInfos) 
 		{
-			petsData.Add(new(info.SystemName));
+			petsData.Add(new(info.Pet.name));
 		}
 		_petsDropdown.AddOptions(petsData);
 
@@ -148,9 +148,6 @@ public class DevToolsPanel : MonoBehaviour
 
 	private void AddPet()
 	{
-		PlayerDataContainer.AddPet(new PetSaveInfo()
-		{
-			SystemName = _allPets[_allPetDropdown.value].name
-		});
+		PlayerDataContainer.AddPet(new PetSaveInfo(_allPets[_allPetDropdown.value]));
 	}
 }

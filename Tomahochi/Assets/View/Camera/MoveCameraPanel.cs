@@ -1,3 +1,4 @@
+using AICore;
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 {
 	[SerializeField] private CinemachineVirtualCamera _camera;
 	[SerializeField] private CinemachineBrain _brain;
+	[SerializeField] private CinemachineConfiner2D _confiner;
 	[SerializeField] private float _moveSensivity = 0.01f;
 	[SerializeField] private Vector2 _cameraScrollSizeBorders;
 	[SerializeField] private float _zCameraLevel = -50;
@@ -56,14 +58,14 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 		}
 		if (_brain.IsBlending == false)
 		{
-			_camera.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, _zCameraLevel);
+			_camera.transform.position = new Vector3(_brain.transform.position.x, _brain.transform.position.y, _zCameraLevel);
 		}
 	}
 
 	public IEnumerator CameraMoveCoroutine()
 	{
 		Vector3 lastMousePosition;
-		while (true)
+		while (Input.GetMouseButton(0))
 		{
 			lastMousePosition = Input.mousePosition;
 			yield return null;
@@ -84,5 +86,6 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 	public void ScrollCamera()
 	{
 		_camera.m_Lens.OrthographicSize = Mathf.Clamp(_camera.m_Lens.OrthographicSize - Input.mouseScrollDelta.y, _cameraScrollSizeBorders[0], _cameraScrollSizeBorders[1]);
+		_confiner.InvalidateCache();
 	}
 }

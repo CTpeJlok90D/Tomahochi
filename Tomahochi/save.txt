@@ -1,31 +1,16 @@
 {
-    "FoodInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"НinНangАlatbreadFood\",\"Value\":1}]}",
-    "IngridientsInStorage": "{\"_values\":[]}",
+    "FoodInStorage": "{\"_values\":[]}",
+    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Ham\",\"Value\":2},{\"Name\":\"\",\"Key\":\"Cabbage\",\"Value\":2},{\"Name\":\"\",\"Key\":\"Flour\",\"Value\":1}]}",
     "FoodCookCount": "{\"_values\":[]}",
-    "WaterInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"BerryDrink\",\"Value\":1}]}",
-    "FurnitureList": "{\"_values\":[{\"Name\":\"\",\"Key\":\"013af3b9-cf50-471d-bdac-7ffedd237811\",\"Value\":{\"_id\":\"013af3b9-cf50-471d-bdac-7ffedd237811\",\"Position\":{\"x\":-13.748294830322266,\"y\":-2.7888343334198},\"SystemName\":\"Bed\"}}]}",
+    "WaterInStorage": "{\"_values\":[]}",
+    "FurnitureList": "{\"_values\":[]}",
     "FurnitureInStorage": "{\"_values\":[]}",
-    "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":6.0,\"Min\":0.0}}",
-    "GemsCount": 2855,
-    "MoraCount": 1006,
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":260.8333435058594,\"GemsCount\":46.95000076293945,\"Food\":45.652774810791019,\"Water\":45.652774810791019,\"Joy\":97.60648345947266,\"Energy\":47.82638931274414,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":4.953939914703369,\"CurrentLevel\":1,\"DuplicatCount\":0,\"_pet\":{\"instanceID\":26014}}]}",
+    "CurrencyDrivers": "",
+    "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
+    "GemsCount": 5,
+    "MoraCount": 10,
     "FateCount": 0,
-    "RollCount": 10,
-    "UnlockedPets": [
-        {
-            "SystemName": "Geovishap",
-            "Food": 99.59308624267578,
-            "Water": 99.58712005615235,
-            "Joy": 99.60585021972656,
-            "Energy": 47.728782653808597,
-            "SleepingBedID": "013af3b9-cf50-471d-bdac-7ffedd237811",
-            "ElevateCount": 0,
-            "NeedEvelate": false,
-            "CurrentXP": 460.1689147949219,
-            "CurrentLevel": 1,
-            "MoraCount": 23.538312911987306,
-            "GemsCount": 4.320216655731201,
-            "DuplicatCount": 0
-        }
-    ],
-    "LastLaunchTime": "2023-06-26 15:06:43,820"
+    "RollCount": 0,
+    "LastLaunchTime": "2023-07-03 08:53:10,397"
 }
