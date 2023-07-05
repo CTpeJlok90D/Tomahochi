@@ -5,6 +5,8 @@ namespace Saving
 	[Serializable]
 	public class PlayerData
 	{
+		public string Saves;
+		
 		public string FoodInStorage;
 		public string IngridientsInStorage;
 		public string FoodCookCount;

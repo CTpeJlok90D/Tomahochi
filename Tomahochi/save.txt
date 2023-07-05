@@ -1,17 +1,18 @@
 {
+    "Saves": "",
     "FoodInStorage": "{\"_values\":[]}",
-    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Cabbage\",\"Value\":11},{\"Name\":\"\",\"Key\":\"Ham\",\"Value\":10},{\"Name\":\"\",\"Key\":\"Flour\",\"Value\":19},{\"Name\":\"\",\"Key\":\"Egg\",\"Value\":11},{\"Name\":\"\",\"Key\":\"Meat\",\"Value\":6}]}",
+    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Ham\",\"Value\":10},{\"Name\":\"\",\"Key\":\"Flour\",\"Value\":11},{\"Name\":\"\",\"Key\":\"Meat\",\"Value\":4},{\"Name\":\"\",\"Key\":\"Cabbage\",\"Value\":6},{\"Name\":\"\",\"Key\":\"Shugar\",\"Value\":7},{\"Name\":\"\",\"Key\":\"Egg\",\"Value\":2}]}",
     "FoodCookCount": "{\"_values\":[]}",
     "WaterInStorage": "{\"_values\":[]}",
     "FurnitureList": "{\"_values\":[]}",
     "FurnitureInStorage": "{\"_values\":[]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":1000.0,\"GemsCount\":213.78326416015626,\"Food\":30.20233154296875,\"Water\":30.20233154296875,\"Joy\":138.3643341064453,\"Energy\":40.1027946472168,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":4.801706314086914,\"CurrentLevel\":1,\"DuplicatCount\":0,\"_pet\":{\"instanceID\":26034}}]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":1000.0,\"GemsCount\":320.0,\"Food\":16.135757446289064,\"Water\":16.135757446289064,\"Joy\":16.135757446289064,\"Energy\":33.06903839111328,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Geovishap\",\"_pet\":{\"instanceID\":22982}}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
-    "MiniGamesRecords": "{\"_values\":[{\"Name\":\"\",\"Key\":1,\"Value\":23.600936889648439}]}",
-    "GemsCount": 50,
-    "MoraCount": 60,
+    "MiniGamesRecords": "{\"_values\":[{\"Name\":\"\",\"Key\":3,\"Value\":23.0},{\"Name\":\"\",\"Key\":4,\"Value\":15.0}]}",
+    "GemsCount": 15,
+    "MoraCount": 7,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-03 10:52:20,559"
+    "LastLaunchTime": "2023-07-05 13:45:22,828"
 }

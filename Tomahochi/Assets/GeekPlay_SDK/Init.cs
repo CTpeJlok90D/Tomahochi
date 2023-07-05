@@ -18,7 +18,7 @@ public enum Platform
 public class Init : MonoBehaviour
 {
     public bool SoundOn = true; //Звук включен?
-    protected PlayerData _playerData;
+    public PlayerData PlayerData;
 
     [Space(50)]
     [Header("Publisher Settings")]
@@ -154,7 +154,7 @@ public class Init : MonoBehaviour
                 {
                     break;
 				}
-				jsonString = JsonUtility.ToJson(_playerData);
+				jsonString = JsonUtility.ToJson(PlayerData);
 				Utils.SaveExtern(jsonString);
 				Debug.Log("Save");
 				break;
@@ -163,7 +163,7 @@ public class Init : MonoBehaviour
                 {
                     break;
                 }
-				jsonString = JsonUtility.ToJson(_playerData);
+				jsonString = JsonUtility.ToJson(PlayerData);
 				Utils.VK_Save(jsonString);
 				break;
         }
@@ -172,7 +172,7 @@ public class Init : MonoBehaviour
     private void EditorSave()
     {
 		string directory = Directory.GetCurrentDirectory() + "/save.txt";
-		File.WriteAllText(directory, JsonUtility.ToJson(_playerData, true));
+		File.WriteAllText(directory, JsonUtility.ToJson(PlayerData, true));
 	}
 
     public void Leaderboard(string leaderboardName, int value) //ЗАНЕСТИ В ЛИДЕРБОРД
@@ -375,7 +375,7 @@ public class Init : MonoBehaviour
 
     public void SetPlayerData(string value)
     {
-        _playerData = JsonUtility.FromJson<PlayerData>(value);
+        PlayerData = JsonUtility.FromJson<PlayerData>(value);
     }
 
     public void Load()
@@ -404,11 +404,11 @@ public class Init : MonoBehaviour
 		try
 		{
 			string playerDataJson = File.ReadAllText(Directory.GetCurrentDirectory() + "/save.txt");
-			_playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
+			PlayerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
 		}
 		catch
 		{
-			_playerData = new();
+			PlayerData = new();
 		}
 	}
 

@@ -61,7 +61,7 @@ public class FlyAndGrapPlayer : MonoBehaviour, IMiniGamePlayer
 	{
 		if (collision.gameObject.TryGetComponent(out Spike spike))
 		{
-			_game.ShowLoseWindow();
+			_game.EndGame();
 			return;
 		}
 

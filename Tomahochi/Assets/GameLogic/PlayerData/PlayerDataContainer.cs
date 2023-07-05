@@ -88,7 +88,7 @@ namespace Saving
 			LoadPlayerData();
 			try
 			{
-				_secondsPassed = (int)(DateTime.UtcNow - DateTime.ParseExact(instance._playerData.LastLaunchTime, DATE_TIME_FORMAT, CultureInfo.InvariantCulture)).TotalSeconds;
+				_secondsPassed = (int)(DateTime.UtcNow - DateTime.ParseExact(instance.PlayerData.LastLaunchTime, DATE_TIME_FORMAT, CultureInfo.InvariantCulture)).TotalSeconds;
 			}
 			catch
 			{
@@ -112,7 +112,7 @@ namespace Saving
 			}
 			set
 			{
-				instance._playerData.GemsCount = value;
+				instance.PlayerData.GemsCount = value;
 				instance._gemsCount.Value = value;
 			}
 		}
@@ -125,7 +125,7 @@ namespace Saving
 			set
 			{
 				instance._moraCount.Value = value;
-				instance._playerData.MoraCount = value;
+				instance.PlayerData.MoraCount = value;
 			}
 		}
 		public static int FateCount
@@ -137,7 +137,7 @@ namespace Saving
 			set
 			{
 				instance._fateCount.Value = value;
-				instance._playerData.FateCount = value;
+				instance.PlayerData.FateCount = value;
 			}
 		}
 		public static int RollCount
@@ -149,7 +149,7 @@ namespace Saving
 			set
 			{
 				_instance._rollCount.Value = value;
-				_instance._playerData.RollCount = value;
+				_instance.PlayerData.RollCount = value;
 			}
 		}
 		public static UnityEvent<int> GemsCountChanged => instance._gemsCount.Changed;
@@ -370,7 +370,7 @@ namespace Saving
 				return;
 			}
 
-			PlayerData data = instance._playerData;
+			PlayerData data = instance.PlayerData;
 
 			data.MoraCount = MoraCount;
 			data.FateCount = FateCount;
@@ -394,15 +394,15 @@ namespace Saving
 		{
 			_instance.Load();
 
-			instance._foodInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FoodInStorage);
-			instance._waterInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.WaterInStorage);
-			instance._ingridiendsInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.IngridientsInStorage);
-			instance._foodCookCount = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FoodCookCount);
-			instance._furnitureById = JsonUtility.FromJson<UnityDictionarity<string, Furniture>>(instance._playerData.FurnitureList);
-			instance._furnitureInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance._playerData.FurnitureInStorage);
-			instance._home = JsonUtility.FromJson<Home>(instance._playerData.Home);
-			instance._unlockedPets = JsonUtility.FromJson<SerializedList<PetSaveInfo>>(instance._playerData.UnlockedPets);
-			instance._minigameRecords = JsonUtility.FromJson<UnityDictionarity<int, float>>(_instance._playerData.MiniGamesRecords);
+			instance._foodInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance.PlayerData.FoodInStorage);
+			instance._waterInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance.PlayerData.WaterInStorage);
+			instance._ingridiendsInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance.PlayerData.IngridientsInStorage);
+			instance._foodCookCount = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance.PlayerData.FoodCookCount);
+			instance._furnitureById = JsonUtility.FromJson<UnityDictionarity<string, Furniture>>(instance.PlayerData.FurnitureList);
+			instance._furnitureInStorage = JsonUtility.FromJson<UnityDictionarity<string, int>>(instance.PlayerData.FurnitureInStorage);
+			instance._home = JsonUtility.FromJson<Home>(instance.PlayerData.Home);
+			instance._unlockedPets = JsonUtility.FromJson<SerializedList<PetSaveInfo>>(instance.PlayerData.UnlockedPets);
+			instance._minigameRecords = JsonUtility.FromJson<UnityDictionarity<int, float>>(_instance.PlayerData.MiniGamesRecords);
 
 			instance._foodInStorage ??= new();
 			instance._waterInStorage ??= new();
@@ -414,9 +414,9 @@ namespace Saving
 			instance._unlockedPets ??= StartPetList;
 			instance._minigameRecords ??= new();
 
-			instance._gemsCount.Value = instance._playerData.GemsCount;
-			instance._moraCount.Value = instance._playerData.MoraCount;
-			instance._fateCount.Value = instance._playerData.FateCount;
+			instance._gemsCount.Value = instance.PlayerData.GemsCount;
+			instance._moraCount.Value = instance.PlayerData.MoraCount;
+			instance._fateCount.Value = instance.PlayerData.FateCount;
 			instance._isLoaded = true;
 		}
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class StoragebleItem : MonoBehaviour
@@ -8,10 +7,12 @@ public class StoragebleItem : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.TryGetComponent(out FlyAndGrapPlayer player))
+		if (collision.TryGetComponent(out IMiniGamePlayer player) == false)
 		{
-			_storageble.AddOnStorage(_count);
-			Destroy(gameObject);
+			return;
 		}
+
+		_storageble.AddOnStorage(_count);
+		Destroy(gameObject);
 	}
 }

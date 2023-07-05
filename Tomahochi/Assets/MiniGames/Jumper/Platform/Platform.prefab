@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3539193363542979377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 6, z: 1}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalScale: {x: 3, y: 26, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4208998735680674438}
@@ -120,6 +120,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6811702206010769532}
+  - {fileID: 9194228387225944315}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +156,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -10}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -166,7 +167,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 6}
+  m_Size: {x: 3, y: 26}
   m_EdgeRadius: 0
 --- !u!114 &291654679973907978
 MonoBehaviour:
@@ -210,6 +211,21 @@ MonoBehaviour:
       Key: 4
       Value:
       - {fileID: 1456131304651705852}
+  _generated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5516001874735148607}
+        m_TargetAssemblyTypeName: ItemsGenerator, Assembly-CSharp
+        m_MethodName: Generate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4409186675474345785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,3 +307,92 @@ MonoBehaviour:
   _renderer: {fileID: 5955444114946278353}
   _collider: {fileID: 1468568666043499231}
   _color: {r: 0.990566, g: 0.167641, b: 0, a: 1}
+--- !u!1 &7529731576071301919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9194228387225944315}
+  - component: {fileID: 5516001874735148607}
+  m_Layer: 0
+  m_Name: ItemGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9194228387225944315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529731576071301919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4208998735680674438}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5516001874735148607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529731576071301919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d5269bd377b39942bbe99d4f2e9714e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _owner: {fileID: 4208998735680674438}
+  _linkGeneratedItemToOwner: 0
+  _ySpawnPositionRange:
+    Max: 6
+    Min: 3.5
+  _xSpawnPositionRange:
+    Max: 3.5
+    Min: -3.5
+  _spawnObjects:
+  - GameObject: {fileID: 4240077626003425260, guid: 7e253b26dbfa317409a2fc4e07c2d7d3,
+      type: 3}
+    Weight: 0.66
+    Chance: 0.08616188
+  - GameObject: {fileID: 2359135730621256596, guid: f11a8ffc8cdb4d34fa81433c40129be1,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 14fef4b2b0b90ce4fb15a70699985d42,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 646ac8cdaf4b9bf44a5df8feb7e9a4f7,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 3075b7fe9c7521849b99aa598316bcae,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 44d54af56ab06dc44b4832577a96a8d9,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 878d76cbfc1c01f4788150bf0dafbfd8,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  - GameObject: {fileID: 3007539407423494029, guid: 69c41f06215effb4299541a8de9f9610,
+      type: 3}
+    Weight: 1
+    Chance: 0.1305483
+  _itemsCountRange:
+    Max: 2
+    Min: 0
+  _generateOnAwake: 0

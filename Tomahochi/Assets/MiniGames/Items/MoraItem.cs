@@ -7,7 +7,7 @@ public class MoraItem : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.TryGetComponent(out FlyAndGrapPlayer player))
+		if (collision.TryGetComponent(out IMiniGamePlayer player))
 		{
 			PlayerDataContainer.MoraCount += _count;
 			Destroy(gameObject);

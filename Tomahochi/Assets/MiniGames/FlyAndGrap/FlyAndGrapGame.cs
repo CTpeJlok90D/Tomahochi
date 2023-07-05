@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FlyAndGrapGame : MiniGame
@@ -21,9 +22,21 @@ public class FlyAndGrapGame : MiniGame
 		{
 			return;
 		}
+		IncreaseJoy = true;
+		IncreaseXP = true;
 		_spikeObject.SetActive(true);
 		State = GameState.InProcess;
 		_player.DragStarted -= OnPlayerMoveStart;
 		StartCoroutine(TimerCoroutine());
+	}
+
+	protected IEnumerator TimerCoroutine()
+	{
+		while (State == GameState.InProcess)
+		{
+			Score += Time.deltaTime;
+
+			yield return null;
+		}
 	}
 }

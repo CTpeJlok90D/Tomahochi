@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FlyAndDragSubScene.unity
     guid: 9e9e012ffe6b88d4da62f500e5c1dd6b
+  - enabled: 1
+    path: Assets/Scenes/Jumper.unity
+    guid: 2df697cd542ccda4590ed57784b2cb59
+  - enabled: 1
+    path: Assets/Scenes/OrhidsAttack.unity
+    guid: f7802ab88b8e5a844b5e2e1f4a4dc593
+  - enabled: 1
+    path: Assets/Scenes/PingPong.unity
+    guid: efe13f93afa2bb34cb2b569e5e02aa7c
   m_configObjects: {}

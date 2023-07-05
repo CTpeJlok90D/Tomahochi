@@ -20,12 +20,21 @@ namespace Pets
 		public int CurrentLevel = 1;
 		[Header("Duplicats")]
 		public int DuplicatCount = 0;
+		public string SystemName;
 
 		[SerializeField] private Pet _pet;
-		public Pet Pet => _pet;
+		public Pet Pet
+		{
+			get 
+			{
+				_pet ??= Resources.Load<Pet>(SystemName);
+				return _pet;
+			} 
+		}
 
 		public PetSaveInfo(Pet pet)
 		{
+			SystemName = pet.name;
 			_pet = pet;
 		}
 

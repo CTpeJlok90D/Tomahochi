@@ -3832,7 +3832,7 @@ PrefabInstance:
     - target: {fileID: 4431475618880776766, guid: 996c7f4920f56f54ea465873433412ab,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4431475618880776766, guid: 996c7f4920f56f54ea465873433412ab,
         type: 3}
@@ -6277,12 +6277,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369662776}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8393484, y: 0.43680185, z: 11.587444}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1171101720}
-  m_RootOrder: 0
+  m_Father: {fileID: 1077836682}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &372883422 stripped
 RectTransform:
@@ -7810,7 +7810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -163.25, y: 90}
+  m_AnchoredPosition: {x: -163.25, y: 0}
   m_SizeDelta: {x: 280, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486447958
@@ -9838,7 +9838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 500, y: 415}
+  m_AnchoredPosition: {x: 500, y: 0}
   m_SizeDelta: {x: 800, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &590662066
@@ -16095,6 +16095,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundOn: 1
+  PlayerData:
+    Saves: 
+    FoodInStorage: 
+    IngridientsInStorage: 
+    FoodCookCount: 
+    WaterInStorage: 
+    FurnitureList: 
+    FurnitureInStorage: 
+    UnlockedPets: 
+    CurrencyDrivers: 
+    Home: 
+    MiniGamesRecords: 
+    GemsCount: 0
+    MoraCount: 0
+    FateCount: 0
+    RollCount: 0
+    LastLaunchTime: 
   Platform: 0
   gameArterPrefab: {fileID: 0}
   leaderboardBtn: {fileID: 0}
@@ -16115,6 +16132,8 @@ MonoBehaviour:
   _furnitureById:
     _values: []
   _furnitureInStorage:
+    _values: []
+  _minigameRecords:
     _values: []
   _unlockedPets:
     List: []
@@ -17539,7 +17558,7 @@ PrefabInstance:
     - target: {fileID: 4389070793539954852, guid: 17ac7577430d18840b21f5773ef03d38,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4389070793539954852, guid: 17ac7577430d18840b21f5773ef03d38,
         type: 3}
@@ -17582,8 +17601,9 @@ GameObject:
   - component: {fileID: 1077836688}
   - component: {fileID: 1077836687}
   - component: {fileID: 1077836686}
+  - component: {fileID: 1077836689}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI==========================================
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17612,8 +17632,9 @@ RectTransform:
   - {fileID: 2112452647}
   - {fileID: 1399739150}
   - {fileID: 656980063}
-  m_Father: {fileID: 1171101720}
-  m_RootOrder: 1
+  - {fileID: 369662779}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -17739,6 +17760,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077836681}
   m_CullTransparentMesh: 1
+--- !u!114 &1077836689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077836681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52336a1ef11d6ad47959add164c93d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tabPerMode:
+    _values:
+    - Name: 
+      Key: 0
+      Value:
+        Tab: {fileID: 1624396962}
+        CanMoveCamera: 1
+    - Name: 
+      Key: 1
+      Value:
+        Tab: {fileID: 57299988}
+        CanMoveCamera: 1
+    - Name: 
+      Key: 2
+      Value:
+        Tab: {fileID: 1393769394}
+        CanMoveCamera: 0
+    - Name: 
+      Key: 3
+      Value:
+        Tab: {fileID: 739930134}
+        CanMoveCamera: 0
+    - Name: 
+      Key: 5
+      Value:
+        Tab: {fileID: 1399739149}
+        CanMoveCamera: 0
+    - Name: 
+      Key: 4
+      Value:
+        Tab: {fileID: 2112452646}
+        CanMoveCamera: 0
+  _mode: 0
+  _petList: {fileID: 794360882}
+  _petUI: {fileID: 1250110444}
+  _recipeList: {fileID: 708809405}
 --- !u!1 &1083305109
 GameObject:
   m_ObjectHideFlags: 0
@@ -19875,88 +19944,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &1171101719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1171101720}
-  - component: {fileID: 1171101721}
-  m_Layer: 0
-  m_Name: UI=====================================================
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1171101720
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171101719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8393484, y: -0.43680185, z: -11.587444}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 369662779}
-  - {fileID: 1077836682}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1171101721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171101719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52336a1ef11d6ad47959add164c93d6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tabPerMode:
-    _values:
-    - Name: 
-      Key: 0
-      Value:
-        Tab: {fileID: 1624396962}
-        CanMoveCamera: 1
-    - Name: 
-      Key: 1
-      Value:
-        Tab: {fileID: 57299988}
-        CanMoveCamera: 1
-    - Name: 
-      Key: 2
-      Value:
-        Tab: {fileID: 1393769394}
-        CanMoveCamera: 0
-    - Name: 
-      Key: 3
-      Value:
-        Tab: {fileID: 739930134}
-        CanMoveCamera: 0
-    - Name: 
-      Key: 5
-      Value:
-        Tab: {fileID: 1399739149}
-        CanMoveCamera: 0
-    - Name: 
-      Key: 4
-      Value:
-        Tab: {fileID: 2112452646}
-        CanMoveCamera: 0
-  _mode: 0
-  _petList: {fileID: 794360882}
-  _petUI: {fileID: 1250110444}
-  _recipeList: {fileID: 708809405}
 --- !u!1 &1184281537
 GameObject:
   m_ObjectHideFlags: 0
@@ -21563,7 +21550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 171, y: 90}
+  m_AnchoredPosition: {x: 171, y: 0}
   m_SizeDelta: {x: 280, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1254278635
@@ -35959,7 +35946,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 68.67566, y: -255}
+  m_AnchoredPosition: {x: 69, y: -220}
   m_SizeDelta: {x: 198.8525, y: 148.0825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2089204191
@@ -36720,9 +36707,15 @@ MonoBehaviour:
   - Icon: {fileID: 21300000, guid: c3c943d6eed7cbc46aadbe537e123e4e, type: 3}
     Name: Grap and fly
     SceneNumber: 1
-  - Icon: {fileID: 21300000, guid: 29e65dabb888aee48871d71550fa991b, type: 3}
-    Name: Grap and fly 2
-    SceneNumber: 1
+  - Icon: {fileID: -21392846, guid: 7e272de493f41c7499a9fcdda409c7c1, type: 3}
+    Name: Jumper
+    SceneNumber: 2
+  - Icon: {fileID: 21300000, guid: 7b230d4d93836234580d9889284bf58f, type: 3}
+    Name: Orhids attack!
+    SceneNumber: 3
+  - Icon: {fileID: 896749365, guid: 8f097b1a66b8a7642b3745372a327e3d, type: 3}
+    Name: Ping pong
+    SceneNumber: 4
   _miniGameIcon: {fileID: 945421891}
   _miniGameCaption: {fileID: 410942518}
   _nextButton: {fileID: 1528623708}
@@ -37639,6 +37632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LoadPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727937200494311448, guid: 52f66bd138021b24f9236496fe91d1b0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8563092588362991602, guid: 52f66bd138021b24f9236496fe91d1b0,
         type: 3}

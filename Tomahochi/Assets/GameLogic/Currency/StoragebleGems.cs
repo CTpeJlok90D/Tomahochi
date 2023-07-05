@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Currency/Gems")]
 public class StoragebleGems : Storageble
 {
+	[SerializeField] private int _count = 1;
 	public override UnityEvent<Storageble, int> OnStorageCountChanged => _countChanged;
 	private UnityEvent<Storageble, int> _countChanged = new();
 
@@ -28,7 +29,7 @@ public class StoragebleGems : Storageble
 
 	public override void ApplyLoot()
 	{
-		PlayerDataContainer.GemsCount++;
+		PlayerDataContainer.GemsCount+= _count;
 	}
 
 	public override int GetStorageCount()

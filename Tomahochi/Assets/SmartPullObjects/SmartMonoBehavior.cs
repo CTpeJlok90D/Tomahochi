@@ -6,8 +6,8 @@ public abstract class SmartMonoBehaivor : MonoBehaviour
 {
 	private static Dictionary<Type, List<SmartMonoBehaivor>> _instances = new();
 
-	public static T Create<T>(T Original) where T : SmartMonoBehaivor => Create(Original);
-	public static T Create<T>(T Original, Vector3 position, Quaternion rotation) where T : SmartMonoBehaivor => Create(Original, position, rotation);
+	public static T Create<T>(T Original) where T : SmartMonoBehaivor => Create((SmartMonoBehaivor)Original) as T;
+	public static T Create<T>(T Original, Vector3 position, Quaternion rotation) where T : SmartMonoBehaivor => Create((SmartMonoBehaivor)Original, position, rotation) as T;
 	public static SmartMonoBehaivor Create(SmartMonoBehaivor original) => Create(original, new Vector3(0,0,0), Quaternion.identity);
 	public static SmartMonoBehaivor Create(SmartMonoBehaivor original, Vector3 position, Quaternion rotation)
 	{
@@ -44,6 +44,11 @@ public abstract class SmartMonoBehaivor : MonoBehaviour
 	{
 		obj.transform.SetParent(null);
 		obj.gameObject.SetActive(false);
+	}
+
+	public void Remove()
+	{
+		Remove(this);
 	}
 
 	private void AddInDictionary()

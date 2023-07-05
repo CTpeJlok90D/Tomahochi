@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEditor;
 public class GameObjectPanelExpand
 {
+	[InitializeOnLoadMethod]
+	private static void Init()
+	{
+		Resources.Load<GameObjectSingletones>("");
+	}
+
 	[MenuItem("GameObject/UI/Custom/Button")]
 	private static void CreateButton()
 	{

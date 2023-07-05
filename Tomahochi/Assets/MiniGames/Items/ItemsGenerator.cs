@@ -7,10 +7,12 @@ using Random = UnityEngine.Random;
 public class ItemsGenerator : MonoBehaviour
 {
 	[SerializeField] private Transform _owner;
+	[SerializeField] private bool _linkGeneratedItemToOwner = true;
 	[SerializeField] private Range _ySpawnPositionRange;
 	[SerializeField] private Range _xSpawnPositionRange;
 	[SerializeField] private ObjectInfo[] _spawnObjects;
 	[SerializeField] private Range _itemsCountRange = new(0,1);
+	[SerializeField] private bool _generateOnAwake = true;
 
 	private List<ObjectInfo> _randomList = new();
 
@@ -25,8 +27,10 @@ public class ItemsGenerator : MonoBehaviour
 				_randomList.Add(info);
 			}
 		}
-
-		Generate();
+		if (_generateOnAwake)
+		{
+			Generate();
+		}
 	}
 
 	public void Generate()
@@ -38,9 +42,13 @@ public class ItemsGenerator : MonoBehaviour
 			ObjectInfo info = _randomList[Random.Range(0, _randomList.Count - 1)];
 
 			GameObject instance =  Instantiate(info.GameObject);
-			instance.transform.SetParent(_owner);
 
-			instance.transform.localPosition = new(_xSpawnPositionRange, _ySpawnPositionRange);
+			if (_linkGeneratedItemToOwner)
+			{
+				instance.transform.SetParent(_owner);
+			}
+
+			instance.transform.position = _owner.transform.position + new Vector3(_xSpawnPositionRange, _ySpawnPositionRange);
 		}
 	}
 
@@ -56,15 +64,6 @@ public class ItemsGenerator : MonoBehaviour
 		return result;
 	}
 
-	private void OnValidate()
-	{
-		float sum = GetWeightSum();
-		foreach (ObjectInfo info in _spawnObjects)
-		{
-			info.Chance = info.Weight / sum;
-		}
-	}
-
 	[Serializable]
 	private class ObjectInfo
 	{
@@ -74,6 +73,16 @@ public class ItemsGenerator : MonoBehaviour
 	}
 
 #if UNITY_EDITOR
+	private void OnValidate()
+	{
+		_owner ??= transform.parent;
+		float sum = GetWeightSum();
+		foreach (ObjectInfo info in _spawnObjects)
+		{
+			info.Chance = info.Weight / sum;
+		}
+	}
+
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.cyan;
