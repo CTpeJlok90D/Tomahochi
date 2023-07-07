@@ -2,10 +2,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using Saving;
 using System.IO;
+using System;
 
 public enum Platform 
 {
@@ -58,7 +58,7 @@ public class Init : MonoBehaviour
 
     public void ShowRewardedAd(RewardHandler callback)
     {
-        string id = GUID.Generate().ToString();
+        string id = Guid.NewGuid().ToString();
 		_rewardDelates.Add(id, callback);
         ShowRewardedAd(id);
 	}

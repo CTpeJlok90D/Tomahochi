@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd31992d7934844cb8c22f87d9ca13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _game: {fileID: 0}
   _arrow: {fileID: 6327340844994574432, guid: 3ab489e18746ff540869976ee0f759b9, type: 3}
   _rigidbody2D: {fileID: 6254382861039931623}
   _sizeDiapason: {x: 1.1, y: 2.3}
@@ -319,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaecfb62cc506e541b144512ac4fad2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 3300982022366911384}
   _moveDirection: {x: 0, y: 1, z: 0}
   _player: {fileID: 2659951113816306562}
   _speedPerPlayerDistance:
@@ -403,15 +403,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6606584ab3f96459cb89a0e268b16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _miniGameView: {fileID: 8946544965827146501}
+  State: 0
   _loseWindow: {fileID: 0}
-  _spikeObject: {fileID: 0}
-  _scoreCaption: {fileID: 0}
-  _score: 0
-  _player: {fileID: 0}
-  _state: 0
   _joyRestorePerSecond: 1.5
   _xpPerSecond: 0.15
+  _score: 0
+  _scoreChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _spikeObject: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1001 &2146323713786786819
 PrefabInstance:
   m_ObjectHideFlags: 0

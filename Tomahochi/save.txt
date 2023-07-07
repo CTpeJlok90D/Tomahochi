@@ -6,7 +6,7 @@
     "WaterInStorage": "{\"_values\":[]}",
     "FurnitureList": "{\"_values\":[]}",
     "FurnitureInStorage": "{\"_values\":[]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":1000.0,\"GemsCount\":320.0,\"Food\":16.135757446289064,\"Water\":16.135757446289064,\"Joy\":16.135757446289064,\"Energy\":33.06903839111328,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Geovishap\",\"_pet\":{\"instanceID\":22982}}]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":1000.0,\"GemsCount\":320.0,\"Food\":15.78128433227539,\"Water\":15.78128433227539,\"Joy\":15.78128433227539,\"Energy\":32.8924446105957,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Geovishap\",\"_pet\":{\"instanceID\":20464}}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
     "MiniGamesRecords": "{\"_values\":[{\"Name\":\"\",\"Key\":3,\"Value\":23.0},{\"Name\":\"\",\"Key\":4,\"Value\":15.0}]}",
@@ -14,5 +14,5 @@
     "MoraCount": 7,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-05 13:45:22,828"
+    "LastLaunchTime": "2023-07-05 14:20:41,670"
 }

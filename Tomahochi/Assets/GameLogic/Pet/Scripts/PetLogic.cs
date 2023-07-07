@@ -27,7 +27,9 @@ namespace Pets
 		{
 			get 
 			{
-				_pet ??= Resources.Load<Pet>(SystemName);
+				if (_pet == null)
+					_pet = Resources.Load<Pet>(SystemName);
+
 				return _pet;
 			} 
 		}
@@ -41,7 +43,7 @@ namespace Pets
 		public bool IsSleeping() => string.IsNullOrEmpty(SleepingBedID) == false;
 		public int ElevateCost()
 		{
-			return _pet.ElevateMoraBaseCost + _pet.ElevateCostRise * ElevateCount;
+			return Pet.ElevateMoraBaseCost + Pet.ElevateCostRise * ElevateCount;
 		}
 		public void Elevate()
 		{
@@ -52,13 +54,13 @@ namespace Pets
 			PlayerDataContainer.MoraCount -= ElevateCost();
 			NeedEvelate = false;
 		}
-		public override int MoraStorage => _pet.BaseMoraStorage + _pet.MoraStorageExpandCount * (CurrentLevel / _pet.LevelsToMoraStorageExpand) + _pet.MoraStoragePerDuplicatBonus * DuplicatCount;
+		public override int MoraStorage => Pet.BaseMoraStorage + Pet.MoraStorageExpandCount * (CurrentLevel / Pet.LevelsToMoraStorageExpand) + Pet.MoraStoragePerDuplicatBonus * DuplicatCount;
 
-		public override int GemsStorage => _pet.BaseGemsStorage + _pet.GemsStorageExpandCount * (CurrentLevel / _pet.LevelsToGemsStorageExpand);
+		public override int GemsStorage => Pet.BaseGemsStorage + Pet.GemsStorageExpandCount * (CurrentLevel / Pet.LevelsToGemsStorageExpand);
 
-		public override float MoraPerSecond => (_pet.MoraPerSecond + _pet.MoraPerSecondDuplicatBonus * DuplicatCount);
+		public override float MoraPerSecond => (Pet.MoraPerSecond + Pet.MoraPerSecondDuplicatBonus * DuplicatCount);
 
-		public override float GemsPerSecond => (_pet.GemsPerSecond + _pet.GemsPerSecondDuplicatBonus * DuplicatCount);
+		public override float GemsPerSecond => (Pet.GemsPerSecond + Pet.GemsPerSecondDuplicatBonus * DuplicatCount);
 
 		public bool CanFeed(Food food)
 		{
@@ -104,7 +106,7 @@ namespace Pets
 			if (CanPlay())
 			{
 				GainXP(_pet.XpPerStroke);
-				Joy = Mathf.Clamp(Joy + _pet.JoyPerStroke, 0, 100);
+				Joy = Mathf.Clamp(Joy + Pet.JoyPerStroke, 0, 100);
 			}
 		}
 
@@ -119,30 +121,30 @@ namespace Pets
 
 		public void GainXP(float count)
 		{
-			if (CurrentLevel == _pet.MaxLevel || NeedEvelate)
+			if (CurrentLevel == Pet.MaxLevel || NeedEvelate)
 			{
 				return;
 			}
 
 			CurrentXP += count;
 
-			while (CurrentXP > _pet.XPToLevelUp)
+			while (CurrentXP > Pet.XPToLevelUp)
 			{
 				LevelUp();
-				CurrentXP -= _pet.XPToLevelUp;
+				CurrentXP -= Pet.XPToLevelUp;
 			}
 		}
 
 		public void LevelUp()
 		{
-			if (CurrentLevel == _pet.MaxLevel || NeedEvelate)
+			if (CurrentLevel == Pet.MaxLevel || NeedEvelate)
 			{
 				return;
 			}
 
 			CurrentLevel++;
-			GemsCount = Mathf.Clamp(GemsCount + _pet.GemsPerLevel, 0, GemsStorage);
-			if (CurrentLevel % _pet.EvelateEveryLevel == 0)
+			GemsCount = Mathf.Clamp(GemsCount + Pet.GemsPerLevel, 0, GemsStorage);
+			if (CurrentLevel % Pet.EvelateEveryLevel == 0)
 			{
 				NeedEvelate = true;
 			}
@@ -176,19 +178,19 @@ namespace Pets
 				return;
 			}
 
-			Joy = Mathf.Clamp(Joy - _pet.JoyFallRate * seconds, 0, 100);
-			Food = Mathf.Clamp(Food - _pet.HungerFallRate * seconds, 0, 100);
-			Water = Mathf.Clamp(Water - _pet.ThiestFallRate * seconds, 0, 100);
+			Joy = Mathf.Clamp(Joy - Pet.JoyFallRate * seconds, 0, 100);
+			Food = Mathf.Clamp(Food - Pet.HungerFallRate * seconds, 0, 100);
+			Water = Mathf.Clamp(Water - Pet.ThiestFallRate * seconds, 0, 100);
 			if (IsSleeping() == false)
 			{
-				Energy = Mathf.Clamp(Energy - _pet.FatigueFallRate * seconds, 0, 100);
+				Energy = Mathf.Clamp(Energy - Pet.FatigueFallRate * seconds, 0, 100);
 			}
 			else
 			{
 				float oldFatigue = Energy;
-				Energy = Mathf.Clamp(Energy + _pet.FatigueUpRate * seconds, 0, 100);
-				float sleepTime = (Energy - oldFatigue) / _pet.FatigueUpRate;
-				GainXP(sleepTime * _pet.XpWhileSleepRate);
+				Energy = Mathf.Clamp(Energy + Pet.FatigueUpRate * seconds, 0, 100);
+				float sleepTime = (Energy - oldFatigue) / Pet.FatigueUpRate;
+				GainXP(sleepTime * Pet.XpWhileSleepRate);
 				if (Energy == 100 || Joy == 0 || Water == 0 || Food == 0)
 				{
 					SleepingBedID = string.Empty;
