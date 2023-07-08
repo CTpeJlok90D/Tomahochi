@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964f0823b96e3ba4eb02c2b6b2c3cc81, type: 3}
+  m_Name: Ferret in mask
+  m_EditorClassIdentifier: 
+  _moraPerHour: 1000
+  _levelsToMoraPerHourIncrease: 1
+  _moraPerHourIncrease: 1
+  _baseMoraStorage: 1000
+  _moraStorageExpandCount: 500
+  _levelsToMoraStorageExpand: 10
+  _gemsPerHour: 400
+  _gemsPerHourIncreaseCount: 1
+  _levelsToGemsPerHourIncrease: 5
+  _gemsPerLevel: 60
+  _baseGemsStorage: 700
+  _levelsToExpandGemsStorage: 10
+  _gemsStorageExpandCount: 500
+  _viewName: Ferret in mask
+  _viewSprite: {fileID: 32874508, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
+  _starCount: 4
+  _viewPrefab: {fileID: 210519590430419121, guid: a74bdf156466c4f42a301072a43dfa97,
+    type: 3}
+  _maxElevateCount: 4
+  _elevateEveryLevel: 10
+  _elevateMoraCost: 200
+  _elevateCostRise: 100
+  _xPToLevelUp: 1000
+  _xpPerStroke: 10
+  _joyPerStroke: 10
+  _joyTime: 6
+  _hungerTime: 8
+  _thirstTime: 6
+  _fatigueTime: 12
+  _sleepTime: 8
+  _xpWhileSleepPerHous: 12.5
+  _maxDuplicatCount: 6
+  _moraPerDuplicatBonus: 1200
+  _moraStoragePerDuplicantBonus: 600
+  _gemsPerHourDuplicatBonus: 300
+  _gemsStoragePerDuplicantBonus: 500

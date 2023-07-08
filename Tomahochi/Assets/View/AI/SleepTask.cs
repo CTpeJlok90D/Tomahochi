@@ -1,12 +1,11 @@
 using AICore;
-using Pets;
 using UnityEngine;
 
 public class SleepTask : Task
 {
 	[SerializeField] private PetView _petView;
 	[SerializeField] private Brain _brain;
-	[SerializeField] private SleepSpotView _sleepPlace;
+	private SleepSpotView _sleepPlace;
 	public override void OnBegin()
 	{
 		base.OnBegin();

@@ -12,24 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964f0823b96e3ba4eb02c2b6b2c3cc81, type: 3}
   m_Name: Geovishap
   m_EditorClassIdentifier: 
-  _viewName: Geovishap
-  _viewSprite: {fileID: 981615501, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
-  _starCount: 5
-  _viewPrefab: {fileID: 3032150570510147557, guid: fef694a4d378ff94aa92664903391b67,
-    type: 3}
-  _maxElevateCount: 5
-  _elevateEveryLevel: 10
-  _xPToLevelUp: 1000
-  _xpPerStroke: 10
-  _joyPerStroke: 10
-  _joyTime: 6
-  _hungerTime: 6
-  _thirstTime: 6
-  _fatigueTime: 12
-  _sleepTime: 8
-  _xpWhileSleepPerHous: 12.5
-  _pollutuionTime: 12
-  _washRatePerClick: 5
   _moraPerHour: 1000
   _levelsToMoraPerHourIncrease: 1
   _moraPerHourIncrease: 1
@@ -43,6 +25,24 @@ MonoBehaviour:
   _baseGemsStorage: 320
   _levelsToExpandGemsStorage: 10
   _gemsStorageExpandCount: 200
+  _viewName: Geovishap
+  _viewSprite: {fileID: 981615501, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
+  _starCount: 5
+  _viewPrefab: {fileID: 5648787689185342838, guid: fef694a4d378ff94aa92664903391b67,
+    type: 3}
+  _maxElevateCount: 5
+  _elevateEveryLevel: 10
+  _elevateMoraCost: 200
+  _elevateCostRise: 100
+  _xPToLevelUp: 1000
+  _xpPerStroke: 10
+  _joyPerStroke: 10
+  _joyTime: 6
+  _hungerTime: 6
+  _thirstTime: 6
+  _fatigueTime: 12
+  _sleepTime: 8
+  _xpWhileSleepPerHous: 12.5
   _maxDuplicatCount: 6
   _moraPerDuplicatBonus: 1200
   _moraStoragePerDuplicantBonus: 600

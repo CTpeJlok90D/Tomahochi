@@ -10,7 +10,7 @@ public class Selecteble : MonoBehaviour
 	[SerializeField] private bool _deleselectOnRepeatClick = false;
 	[SerializeField] private bool _disableCameraMovement = false;
 	[SerializeField] private bool _canSelectOtherWhileSelected = true;
-	[SerializeField] private List<UIMode> _canBeSelectedInModes = new();
+	[SerializeField] private List<UIMode> _canBeSelectedInModes = new() { UIMode.Defualt};
 
 	public delegate void SelectedObjectChangedHandler(Selecteble selecteble);
 	public delegate void DeSelectedObjectChangedHandler();
