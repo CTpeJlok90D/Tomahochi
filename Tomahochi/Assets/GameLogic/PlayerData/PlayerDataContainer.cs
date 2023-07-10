@@ -6,13 +6,13 @@ using Pets;
 using System.Linq;
 using UnityExtentions;
 using System.Data;
+using UnityEngine.SceneManagement;
 
 namespace Saving
 {
 	public class PlayerDataContainer : Init
 	{
 		public static int PlayingPetIndex = 0;
-
 		[Space(50)]
 		[Header("PlayerDataContainer")]
 		[SerializeField] private int _secondsPassed = 0;
@@ -26,7 +26,7 @@ namespace Saving
 		[SerializeField] private UnityDictionarity<int, float> _minigameRecords = new();
 		[SerializeField] private SerializedList<PetSaveInfo> _unlockedPets = new();
 		[SerializeField] private Home _home = new();
-
+		
 
 		private ReactiveVariable<int> _gemsCount = new(0);
 		private ReactiveVariable<int> _moraCount = new(0);
@@ -38,12 +38,14 @@ namespace Saving
 		private UnityEvent<Storageble, int> _ingridiendCountChanged = new();
 		private UnityEvent<Storageble, int> _waterCountChanged = new();
 		private UnityEvent<Storageble, int> _furnitureOnStorageCountChanged = new();
+		private UnityEvent _loaded = new();
 
 		public static UnityEvent<PetSaveInfo> UnlockedNewPet => instance._unlockedNewPet;
 		public static UnityEvent<Storageble, int> FoodCountChanged => instance._foodCountChanged;
 		public static UnityEvent<Storageble, int> WaterCountChanged => instance._waterCountChanged;
 		public static UnityEvent<Storageble, int> IngridiendCountChanged => instance._ingridiendCountChanged;
 		public static UnityEvent<Storageble, int> FurnitureOnStarageCountChanged => _instance._furnitureOnStorageCountChanged;
+		public static UnityEvent Loaded => _instance._loaded;
 		public static PetSaveInfo[] UnlockedPets => _instance._unlockedPets.List.ToArray();
 		public static bool HaveInstance => _instance != null;
 
@@ -96,6 +98,12 @@ namespace Saving
 			}
 			Pet.FallRatePetsByTime(UnlockedPets, _secondsPassed);
 		}
+
+		protected void Start()
+		{
+			_loaded.Invoke();
+		}
+
 		private void OnDisable()
 		{
 			if (HaveInstance == false)
@@ -104,6 +112,12 @@ namespace Saving
 			}
 			SavePlayerData();
 		}
+
+		private void OnSceneLoad()
+		{
+
+		}
+
 		public static int GemsCount
 		{
 			get
@@ -363,7 +377,7 @@ namespace Saving
 		}
 
 
-		private static void SavePlayerData()
+		public static void SavePlayerData()
 		{
 			if (instance._isLoaded == false)
 			{

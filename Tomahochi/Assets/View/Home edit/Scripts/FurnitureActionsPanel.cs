@@ -18,6 +18,7 @@ public class FurnitureActionsPanel : MonoBehaviour
 		Selecteble.SelectObjectChange += OnSelectObject;
 		_moveOnStorageButton.onClick.AddListener(MoveOnStorage);
 		_moveFurnitureButton.onClick.AddListener(MoveFurnuture);
+		UI.ModeChanged += OnUIModeChange;
 	}
 
 	private void OnDisable()
@@ -25,6 +26,15 @@ public class FurnitureActionsPanel : MonoBehaviour
 		Selecteble.SelectObjectChange -= OnSelectObject;
 		_moveOnStorageButton.onClick.AddListener(MoveOnStorage);
 		_moveFurnitureButton.onClick.AddListener(MoveFurnuture);
+		UI.ModeChanged -= OnUIModeChange;
+	}
+
+	private void OnUIModeChange(UIMode mode)
+	{
+		if (mode != UIMode.EditRoomMode)
+		{
+			gameObject.SetActive(false);
+		}
 	}
 
 	private void MoveOnStorage()

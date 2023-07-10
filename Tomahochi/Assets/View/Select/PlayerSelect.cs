@@ -8,7 +8,7 @@ public class PlayerSelect : MonoBehaviour
 	[SerializeField] private GraphicRaycaster _raycaster;
 	private void Update()
 	{
-		if (Input.GetMouseButtonUp(0) == false)
+		if (Input.GetMouseButtonDown(0) == false)
 		{
 			return;
 		}

@@ -52,6 +52,7 @@ namespace Pets
 				return;
 			}
 			PlayerDataContainer.MoraCount -= ElevateCost();
+			ElevateCount++;
 			NeedEvelate = false;
 		}
 		public override int MoraStorage => Pet.BaseMoraStorage + Pet.MoraStorageExpandCount * (CurrentLevel / Pet.LevelsToMoraStorageExpand) + Pet.MoraStoragePerDuplicatBonus * DuplicatCount;

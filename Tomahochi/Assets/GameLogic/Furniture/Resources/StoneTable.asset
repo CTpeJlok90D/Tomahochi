@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4808f21b1740247b714ccbd0174a37, type: 3}
+  m_Name: StoneTable
+  m_EditorClassIdentifier: 
+  _viewName: Stone table
+  _viewSprite: {fileID: 21300000, guid: 3ee90c32dee059143b10f84e84d942a8, type: 3}
+  _viewPrefab: {fileID: 4902236127516737419, guid: a2d4439f09294184490301b7e2722638,
+    type: 3}
+  _buildCheckPoints:
+  - {x: 0.575, y: -0.5}
+  - {x: -0.575, y: -0.5}

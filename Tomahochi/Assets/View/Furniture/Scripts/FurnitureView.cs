@@ -1,16 +1,12 @@
 using Saving;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class FurnitureView : MonoBehaviour
 {
-	[SerializeField] private FurnitureInfo _info;
-	private Furniture _source;
-	public Furniture Source => _source;
-	public FurnitureInfo Info => _info;
 	private static Dictionary<string, FurnitureView> _byID = new();
-
 	public static Dictionary<string, FurnitureView> ByID => new(_byID);
 
 	public static FurnitureView CreatyByFurniture(Furniture furniture, Transform parent = null)
@@ -23,8 +19,37 @@ public class FurnitureView : MonoBehaviour
 		instance.transform.localPosition = furniture.Position;
 
 		_byID.Add(furniture.ID, instance);
+		instance._created?.Invoke();
 		return instance;
 	}
+
+	private void OnEnable()
+	{
+		SceneManager.sceneUnloaded += OnSceneLoad;
+	}
+
+	private void OnDisable()
+	{
+		SceneManager.sceneUnloaded -= OnSceneLoad;
+	}
+
+	public static void OnSceneLoad(Scene oldScene)
+	{
+		_byID.Clear();
+	}
+
+	[SerializeField] private FurnitureInfo _info;
+
+	private Furniture _source;
+	private event Action _created;
+
+	public event Action Created
+	{
+		add => _created += value;
+		remove => _created -= value;
+	}
+	public Furniture Source => _source;
+	public FurnitureInfo Info => _info;
 
 	public void MoveOnStorage()
 	{

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4808f21b1740247b714ccbd0174a37, type: 3}
+  m_Name: Vase 1
+  m_EditorClassIdentifier: 
+  _viewName: Vase
+  _viewSprite: {fileID: -1378431583, guid: 33f4316b13293864a8639908c183a0b7, type: 3}
+  _viewPrefab: {fileID: 364871927667607767, guid: 12634dc070f089f4288eef5b69638ae5,
+    type: 3}
+  _buildCheckPoints:
+  - {x: 0.1, y: -1.24}

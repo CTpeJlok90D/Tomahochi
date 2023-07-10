@@ -1,3 +1,4 @@
+using Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class LoadSceneButton : MonoBehaviour
 
 	private void OnClick()
 	{
+		PlayerDataContainer.SavePlayerData();
 		SceneManager.LoadSceneAsync(SceneNumber);
 		_loadSceneIndicator.SetActive(true);
 	}

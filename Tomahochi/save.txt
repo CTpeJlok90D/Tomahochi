@@ -4,15 +4,15 @@
     "IngridientsInStorage": "{\"_values\":[]}",
     "FoodCookCount": "{\"_values\":[]}",
     "WaterInStorage": "{\"_values\":[]}",
-    "FurnitureList": "{\"_values\":[{\"Name\":\"\",\"Key\":\"08c46eb3-b602-40a3-a4be-f9e127b7510d\",\"Value\":{\"_id\":\"08c46eb3-b602-40a3-a4be-f9e127b7510d\",\"Position\":{\"x\":-14.3463134765625,\"y\":-2.386186361312866},\"PlaceDate\":\"\",\"SystemName\":\"Bed\"}}]}",
-    "FurnitureInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Bed\",\"Value\":98}]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":941.2315063476563,\"GemsCount\":371.72802734375,\"Food\":38.12294006347656,\"Water\":34.297157287597659,\"Joy\":34.297157287597659,\"Energy\":42.169471740722659,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Jadeplume terrorshroom\",\"_pet\":{\"instanceID\":22288}},{\"MoraCount\":936.3182373046875,\"GemsCount\":172.2613983154297,\"Food\":34.4481086730957,\"Water\":34.38227081298828,\"Joy\":34.38227081298828,\"Energy\":42.21006774902344,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret Boot\",\"_pet\":{\"instanceID\":22286}},{\"MoraCount\":935.9769897460938,\"GemsCount\":374.4391784667969,\"Food\":38.278472900390628,\"Water\":34.388160705566409,\"Joy\":34.388160705566409,\"Energy\":42.21273422241211,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret in mask\",\"_pet\":{\"instanceID\":22284}},{\"MoraCount\":935.5760498046875,\"GemsCount\":374.2787780761719,\"Food\":38.28384017944336,\"Water\":34.395023345947269,\"Joy\":34.395023345947269,\"Energy\":42.21582794189453,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret lilac lightning\",\"_pet\":{\"instanceID\":22302}},{\"MoraCount\":935.1030883789063,\"GemsCount\":374.0896301269531,\"Food\":38.29022979736328,\"Water\":34.403114318847659,\"Joy\":34.403114318847659,\"Energy\":42.21942901611328,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret red tailed\",\"_pet\":{\"instanceID\":22292}},{\"MoraCount\":934.6874389648438,\"GemsCount\":373.92333984375,\"Food\":38.29584503173828,\"Water\":34.410213470458987,\"Joy\":34.410213470458987,\"Energy\":42.222557067871097,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":0.0,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret Snow\",\"_pet\":{\"instanceID\":22288}}]}",
+    "FurnitureList": "{\"_values\":[]}",
+    "FurnitureInStorage": "{\"_values\":[]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":485.865234375,\"GemsCount\":194.97976684570313,\"Food\":100.0,\"Water\":100.0,\"Joy\":100.0,\"Energy\":100.0,\"SleepingBedID\":\"\",\"ElevateCount\":2,\"NeedEvelate\":false,\"CurrentXP\":50.0,\"CurrentLevel\":40,\"DuplicatCount\":0,\"SystemName\":\"Ferret Boot\",\"_pet\":{\"instanceID\":22294}}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
     "MiniGamesRecords": "{\"_values\":[]}",
-    "GemsCount": 0,
-    "MoraCount": 0,
+    "GemsCount": 2377,
+    "MoraCount": 999192,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-08 11:08:20,885"
+    "LastLaunchTime": "2023-07-10 19:06:41,413"
 }

@@ -99,6 +99,7 @@ public class PetUI : MonoBehaviour
 		foreach (Image image in _backGroundStars)
 		{
 			image.gameObject.SetActive(starNumber <= _pet.MaxElevateCount);
+			_starsImages[starNumber - 1].gameObject.SetActive(starNumber <= _pet.MaxElevateCount);
 			starNumber++;
 		}
 		starNumber = 1;

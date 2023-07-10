@@ -68,14 +68,14 @@ public class BuildPreview : MonoBehaviour
 		Error,
 		InProgress
 	}
-
-	private Vector2[] points = new Vector2[0];
+#if UNITY_EDITOR
 	private void OnDrawGizmos()
 	{
-		foreach (Vector2 point in points)
+		foreach (Vector2 point in _buildCheckPoints)
 		{
 			Gizmos.color = Color.red;
 			Gizmos.DrawSphere((Vector2)transform.position + point, 0.25f);
 		}
 	}
+#endif
 }
