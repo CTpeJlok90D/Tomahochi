@@ -21,30 +21,28 @@ public class PetList : MonoBehaviour
 		}
 	}
 
+	public void Show(PetSaveInfo[] list)
+	{
+		ShowPets(list);
+		gameObject.SetActive(true);
+	}
+
 	public void Show()
 	{
+		ShowPets(PlayerDataContainer.UnlockedPets);
 		gameObject.SetActive(true);
 	}
 
 	public void Hide()
 	{
+		Clear();
 		gameObject.SetActive(false);
 	}
 
-	private void OnEnable()
-	{
-		ShowPets();
-	}
-
-	private void OnDisable()
+	private void ShowPets(PetSaveInfo[] petList)
 	{
 		Clear();
-	}
-
-	private void ShowPets()
-	{
-		Clear();
-		foreach (PetSaveInfo petInfo in PlayerDataContainer.UnlockedPets)
+		foreach (PetSaveInfo petInfo in petList)
 		{
 		 	PetListElement element = Instantiate(_petListElementPrefab, _content).Init(petInfo);
 			element.OnPetClick += OnPetClick;

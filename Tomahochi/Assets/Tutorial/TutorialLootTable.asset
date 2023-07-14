@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d9071f34c015e94eb9df3792743a041, type: 3}
+  m_Name: TutorialLootTable
+  m_EditorClassIdentifier: 
+  _4StarPets: []
+  _4StartShopItems:
+  - {fileID: 11400000, guid: 4873e028182757a45a6e4c502384dde6, type: 2}
+  _5StarPets: []
+  _foodAndWater:
+  - {fileID: 11400000, guid: 86a093c9e0b67494882303f92ad12849, type: 2}
+  _mora: {fileID: 11400000, guid: f127bced462e31b44afe83a546dc0c31, type: 2}
+  _foodWhaterChance: 30
+  _rareChance: 7
+  _legendaryChance: 0

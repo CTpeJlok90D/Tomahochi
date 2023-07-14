@@ -26,7 +26,7 @@ MonoBehaviour:
   _levelsToExpandGemsStorage: 10
   _gemsStorageExpandCount: 500
   _viewName: Bird
-  _viewSprite: {fileID: -392518363, guid: a4b3b2de622f25f4eba6da34b14e4775, type: 3}
+  _viewSprite: {fileID: -392518363, guid: 92ed1074a1666a24ba5b451f7ead2a38, type: 3}
   _starCount: 5
   _viewPrefab: {fileID: 7411247320986021989, guid: 9dbcf5b00cc4630489d9b949bec44b8a,
     type: 3}

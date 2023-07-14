@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CookMiniGame : MonoBehaviour
 {
+	public float TimeScale = 1.0f;
 	[SerializeField] private float _timeInterval = 5f;
 	[SerializeField] private Vector2 _acceptebleTimeInterval = new(1,2);
 	[SerializeField] private float _currentTime = 0;
@@ -47,7 +48,7 @@ public class CookMiniGame : MonoBehaviour
 		_currentTime = 0;
 		while (_currentTime < _timeInterval)
 		{
-			_currentTime += Time.deltaTime;
+			_currentTime += Time.deltaTime * TimeScale;
 			yield return null;
 		}
 		OnTimeEnd();

@@ -1,18 +1,18 @@
 {
-    "Saves": "",
+    "Saves": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Tutorial\",\"Value\":\"{\\\"Value\\\":2}\"}]}",
     "FoodInStorage": "{\"_values\":[]}",
-    "IngridientsInStorage": "{\"_values\":[]}",
-    "FoodCookCount": "{\"_values\":[]}",
+    "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Egg\",\"Value\":0}]}",
+    "FoodCookCount": "{\"_values\":[{\"Name\":\"\",\"Key\":\"TaiwaneseFriedEggsFood\",\"Value\":1}]}",
     "WaterInStorage": "{\"_values\":[]}",
     "FurnitureList": "{\"_values\":[]}",
     "FurnitureInStorage": "{\"_values\":[]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":485.865234375,\"GemsCount\":194.97976684570313,\"Food\":100.0,\"Water\":100.0,\"Joy\":100.0,\"Energy\":100.0,\"SleepingBedID\":\"\",\"ElevateCount\":2,\"NeedEvelate\":false,\"CurrentXP\":50.0,\"CurrentLevel\":40,\"DuplicatCount\":0,\"SystemName\":\"Ferret Boot\",\"_pet\":{\"instanceID\":22294}}]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":6.372596740722656,\"GemsCount\":2.748973846435547,\"Food\":54.873111724853519,\"Water\":49.83560562133789,\"Joy\":99.99038696289063,\"Energy\":49.924068450927737,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":26.045812606811525,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret in mask\",\"_pet\":{\"instanceID\":22206}}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
     "MiniGamesRecords": "{\"_values\":[]}",
-    "GemsCount": 2377,
-    "MoraCount": 999192,
+    "GemsCount": 2000,
+    "MoraCount": 1600,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-10 19:06:41,413"
+    "LastLaunchTime": "2023-07-14 12:59:05,827"
 }

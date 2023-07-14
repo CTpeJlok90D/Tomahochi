@@ -12,6 +12,7 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 	[SerializeField] private float _moveSensivity = 0.01f;
 	[SerializeField] private Vector2 _cameraScrollSizeBorders;
 	[SerializeField] private float _zCameraLevel = -50;
+	[SerializeField] private bool _singletone = true;
 	private Coroutine _moveCoroutine;
 	public bool ThisCameraIsActive => (_brain.ActiveVirtualCamera as CinemachineVirtualCamera) == _camera;
 
@@ -20,6 +21,11 @@ public class MoveCameraPanel : MonoBehaviour, IPointerUpHandler, IPointerDownHan
 
 	private void Awake()
 	{
+		if (_singletone == false)
+		{
+			return;
+		}
+
 		if (_instance != null && _instance != this)
 		{
 			Destroy(this.gameObject);

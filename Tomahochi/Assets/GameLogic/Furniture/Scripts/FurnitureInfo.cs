@@ -14,6 +14,7 @@ public class FurnitureInfo : Storageble
 	public override void AddOnStorage(int count)
 	{
 		PlayerDataContainer.AddFurnitureInStorage(name, count);
+		Debug.Log("Added");
 	}
 
 	public override int GetStorageCount()

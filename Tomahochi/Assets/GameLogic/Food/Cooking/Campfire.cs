@@ -1,5 +1,4 @@
 using Saving;
-using UnityEditor;
 using UnityEngine;
 
 public class Campfire : MonoBehaviour
@@ -8,8 +7,8 @@ public class Campfire : MonoBehaviour
 	[SerializeField] private Recipe _selectedRecipe;
 	public delegate void RecipeSelectedDelegate(Recipe recipe);
 	private event RecipeSelectedDelegate _selectedRecipeChanged;
-
 	private bool _isCooking = false;
+
 
 	public bool IsCooking => _isCooking;
 	public Recipe SelectedRecipe => _selectedRecipe;

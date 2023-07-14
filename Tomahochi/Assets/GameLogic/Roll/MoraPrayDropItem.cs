@@ -12,6 +12,8 @@ public class MoraPrayDropItem : ScriptableObject, ILootDrop
 
 	public int MoraCount => _moraCount;
 
+	public string ViewCation => _moraCount.ToString();
+
 	public void ApplyLoot()
 	{
 		_moraCount = Random.Range(_moraCountRange[0], _moraCountRange[1]+1);

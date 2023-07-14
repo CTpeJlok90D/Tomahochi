@@ -28,14 +28,10 @@ public class PetListElement : MonoBehaviour, IPointerClickHandler
 		}
 	}
 
-	private void Awake()
-	{
-		nameFormat = _nameCaption.text;
-	}
-
 	public PetListElement Init(PetSaveInfo info)
 	{
 		Pet pet = info.Pet;
+		nameFormat = _nameCaption.text;
 
 		_info = info;
 		_nameCaption.text = string.Format(nameFormat, pet.name);

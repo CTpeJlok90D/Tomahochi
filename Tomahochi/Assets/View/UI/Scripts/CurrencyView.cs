@@ -7,10 +7,11 @@ public class CurrencyView : MonoBehaviour
 	[SerializeField] private TMP_Text _text;
 	[SerializeField] private Currency _currency;
 	private string _textFormat;
+	private bool _formatLoaded;
 
 	private void Start()
 	{
-		_textFormat = _text.text;
+		LoadFormat();
 		switch (_currency)
 		{
 			case Currency.Mora:
@@ -36,8 +37,19 @@ public class CurrencyView : MonoBehaviour
 		}
 	}
 
+	private void LoadFormat()
+	{
+		if (_formatLoaded)
+		{
+			return;
+		}
+		_textFormat = _text.text;
+		_formatLoaded = true;
+	}
+
 	private void OnValueChange(int value)
 	{
+		LoadFormat();
 		_text.text = string.Format(_textFormat, value);
 	}
 

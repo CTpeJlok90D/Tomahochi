@@ -79,7 +79,8 @@ namespace Pets
 		public float GemsPerSecondDuplicatBonus => (float)_gemsPerHourDuplicatBonus / SECONDS_IN_HOUR;
 
 		public int MaxLevel => _maxElevateCount * _elevateEveryLevel;
-		
+
+		public string ViewCation => ViewName;
 
 		public static void FallRatePetsByTime(IEnumerable<PetSaveInfo> petList, float seconds)
 		{

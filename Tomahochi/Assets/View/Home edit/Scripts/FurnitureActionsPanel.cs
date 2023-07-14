@@ -82,6 +82,11 @@ public class FurnitureActionsPanel : MonoBehaviour
 	{
 		if (selected != null && selected.TryGetComponent(out FurnitureView view))
 		{
+			if (selected.TryGetComponent(out SleepSpotView sleepspot) && sleepspot.SleepingPet != null)
+			{
+				_panel.SetActive(false);
+				return;
+			}
 			_panel.transform.position = (Vector2)Input.mousePosition + _panelOffect;
 			_selectedFurnitureView = view;
 			_panel.SetActive(true);

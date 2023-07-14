@@ -12,6 +12,7 @@ public class RecipeList : MonoBehaviour
 	[SerializeField] private GameObject _recipeListUIParent;
 	[SerializeField] private Button _autoCookButton;
 	[SerializeField] private Button _handCookButton;
+	[SerializeField] private Recipe[] _recipes;
 
 	private void OnEnable()
 	{
@@ -98,8 +99,7 @@ public class RecipeList : MonoBehaviour
 			Destroy(child.gameObject);
 		}
 
-		Recipe[] recipes = Resources.LoadAll<Recipe>("");
-		foreach (Recipe recipe in recipes)
+		foreach (Recipe recipe in _recipes)
 		{
 			Instantiate(_elementPrefab, _content.transform).Init(recipe, campfire);
 		}

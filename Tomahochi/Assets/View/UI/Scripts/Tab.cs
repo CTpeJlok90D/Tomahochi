@@ -9,6 +9,5 @@ public class Tab : MonoBehaviour
 			transform.gameObject.SetActive(false);
 		}
 		gameObject.SetActive(true);
-
 	}
 }

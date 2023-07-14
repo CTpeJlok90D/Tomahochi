@@ -6,17 +6,16 @@ using Pets;
 using System.Linq;
 using UnityExtentions;
 using System.Data;
-using UnityEngine.SceneManagement;
 
 namespace Saving
 {
 	public class PlayerDataContainer : Init
 	{
 		public static int PlayingPetIndex = 0;
+		public const int PetCountPerRoom = 4;
 		[Space(50)]
 		[Header("PlayerDataContainer")]
 		[SerializeField] private int _secondsPassed = 0;
-		[SerializeField] private Pet _startPet;
 		[SerializeField] private UnityDictionarity<string, int> _foodInStorage = new();
 		[SerializeField] private UnityDictionarity<string, int> _foodCookCount = new();
 		[SerializeField] private UnityDictionarity<string, int> _ingridiendsInStorage = new();
@@ -307,6 +306,8 @@ namespace Saving
 		public static void RemoveFurniture(Furniture furniture)
 		{
 			_instance._furnitureById.Remove(furniture.ID);
+			FurnitureInfo info = Resources.Load<FurnitureInfo>(furniture.SystemName);
+			instance._furnitureOnStorageCountChanged.Invoke(info, GetFurnitureCountOnStorage(furniture.SystemName));
 		}
 		public static void AddFurnitureInStorage(string systemName, int count)
 		{
@@ -330,7 +331,7 @@ namespace Saving
 				_instance._furnitureInStorage.Remove(systemName);
 			}
 			FurnitureInfo info = Resources.Load<FurnitureInfo>(systemName);
-			_instance._furnitureOnStorageCountChanged?.Invoke(info, GetFurnitureCountOnStorage(systemName));
+			_instance._furnitureOnStorageCountChanged.Invoke(info, GetFurnitureCountOnStorage(systemName));
 		}
 		public static int GetFurnitureCountOnStorage(string systemName)
 		{
@@ -376,7 +377,10 @@ namespace Saving
 			return instance._minigameRecords[miniGame];
 		}
 
-
+		public static void ClearPetList()
+		{
+			instance._unlockedPets = StartPetList;
+		}
 		public static void SavePlayerData()
 		{
 			if (instance._isLoaded == false)
@@ -434,6 +438,19 @@ namespace Saving
 			instance._isLoaded = true;
 		}
 
+		public static void LoadDefualts()
+		{
+			instance._foodInStorage = new();
+			instance._waterInStorage = new();
+			instance._ingridiendsInStorage = new();
+			instance._foodCookCount = new();
+			instance._furnitureById = new();
+			instance._furnitureInStorage = new();
+			instance._home = new();
+			instance._unlockedPets = StartPetList;
+			instance._minigameRecords = new();
+		}
+
 		private static SerializedList<PetSaveInfo> StartPetList
 		{
 			get
@@ -441,9 +458,6 @@ namespace Saving
 				return new SerializedList<PetSaveInfo>()
 				{
 					List = new()
-					{
-						new PetSaveInfo(_instance._startPet)
-					}
 				};
 			}
 		}

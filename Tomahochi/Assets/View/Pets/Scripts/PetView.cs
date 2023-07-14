@@ -36,27 +36,42 @@ public class PetView : MonoBehaviour
 	public void LaySleep(SleepSpotView sleepSpot)
 	{
 		Factor factor = new("Sleep", sleepSpot);
+		_agent.enabled = false;
 		_brain.AddFactor(factor);
+	}
+
+	private void Awake()
+	{
+		_petViewByName.Clear();
 	}
 
 	private void Start()
 	{
-		_petViewByName.Clear();
 		_petInfo = PlayerDataContainer.PetInfoBySystemName(_pet.name);
 		_petViewByName.Add(PetInfo.Pet.name, this);
 
 		if (_petInfo.IsSleeping())
 		{
-			SleepSpotView spot = FurnitureView.ByID[_petInfo.SleepingBedID].GetComponent<SleepSpotView>();
+			FurnitureView view = FurnitureView.ByID[_petInfo.SleepingBedID];
+			view.MovedOnStorage += OnFurnutureDestroy;
+			SleepSpotView spot = view.GetComponent<SleepSpotView>();
 			_agent.Warp(spot.SleepTransform.position);
 			LaySleep(spot);
 		}
+
+		_agent.updateRotation = false;
+		_view.transform.localEulerAngles = new Vector3(90,0,0);
+	}
+
+	private void OnFurnutureDestroy()
+	{
+		_petInfo.SleepingBedID = string.Empty;
 	}
 
 	private void LateUpdate()
 	{
 		_animator.SetBool(WALK_PARAMETR_NAME, InMoving);
-		_animator.SetBool(SLEEPING_PARAMERT_NAME, InMoving == false && _petInfo.IsSleeping());
+		_animator.SetBool(SLEEPING_PARAMERT_NAME, _petInfo.IsSleeping());
 
 		if (InMoving)
 		{

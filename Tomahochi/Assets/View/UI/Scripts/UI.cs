@@ -17,6 +17,7 @@ public class UI : MonoBehaviour
 		add => _instance._modeChanged += value;
 		remove => _instance._modeChanged -= value;
 	}
+
 	public static UIMode Mode
 	{
 		get
@@ -42,6 +43,7 @@ public class UI : MonoBehaviour
 	public static PetUI PetUI => _instance._petUI;
 	public static RecipeList RecipeList => _instance._recipeList;
 	public static bool HaveInstance => _instance != null;
+
 	private void Awake()
 	{
 #if UNITY_EDITOR

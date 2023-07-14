@@ -13,16 +13,45 @@ MonoBehaviour:
   m_Name: DefualtLootTable
   m_EditorClassIdentifier: 
   _4StarPets:
-  - {fileID: 11400000, guid: 47d73b4bf22e64d4bbd0da02020631fd, type: 2}
+  - {fileID: 11400000, guid: fe7333fef0e91c041b983cd5f4062460, type: 2}
+  - {fileID: 11400000, guid: 14533ff6058424d46a2fbca2f4cea766, type: 2}
+  - {fileID: 11400000, guid: 0360d8f09682522449a49d007c485482, type: 2}
+  - {fileID: 11400000, guid: 189dcafe6c8158c4a9fe33a2426e65bf, type: 2}
+  - {fileID: 11400000, guid: 4dc70af920300bc4c821e73be23bacf5, type: 2}
   _4StartShopItems:
+  - {fileID: 11400000, guid: e09e70fae22d7f440b166ce260796edc, type: 2}
   - {fileID: 11400000, guid: 4873e028182757a45a6e4c502384dde6, type: 2}
+  - {fileID: 11400000, guid: a7c71a55e5f5f1f4d922b64abada06cf, type: 2}
+  - {fileID: 11400000, guid: 15d29600c15f4f4468a018b116bdeb8d, type: 2}
+  - {fileID: 11400000, guid: 1c42427ffffda02478bb328477ba5e67, type: 2}
+  - {fileID: 11400000, guid: 61d7014a4839a8c47a0224264fc1e4b5, type: 2}
+  - {fileID: 11400000, guid: 0d147755f9c6c784cbdfbf9996ad7d16, type: 2}
+  - {fileID: 11400000, guid: 8a3d783ff9540984b9a97ddac3c8641c, type: 2}
+  - {fileID: 11400000, guid: a057378e28947e24191218e60bf1f358, type: 2}
+  - {fileID: 11400000, guid: b77fcfe6e65a11d4a947b0c99c1adf67, type: 2}
+  - {fileID: 11400000, guid: 7d0620d2240eb5540abcd6ee0f901c0d, type: 2}
+  - {fileID: 11400000, guid: 8bc7109cd9553df4583fff345fa21f70, type: 2}
+  - {fileID: 11400000, guid: 7ed8d75a8fb94d843bc9bfe59e845f97, type: 2}
+  - {fileID: 11400000, guid: 2cfaca5419ac16e4fa1dbc6d7dbfcac8, type: 2}
+  - {fileID: 11400000, guid: 94ef9f8f6c38d6f4f947991ac6166e0c, type: 2}
+  - {fileID: 11400000, guid: 74840fcea2c274a4c8e132cd83381241, type: 2}
+  - {fileID: 11400000, guid: 5621f9215bdfc7c469ff670734662915, type: 2}
+  - {fileID: 11400000, guid: cc2e2c1648510b44c988d222e4b53acc, type: 2}
+  - {fileID: 11400000, guid: d2d7a80990ecbad42823566f783f0d86, type: 2}
+  - {fileID: 11400000, guid: 97abc3efac25f24488b269e07c4cffc9, type: 2}
+  - {fileID: 11400000, guid: 6bcf0572ee47de54b9346f201c5ba550, type: 2}
   _5StarPets:
   - {fileID: 11400000, guid: 47d73b4bf22e64d4bbd0da02020631fd, type: 2}
   - {fileID: 11400000, guid: 713b3d5e70bfc5444a686b17d3f5dfbc, type: 2}
+  - {fileID: 11400000, guid: 6640c1de348c41949a5fbdc039c343fd, type: 2}
+  - {fileID: 11400000, guid: 37941b6702eddab4fad09635d45018fc, type: 2}
+  - {fileID: 11400000, guid: 4f78b3e33f2001e41972bbec2d17f864, type: 2}
+  - {fileID: 11400000, guid: cb0c2cf1fca7dc04b852ff5a8082813a, type: 2}
+  - {fileID: 11400000, guid: cae2e5c9becfc9f4a8c86344ade62f59, type: 2}
   _foodAndWater:
   - {fileID: 11400000, guid: efc5bd75a0063d6479767cf4803c07cc, type: 2}
   - {fileID: 11400000, guid: 77c3cfd8e4426ba4182335f30e1584b6, type: 2}
   _mora: {fileID: 11400000, guid: f127bced462e31b44afe83a546dc0c31, type: 2}
   _foodWhaterChance: 30
-  _rareChance: 7
-  _legendaryChance: 3
+  _rareChance: 14
+  _legendaryChance: 9

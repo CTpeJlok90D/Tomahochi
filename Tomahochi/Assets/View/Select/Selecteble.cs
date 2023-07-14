@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Selecteble : MonoBehaviour
 {
+	public static bool CanSelect = true;
 	[SerializeField] private CinemachineVirtualCamera _camera;
 	[SerializeField] private int _cameraPryorityChange = 50;
 	[SerializeField] private bool _deleselectOnRepeatClick = false;
@@ -66,6 +67,11 @@ public class Selecteble : MonoBehaviour
 
 	public void OnPlayerClick()
 	{
+		if (CanSelect == false)
+		{
+			return;
+		}
+
 		if (IsSelected && _deleselectOnRepeatClick == false)
 		{
 			return;

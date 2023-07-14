@@ -12,6 +12,8 @@ public abstract class Storageble : ScriptableObject, ILootDrop
 	public abstract void RemoveFromStorage(int count);
 	public abstract int GetStorageCount();
 	public abstract void ApplyLoot();
+	public string ViewCation => _viewName;
 
 	public abstract UnityEvent<Storageble, int> OnStorageCountChanged { get; }
+
 }

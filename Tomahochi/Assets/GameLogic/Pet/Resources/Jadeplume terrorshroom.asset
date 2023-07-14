@@ -26,7 +26,7 @@ MonoBehaviour:
   _levelsToExpandGemsStorage: 10
   _gemsStorageExpandCount: 200
   _viewName: Jadeplume terrorshroom
-  _viewSprite: {fileID: 721022633, guid: aa614aa60f2ea894aad9f74cee36e673, type: 3}
+  _viewSprite: {fileID: 21300000, guid: 13a75b5c63f72a24cb96a7a84bb450f1, type: 3}
   _starCount: 5
   _viewPrefab: {fileID: 4595321935249417920, guid: 2267caab402938044815737ad2cecf3d,
     type: 3}
