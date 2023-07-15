@@ -30,6 +30,7 @@ public class StorajebleMora : Storageble
 	public override void ApplyLoot()
 	{
 		PlayerDataContainer.MoraCount+= _count;
+		GotLoot.Invoke();
 	}
 
 	public override int GetStorageCount()

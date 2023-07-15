@@ -82,7 +82,6 @@ public class FurnitureListElement : MonoBehaviour, IPointerDownHandler
 		furniture.Position = buildPreview.transform.position;
 		Destroy(buildPreview.gameObject);
 
-		PlayerDataContainer.PlaceFurniture(furniture);
-		FurnitureView furnitureView = FurnitureView.CreatyByFurniture(furniture);
+		FurnitureView.CreatyByFurniture(furniture);
 	}
 }

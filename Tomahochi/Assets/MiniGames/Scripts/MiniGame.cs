@@ -55,7 +55,7 @@ public abstract class MiniGame : MonoBehaviour
 		}
 		if (IncreaseJoy)
 		{
-			PlayingPet.Joy = Mathf.Clamp(PlayingPet.Joy + _joyRestorePerSecond * Time.deltaTime, 100, 0);
+			PlayingPet.Joy = Mathf.Clamp(PlayingPet.Joy + _joyRestorePerSecond * Time.deltaTime, 0, 100);
 		}
 	}
 

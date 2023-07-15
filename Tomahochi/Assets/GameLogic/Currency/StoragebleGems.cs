@@ -30,6 +30,7 @@ public class StoragebleGems : Storageble
 	public override void ApplyLoot()
 	{
 		PlayerDataContainer.GemsCount+= _count;
+		GotLoot.Invoke();
 	}
 
 	public override int GetStorageCount()

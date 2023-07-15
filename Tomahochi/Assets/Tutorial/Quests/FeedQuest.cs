@@ -8,6 +8,8 @@ public class FeedQuest : Quest
 	[SerializeField] private Dialog _startDialog;
 	[SerializeField] private Dialog _feedHint;
 	[SerializeField] private GameObject _foodList;
+	[SerializeField] private GameObject _petSelectHint; 
+	[SerializeField] private GameObject _feedObjecthint;
 
 	public override void OnQuestBegin()
 	{
@@ -17,6 +19,7 @@ public class FeedQuest : Quest
 		_foodList.SetActive(true);
 		PlayerDataContainer.FoodCountChanged.AddListener(OnFoodCountChanged);
 		Selecteble.SelectObjectChange += OnPetSelect;
+		_petSelectHint.SetActive(true);
 	}
 
 	private void OnPetSelect(Selecteble selecteble)
@@ -25,13 +28,18 @@ public class FeedQuest : Quest
 		{
 			return;
 		}
-		_dialoger.StartDialog(_feedHint);
 		Selecteble.SelectObjectChange -= OnPetSelect;
+
+		_petSelectHint.SetActive(false);
+		_feedObjecthint.SetActive(true);
+		_dialoger.StartDialog(_feedHint);
 	}
 
 	private void OnFoodCountChanged(Storageble item, int count)
 	{
 		Selecteble.SelectObjectChange -= OnPetSelect;
+
+		_feedObjecthint.SetActive(false);
 		Complete();
 	}
 }

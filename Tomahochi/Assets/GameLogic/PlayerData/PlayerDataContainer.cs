@@ -112,11 +112,6 @@ namespace Saving
 			SavePlayerData();
 		}
 
-		private void OnSceneLoad()
-		{
-
-		}
-
 		public static int GemsCount
 		{
 			get
@@ -296,16 +291,13 @@ namespace Saving
 		}
 		public static void PlaceFurniture(Furniture furniture)
 		{
-			if (GetFurnitureCountOnStorage(furniture.SystemName) <= 0)
-			{
-				return;
-			}
 			_instance._furnitureById.Add(furniture.ID, furniture);
 			RemoveFurnitureFromStorage(furniture.SystemName, 1);
 		}
 		public static void RemoveFurniture(Furniture furniture)
 		{
 			_instance._furnitureById.Remove(furniture.ID);
+			_instance._furnitureInStorage[furniture.SystemName] += 1;
 			FurnitureInfo info = Resources.Load<FurnitureInfo>(furniture.SystemName);
 			instance._furnitureOnStorageCountChanged.Invoke(info, GetFurnitureCountOnStorage(furniture.SystemName));
 		}
@@ -317,7 +309,7 @@ namespace Saving
 			}
 			_instance._furnitureInStorage[systemName] += count;
 			FurnitureInfo info = Resources.Load<FurnitureInfo>(systemName);
-			_instance._furnitureOnStorageCountChanged?.Invoke(info, GetFurnitureCountOnStorage(systemName));
+			_instance._furnitureOnStorageCountChanged.Invoke(info, GetFurnitureCountOnStorage(systemName));
 		}
 		public static void RemoveFurnitureFromStorage(string systemName, int count)
 		{
@@ -436,19 +428,6 @@ namespace Saving
 			instance._moraCount.Value = instance.PlayerData.MoraCount;
 			instance._fateCount.Value = instance.PlayerData.FateCount;
 			instance._isLoaded = true;
-		}
-
-		public static void LoadDefualts()
-		{
-			instance._foodInStorage = new();
-			instance._waterInStorage = new();
-			instance._ingridiendsInStorage = new();
-			instance._foodCookCount = new();
-			instance._furnitureById = new();
-			instance._furnitureInStorage = new();
-			instance._home = new();
-			instance._unlockedPets = StartPetList;
-			instance._minigameRecords = new();
 		}
 
 		private static SerializedList<PetSaveInfo> StartPetList

@@ -20,7 +20,6 @@ public class Tutorial : MonoBehaviour
 				obj.SetActive(false);
 			}
 			_tutorialLine.StartLine();
-			PlayerDataContainer.LoadDefualts();
 			return;
 		}
 		if (progress == 1)
@@ -56,6 +55,8 @@ public class Tutorial : MonoBehaviour
 		{
 			obj.SetActive(true);
 		}
+		Furniture furniture = FindObjectOfType<FurnitureView>().Source;
+		PlayerDataContainer.PlaceFurniture(furniture);
 		Destroy(gameObject);
 	}
 

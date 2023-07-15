@@ -11,6 +11,7 @@ public class SleepSpotView : MonoBehaviour
 	[SerializeField] private Transform _sleepTransform;
 
 	public PetSaveInfo SleepingPet => _sleepingPet;
+	public FurnitureView FurnitureView => _furnitureView;
 
 	public Transform SleepTransform => _sleepTransform;
 

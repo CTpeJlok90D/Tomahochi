@@ -19,7 +19,7 @@ public class ReactiveVariable<T>
 		set
 		{
 			_value = value;
-			_changed.Invoke(_value);
+			_changed.Invoke(_value);	
 		}
 	}
 

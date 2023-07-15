@@ -15,6 +15,8 @@ public class PrayQuest : Quest
 	[SerializeField] private LootView _viewPrefab;
 	[SerializeField] private Transform _content;
 	[SerializeField] private Prayer _prayer;
+	[SerializeField] private GameObject _prayHint;
+	[SerializeField] private GameObject _exitHint;
 	public override void OnQuestBegin()
 	{
 		base.OnQuestBegin();
@@ -32,6 +34,7 @@ public class PrayQuest : Quest
 	private void OnStoryEnded()
 	{
 		_prayWindow.SetActive(true);
+		_prayHint.SetActive(true);
 	}
 
 	private void OnClick()
@@ -42,10 +45,13 @@ public class PrayQuest : Quest
 		_prayer.ShowLoot(_startPet);
 		_backButton.interactable = true;
 		_prayButton.interactable = false;
+		_prayHint.SetActive(false);
+		_exitHint.SetActive(true);
 	}
 
 	private void OnExit()
 	{
 		Complete();
+		_exitHint.SetActive(false);
 	}
 }

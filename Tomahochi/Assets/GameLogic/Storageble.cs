@@ -5,6 +5,7 @@ public abstract class Storageble : ScriptableObject, ILootDrop
 {
 	[SerializeField] private string _viewName = "<view name>";
 	[SerializeField] private Sprite _viewSprite;
+	private UnityEvent _gotLoot = new();
 
 	public string ViewName => _viewName;
 	public Sprite ViewSprite => _viewSprite;
@@ -16,4 +17,5 @@ public abstract class Storageble : ScriptableObject, ILootDrop
 
 	public abstract UnityEvent<Storageble, int> OnStorageCountChanged { get; }
 
+	public UnityEvent GotLoot => _gotLoot;
 }

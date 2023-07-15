@@ -29,6 +29,7 @@ public class Water : Consumeble
 	public override void ApplyLoot()
 	{
 		AddOnStorage(3);
+		GotLoot.Invoke();
 	}
 
 	public override UnityEvent<Storageble, int> OnStorageCountChanged => PlayerDataContainer.WaterCountChanged;

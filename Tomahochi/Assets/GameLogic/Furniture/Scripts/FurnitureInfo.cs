@@ -14,7 +14,6 @@ public class FurnitureInfo : Storageble
 	public override void AddOnStorage(int count)
 	{
 		PlayerDataContainer.AddFurnitureInStorage(name, count);
-		Debug.Log("Added");
 	}
 
 	public override int GetStorageCount()
@@ -32,5 +31,6 @@ public class FurnitureInfo : Storageble
 	public override void ApplyLoot()
 	{
 		AddOnStorage(1);
+		GotLoot.Invoke();
 	}
 }

@@ -18,6 +18,7 @@ public class FurnitureView : MonoBehaviour
 		instance.transform.localPosition = furniture.Position;
 
 		_byID.Add(furniture.ID, instance);
+		PlayerDataContainer.PlaceFurniture(furniture);
 		instance._created?.Invoke();
 		return instance;
 	}
@@ -48,7 +49,6 @@ public class FurnitureView : MonoBehaviour
 	{
 		PlayerDataContainer.RemoveFurniture(_source);
 		_byID.Remove(_source.ID);
-		_info.AddOnStorage(1);
 		_movedOnStorage?.Invoke();
 		Destroy(gameObject);
 	}

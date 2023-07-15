@@ -12,7 +12,7 @@ public class FurnitureSpawner : MonoBehaviour
 	{
 		foreach (string guid in PlayerDataContainer.GetAllFurnitureId())
 		{
-			FurnitureView instance = FurnitureView.CreatyByFurniture(PlayerDataContainer.GetFurnitureByID(guid), transform);
+			FurnitureView.CreatyByFurniture(PlayerDataContainer.GetFurnitureByID(guid), transform);
 		}
 	}
 }

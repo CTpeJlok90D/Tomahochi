@@ -74,8 +74,7 @@ public class FurnitureActionsPanel : MonoBehaviour
 		furniture.Position = buildPreview.transform.position;
 		Destroy(buildPreview.gameObject);
 
-		PlayerDataContainer.PlaceFurniture(furniture);
-		FurnitureView furnitureView = FurnitureView.CreatyByFurniture(furniture);
+		FurnitureView.CreatyByFurniture(furniture);
 	}
 
 	private void OnSelectObject(Selecteble selected)

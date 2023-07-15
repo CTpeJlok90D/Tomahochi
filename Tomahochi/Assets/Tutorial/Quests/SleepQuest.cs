@@ -14,6 +14,9 @@ public class SleepQuest : Quest
 	[SerializeField] private Dialog _onBuildExit;
 	[SerializeField] private PetList _petList;
 	[SerializeField] private Button _exitBuildButton;
+	[SerializeField] private GameObject _exitEditModeHint;
+	[SerializeField] private InWorldHint _worldBedHint;
+	[SerializeField] private GameObject _selectPetHint;
 
 	private SleepSpotView _spot;
 
@@ -21,12 +24,21 @@ public class SleepQuest : Quest
 	{
 		base.OnQuestBegin();
 		_dialoger.StartDialog(_startDialog);
+		_startDialog.StoryEnded.AddListener(OnStartDialogEnd);
 		Selecteble.SelectObjectChange += OnSelectObject;
 		_exitBuildButton.onClick.AddListener(OnExitBuild);
 	}
 
+	private void OnStartDialogEnd()
+	{
+		_exitEditModeHint.SetActive(true);
+	}
+
 	private void OnExitBuild()
 	{
+		_exitEditModeHint.SetActive(false);
+		_worldBedHint.Target = FindObjectOfType<SleepSpotView>().transform;
+		_worldBedHint.gameObject.SetActive(true);
 		_exitBuildButton.onClick.RemoveListener(OnExitBuild);
 
 		_dialoger.StartDialog(_onBuildExit);
@@ -40,6 +52,8 @@ public class SleepQuest : Quest
 		}
 		Selecteble.SelectObjectChange -= OnSelectObject;
 
+		_worldBedHint.gameObject.SetActive(false);
+		_selectPetHint.SetActive(true);
 		_dialoger.StartDialog(_layPetSleep);
 		_petList.Show(PlayerDataContainer.UnlockedPets.Where(pet => pet.CanSleep()).ToArray());
 		_petList.PetClicked += AfterSelectPet;
@@ -49,16 +63,19 @@ public class SleepQuest : Quest
 	{
 		_petList.PetClicked -= AfterSelectPet;
 
+		_selectPetHint.SetActive(false);
 		_spot.PutPet(pet);
 		_dialoger.StartDialog(_sleepDialog);
-		_sleepDialog.StoryEnded.AddListener(Complete);
+		_sleepDialog.StoryEnded.AddListener(OnComplete);
 	}
 
-	public override void OnQuestFinish()
+	private void OnComplete()
 	{
-		base.OnQuestFinish();
-		_sleepDialog.StoryEnded.RemoveListener(Complete);
+		_sleepDialog.StoryEnded.RemoveListener(OnComplete);
+
 		PlayerDataContainer.MoraCount = 1600;
 		PlayerDataContainer.GemsCount = 2000;
+		PlayerDataContainer.SavePlayerData();
+		Complete();
 	}
 }

@@ -25,5 +25,6 @@ public class Ingredient : Storageble
 	public override void ApplyLoot()
 	{
 		AddOnStorage(10);
+		GotLoot.Invoke();
 	}
 }

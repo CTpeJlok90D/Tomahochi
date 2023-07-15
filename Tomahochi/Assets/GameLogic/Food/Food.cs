@@ -28,6 +28,7 @@ public class Food : Consumeble
 	public override void ApplyLoot()
 	{
 		AddOnStorage(3);
+		GotLoot.Invoke();
 	}
 
 	public override UnityEvent<Storageble, int> OnStorageCountChanged => PlayerDataContainer.FoodCountChanged;

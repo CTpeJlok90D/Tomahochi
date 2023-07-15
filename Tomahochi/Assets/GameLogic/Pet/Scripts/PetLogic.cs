@@ -1,6 +1,7 @@
 using Saving;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Pets
 {
@@ -22,14 +23,21 @@ namespace Pets
 		public int DuplicatCount = 0;
 		public string SystemName;
 
-		[SerializeField] private Pet _pet;
+		private Pet _pet;
+		private UnityEvent<PetSaveInfo> _levelUpped = new();
+		public UnityEvent<PetSaveInfo> LevelUppped
+		{
+			get
+			{
+				_levelUpped ??= new();
+				return _levelUpped;
+			}
+		}
 		public Pet Pet
 		{
 			get 
 			{
-				if (_pet == null)
-					_pet = Resources.Load<Pet>(SystemName);
-
+				_pet ??= Resources.Load<Pet>(SystemName);
 				return _pet;
 			} 
 		}
@@ -144,6 +152,7 @@ namespace Pets
 			}
 
 			CurrentLevel++;
+			_levelUpped.Invoke(this);
 			GemsCount = Mathf.Clamp(GemsCount + Pet.GemsPerLevel, 0, GemsStorage);
 			if (CurrentLevel % Pet.EvelateEveryLevel == 0)
 			{
@@ -170,7 +179,7 @@ namespace Pets
 		{
 			base.EmitLive(seconds);
 
-			if (CurrentLevel == _pet.MaxLevel)
+			if (CurrentLevel == Pet.MaxLevel)
 			{
 				Joy = 100;
 				Food = 100;

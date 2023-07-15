@@ -1,6 +1,7 @@
 using Saving;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Pets
 {
@@ -12,6 +13,7 @@ namespace Pets
 		[SerializeField] Sprite _viewSprite;
 		[SerializeField] int _starCount = 5;
 		[SerializeField] private GameObject _viewPrefab;
+		private UnityEvent _gotLoot = new();
 		public int StarCount => _starCount;
 		public string ViewName => _viewName;
 		public Sprite ViewSprite => _viewSprite;
@@ -82,6 +84,8 @@ namespace Pets
 
 		public string ViewCation => ViewName;
 
+		public UnityEvent GotLoot => _gotLoot;
+
 		public static void FallRatePetsByTime(IEnumerable<PetSaveInfo> petList, float seconds)
 		{
 			foreach (PetSaveInfo info in petList)
@@ -93,6 +97,7 @@ namespace Pets
 		public void ApplyLoot()
 		{
 			PlayerDataContainer.AddPet(new PetSaveInfo(this));
+			_gotLoot.Invoke();
 		}
 	}
 }

@@ -2,6 +2,7 @@ using AICore;
 using Pets;
 using Saving;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -36,7 +37,7 @@ public class PetView : MonoBehaviour
 	public void LaySleep(SleepSpotView sleepSpot)
 	{
 		Factor factor = new("Sleep", sleepSpot);
-		_agent.enabled = false;
+		_agent.updatePosition = false;
 		_brain.AddFactor(factor);
 	}
 
@@ -75,6 +76,7 @@ public class PetView : MonoBehaviour
 
 		if (InMoving)
 		{
+			_agent.updatePosition = _petInfo.IsSleeping() == false;
 			RotateWithMove();
 		}
 	}
