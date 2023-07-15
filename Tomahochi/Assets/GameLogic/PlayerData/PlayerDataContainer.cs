@@ -291,7 +291,10 @@ namespace Saving
 		}
 		public static void PlaceFurniture(Furniture furniture)
 		{
-			_instance._furnitureById.Add(furniture.ID, furniture);
+			if (_instance._furnitureById.Keys.Contains(furniture.ID) == false)
+			{
+				_instance._furnitureById.Add(furniture.ID, furniture);
+			}
 			RemoveFurnitureFromStorage(furniture.SystemName, 1);
 		}
 		public static void RemoveFurniture(Furniture furniture)

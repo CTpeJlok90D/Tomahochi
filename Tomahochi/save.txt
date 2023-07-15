@@ -1,18 +1,18 @@
 {
-    "Saves": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Tutorial\",\"Value\":\"{\\\"Value\\\":2}\"},{\"Name\":\"\",\"Key\":\"Base level\",\"Value\":\"{\\\"Level\\\":0,\\\"XP\\\":500.0}\"}]}",
+    "Saves": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Tutorial\",\"Value\":\"{\\\"Value\\\":2}\"},{\"Name\":\"\",\"Key\":\"Base level\",\"Value\":\"{\\\"Level\\\":1,\\\"XP\\\":1000.0}\"}]}",
     "FoodInStorage": "{\"_values\":[]}",
     "IngridientsInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Egg\",\"Value\":0}]}",
     "FoodCookCount": "{\"_values\":[{\"Name\":\"\",\"Key\":\"TaiwaneseFriedEggsFood\",\"Value\":1}]}",
     "WaterInStorage": "{\"_values\":[]}",
-    "FurnitureList": "{\"_values\":[{\"Name\":\"\",\"Key\":\"371fbf98-41a8-4769-9201-ee08343239ff\",\"Value\":{\"_id\":\"371fbf98-41a8-4769-9201-ee08343239ff\",\"Position\":{\"x\":-5.043294429779053,\"y\":-2.5802531242370607},\"PlaceDate\":\"\",\"SystemName\":\"Bed\"}},{\"Name\":\"\",\"Key\":\"371fbf98-41a8-4769-9201-ee08343239ff\",\"Value\":{\"_id\":\"371fbf98-41a8-4769-9201-ee08343239ff\",\"Position\":{\"x\":-5.043294429779053,\"y\":-2.5802531242370607},\"PlaceDate\":\"\",\"SystemName\":\"Bed\"}}]}",
-    "FurnitureInStorage": "{\"_values\":[]}",
-    "UnlockedPets": "{\"List\":[{\"MoraCount\":9.794407844543457,\"GemsCount\":3.7177767753601076,\"Food\":54.84176254272461,\"Water\":49.79507064819336,\"Joy\":60.791168212890628,\"Energy\":49.90604019165039,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":26.099609375,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret in mask\"}]}",
+    "FurnitureList": "{\"_values\":[{\"Name\":\"\",\"Key\":\"2e1a9e21-ae80-4496-935a-81320bfda6fd\",\"Value\":{\"_id\":\"2e1a9e21-ae80-4496-935a-81320bfda6fd\",\"Position\":{\"x\":-8.604269027709961,\"y\":-2.769294261932373},\"PlaceDate\":\"\",\"SystemName\":\"Bed\"}}]}",
+    "FurnitureInStorage": "{\"_values\":[{\"Name\":\"\",\"Key\":\"Bed\",\"Value\":5}]}",
+    "UnlockedPets": "{\"List\":[{\"MoraCount\":8.4826078414917,\"GemsCount\":3.792879343032837,\"Food\":54.80433654785156,\"Water\":49.74751663208008,\"Joy\":70.54170989990235,\"Energy\":49.884681701660159,\"SleepingBedID\":\"\",\"ElevateCount\":0,\"NeedEvelate\":false,\"CurrentXP\":36.07844924926758,\"CurrentLevel\":1,\"DuplicatCount\":0,\"SystemName\":\"Ferret in mask\"}]}",
     "CurrencyDrivers": "",
     "Home": "{\"_rooms\":[{\"x\":0,\"y\":0}],\"_xSize\":{\"Max\":0.0,\"Min\":0.0},\"_ySize\":{\"Max\":7.0,\"Min\":0.0}}",
     "MiniGamesRecords": "{\"_values\":[]}",
     "GemsCount": 2000,
-    "MoraCount": 1600,
+    "MoraCount": 100,
     "FateCount": 0,
     "RollCount": 0,
-    "LastLaunchTime": "2023-07-15 11:33:43,244"
+    "LastLaunchTime": "2023-07-15 11:43:33,811"
 }

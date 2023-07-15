@@ -34,8 +34,11 @@ public class BaseLevel : MonoBehaviour
 		set
 		{
 			_xp.Value = value;
-			_level.Value = (int)(value/_xpToLevelUp);
-			_xp.Value -= (int)(value/_xpToLevelUp);
+			while (_xp.Value > _xpToLevelUp)
+			{
+				_level.Value++;
+				_xp.Value -= _xpToLevelUp;
+			}
 		}
 	}
 	private void Awake()
