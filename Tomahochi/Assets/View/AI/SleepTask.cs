@@ -10,24 +10,17 @@ public class SleepTask : Task
 	{
 		base.OnBegin();
 		_sleepPlace = Info.Source as SleepSpotView;
-		Agent.updatePosition = false;
-		Agent.Warp(_sleepPlace.SleepTransform.position);
+		Agent.Warp(new Vector3(_sleepPlace.SleepTransform.position.x, _sleepPlace.SleepTransform.position.y, Agent.transform.position.z));
 	}
 
 	public override void OnUpdate()
 	{
 		base.OnUpdate();
-		
+
 
 		if (_petView.PetInfo.IsSleeping() == false)
 		{
 			_brain.RemoveFactor(new Factor("Sleep", this));
 		}
-	}
-
-	public override void OnCancel()
-	{
-		base.OnCancel();
-		Agent.updatePosition = true;
 	}
 }

@@ -37,7 +37,7 @@ public class PetView : MonoBehaviour
 	public void LaySleep(SleepSpotView sleepSpot)
 	{
 		Factor factor = new("Sleep", sleepSpot);
-		_agent.updatePosition = false;
+		_petInfo.SleepingBedID = sleepSpot.FurnitureView.Source.ID;
 		_brain.AddFactor(factor);
 	}
 
@@ -56,7 +56,7 @@ public class PetView : MonoBehaviour
 			FurnitureView view = FurnitureView.ByID[_petInfo.SleepingBedID];
 			view.MovedOnStorage += OnFurnutureDestroy;
 			SleepSpotView spot = view.GetComponent<SleepSpotView>();
-			_agent.Warp(spot.SleepTransform.position);
+			_agent.Warp(new Vector3(spot.SleepTransform.position.x, spot.SleepTransform.position.y, _agent.transform.position.z));
 			LaySleep(spot);
 		}
 
@@ -76,7 +76,6 @@ public class PetView : MonoBehaviour
 
 		if (InMoving)
 		{
-			_agent.updatePosition = _petInfo.IsSleeping() == false;
 			RotateWithMove();
 		}
 	}
