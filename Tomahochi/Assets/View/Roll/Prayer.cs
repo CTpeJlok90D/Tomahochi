@@ -27,13 +27,18 @@ public class Prayer : MonoBehaviour
 
 	private void OnEnable()
 	{
+		PrayCheck();
+		_limitReachedCaption.text = string.Format(_limitReachedFormat, PlayerDataContainer.UnlockedPets.Length);
+	}
+
+	public void PrayCheck()
+	{
 		bool limitReached = PlayerDataContainer.UnlockedPets.Length >= PlayerDataContainer.PetCountPerRoom * PlayerDataContainer.GetRooms().Length;
 		foreach (Button button in _prayButtons)
 		{
 			button.interactable = limitReached == false;
 		}
 		_limitReachedCaption.gameObject.SetActive(limitReached);
-		_limitReachedCaption.text = string.Format(_limitReachedFormat, PlayerDataContainer.UnlockedPets.Length);
 	}
 
 	public void Pray()
@@ -70,6 +75,7 @@ public class Prayer : MonoBehaviour
 		ClearLoot();
 
 		StartCoroutine(VideoCoruotine(count));
+		PrayCheck();
 	}
 
 	public void SpawnLoot(int count)
